@@ -98,7 +98,6 @@ local function add_file_info(name, bufnr)
 
     name = (#name > 18 and string.sub(name, 1, 16) .. "..") or name
     name = (vim.api.nvim_get_current_buf() == bufnr and "%#TbLineBufOn# " .. name) or ("%#TbLineBufOff# " .. name)
-    print(vim.inspect(string.rep(" ", padding) .. icon .. name .. string.rep(" ", padding)))
     return string.rep(" ", padding) .. icon .. name .. string.rep(" ", padding)
   end
 end

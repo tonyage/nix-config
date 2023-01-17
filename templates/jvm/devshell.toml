@@ -1,0 +1,37 @@
+[devshell]
+name = "remote"
+
+packages = [
+  "jdk11",
+  "android-sdk",
+  "libgcc",
+  "wget",
+  "bison",
+  "flex",
+  "gperf",
+  "python39",
+  "cmake",
+  "ninja",
+  "ccache",
+  "libffi",
+  "openssl",
+  "dfu-util",
+  "libusb1"
+]
+
+[[commands]]
+package = "jetbrains.idea-ultimate"
+category = "ide"
+
+[[commands]]
+package = "gcc"
+category = "build"
+
+[[commands]]
+package = "gradle" 
+category = "build"
+
+[[commands]]
+package = "treefmt"
+category = "linter"
+

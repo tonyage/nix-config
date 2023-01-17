@@ -83,11 +83,15 @@
     git
     zsh
     curl
+    gnused
     neovim
     zoxide
     ripgrep
     binutils
+    patchelf
     coreutils
+    findutils
+    inotify-tools
   ];
 
   environment.shells = with pkgs; [ zsh ];
@@ -109,6 +113,10 @@
   virtualisation.docker = { 
     enable = true;
     autoPrune.enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
   };
 
   fonts = {

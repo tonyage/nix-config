@@ -71,7 +71,7 @@
         home.homeDirectory = "/home/build";
         home.username = "build";
         imports = [
-          ./modules/editor/nvim
+          ./modules/editor
           ./modules/shell
         ];
         systemd.user.startServices = "sd-switch";
@@ -86,9 +86,20 @@
           overlays = [ devshell.overlay ];
         };
         in pkgs.devshell.mkShell {
+          envs = [
+            {
+              name = "NIX_CONFIG";
+              value = "experimental-features = nix-command flakes";
+            }
+          ];
           imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
         }
       );
+
+      templates.jvm = {
+        path = ./templates/jvm;
+        description = "jvm devshell";
+      };
 
       nixosConfigurations = {
         cyclops = nixpkgs.lib.nixosSystem {
