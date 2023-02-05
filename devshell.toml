@@ -35,6 +35,10 @@ category = "bootstrap"
 package = "home-manager"
 category = "bootstrap"
 
+[[env]]
+name = "NIX_CONFIG"
+value = "experimental-features = nix-command flakes"
+
 [git.hooks]
 enable = true
 
