@@ -44,6 +44,11 @@
           config.allowUnfree = true;
           config.allowUnfreePredicate = _: true;
         };
+	      imports = [
+          ./modules/editor
+          ./modules/shell
+        ];
+        systemd.user.startServices = "sd-switch";
       };
 
       user-common = { ... }: {
@@ -60,11 +65,9 @@
         imports = [ ./nixos/common/configuration.nix ];
       };
 
-      linux = { ... }: {
+      tony = { ... }: {
         home.homeDirectory = "/home/tony";
         home.username = "tony";
-	      imports = [ ./modules/de ];
-        systemd.user.startServices = "sd-switch";
       };
 
       server = { ... }: {
@@ -74,7 +77,6 @@
           ./modules/editor
           ./modules/shell
         ];
-        systemd.user.startServices = "sd-switch";
       };
 
     in {
@@ -127,7 +129,8 @@
           modules = [
             common
 	          user-common
-	          linux
+            tony
+            import [ ./modules/de ]
 	        ];
         };
         "tony@jean" = home-manager.lib.homeManagerConfiguration {
@@ -135,7 +138,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             common
-            server
+            tony
 	        ];
         };
         "build@magneto" = home-manager.lib.homeManagerConfiguration {

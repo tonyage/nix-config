@@ -16,7 +16,6 @@
       vim-fugitive
 
       neo-tree-nvim
-      nvim-tree-lua
       nvim-navic
 
       nvim-autopairs
@@ -46,17 +45,19 @@
       nvim-dap-python
       nvim-dap-ui
 
-      fidget-nvim
       null-ls-nvim
       rust-tools-nvim
       crates-nvim
       nvim-treesitter.withAllGrammars
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
+      nvim-treesitter-context
     ];
 
     extraPackages = with pkgs; [
       gcc12
+      tree-sitter
+      nodejs
 
       nodePackages.bash-language-server
       shellcheck

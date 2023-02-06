@@ -69,15 +69,16 @@ local config = {
   formatting = {
     format = function(_, vim_item)
       local icons = require("ui.icons").lspkind
-      vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
+      vim_item.kind = string.format("[%s] %s", icons[vim_item.kind], vim_item.kind)
       return vim_item
     end,
   },
   mapping = mapping,
   sources = {
-    { name = "luasnip" },
-    { name = "nvim_lsp" },
-    { name = "nvim_lua" },
+    { name = "copilot", group_index = 1 },
+    { name = "nvim_lsp", group_index = 1 },
+    { name = "luasnip", group_index = 1 },
+    { name = "nvim_lua", group_index = 1 },
     { name = "buffer" },
     { name = "path" },
     { name = "calc" },

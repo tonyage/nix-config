@@ -6,7 +6,52 @@ vim.fn.mkdir(parser_install_dir, "p")
 vim.opt.runtimepath:append(parser_install_dir)
 
 local config = {
-  ensure_installed = "all",
+  parser_install_dir = parser_install_dir,
+  ensure_installed = {
+    "bash",
+    "c",
+    "cpp",
+    "css",
+    "cmake",
+    "c_sharp",
+    "comment",
+    "dart",
+    "dockerfile",
+    "go",
+    "git_rebase",
+    "gitattributes",
+    "gitcommit",
+    "gitignore",
+    "help",
+    "html",
+    "java",
+    "json",
+    "javascript",
+    "kotlin",
+    "latex",
+    "lua",
+    "markdown",
+    "nix",
+    "proto",
+    "python",
+    "regex",
+    "rust",
+    "scss",
+    "swift",
+    "toml",
+    "typescript",
+    "vim",
+    "yaml"
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<C-Space>",
+      node_incremental = "<C-Space>",
+      scope_incremental = "<nop>",
+      node_decremental = "<BS>"
+    }
+  },
   auto_install = true,
   indent = { enable = true },
   highlight = {
@@ -15,7 +60,13 @@ local config = {
   },
   refactor = {
     highlight_definitions = { enable = true },
-    highlight_current_scope = { enable = true },
+    highlight_current_scope = { enable = false },
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = "grn"
+      }
+    }
   },
   textobjects = {
     select = {

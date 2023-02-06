@@ -3,7 +3,6 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 local key = require("main.mappings")
-local windows = require("ui.windows")
 local extensions_list = { "fzf", "themes", "terms" }
 
 local config = {
