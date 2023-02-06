@@ -1,4 +1,5 @@
 require("main.options")
-require("main.autocmds")
+require("main.lazy")
 require("main.mappings").default()
-require("main.config")
+require("main.autocmds")
+

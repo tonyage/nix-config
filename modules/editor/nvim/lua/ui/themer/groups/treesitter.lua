@@ -80,4 +80,3 @@ return {
   ["@conditional"] = { fg = colors.base0E, italic = true },
 }
 
-

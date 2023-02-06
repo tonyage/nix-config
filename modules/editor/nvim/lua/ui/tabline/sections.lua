@@ -1,8 +1,6 @@
-local devicons_present, devicons = pcall(require, "nvim-web-devicons")
 local buf_is_valid = require("ui.tabline").buf_is_valid
 local themer = require("ui.themer")
-
-require("ui.themer").highlight("tabline")
+themer.highlight("tabline")
 
 vim.cmd("function! TbGoToBuf(bufnr,b,c,d) \n execute 'b'..a:bufnr \n endfunction")
 vim.cmd[[
@@ -17,8 +15,8 @@ vim.cmd("function! TbToggleTabs(a,b,c,d) \n let g:toggletabs = !g:TbTabsToggled 
 
 vim.api.nvim_create_user_command("TbPick", function()
   vim.g.pickbuffer = true
-  vim.api.nvim_echo({ { "Enter Num ", "Question" } }, false, {})
   vim.cmd("redrawtabline")
+  vim.api.nvim_echo({ { "Enter Num ", "Question" } }, false, {})
   local key = tonumber(vim.fn.nr2char(vim.fn.getchar()))
   local bufid = vim.t.bufs[(key and key or 0) + vim.g.buffirst]
   if key and bufid then
@@ -38,9 +36,9 @@ vim.api.nvim_create_user_command("TbRight", function()
   require("ui.tabline").move_buf(1)
 end, {})
 
-local function nvim_tree_width()
+local function nvim_tree_width(filetype)
   for _, win in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-    if vim.bo[vim.api.nvim_win_get_buf(win)].ft == "NvimTree" then
+    if vim.bo[vim.api.nvim_win_get_buf(win)].ft == filetype then
       return vim.api.nvim_win_get_width(win) + 1
     end
   end
@@ -57,11 +55,14 @@ local function button_width() -- close, theme toggle btn etc
 end
 
 local function add_file_info(name, bufnr)
-  if devicons_present then
+  local present, devicons = pcall(require, "nvim-web-devicons")
+  if present then
     local icon, icon_hl = devicons.get_icon(name, string.match(name, "%a+$"))
     local padding = (24 - #name - 5) / 2
 
-    if not icon then icon, icon_hl = devicons.get_icon("default_icon") end
+    if not icon then
+      icon, icon_hl = devicons.get_icon("default_icon")
+    end
 
     icon = (
       vim.api.nvim_get_current_buf() == bufnr and themer.new_hl_groups("TbLine", icon_hl, "TbLineBufOn") .. " " .. icon
@@ -75,14 +76,11 @@ local function add_file_info(name, bufnr)
           for match in (vim.api.nvim_buf_get_name(value) .. "/"):gmatch("(.-)" .. "/") do
             table.insert(other, match)
           end
-
           local current = {}
           for match in (vim.api.nvim_buf_get_name(bufnr) .. "/"):gmatch("(.-)" .. "/") do
             table.insert(current, match)
           end
-
           name = current[#current]
-
           for i = #current - 1, 1, -1 do
             local value_current = current[i]
             local other_current = other[i]
@@ -95,10 +93,9 @@ local function add_file_info(name, bufnr)
         end
       end
     end
-
     name = (#name > 18 and string.sub(name, 1, 16) .. "..") or name
     name = (vim.api.nvim_get_current_buf() == bufnr and "%#TbLineBufOn# " .. name) or ("%#TbLineBufOff# " .. name)
-    return string.rep(" ", padding) .. icon .. name .. string.rep(" ", padding)
+    return icon .. string.rep(" ", padding) .. name .. string.rep(" ", padding)
   end
 end
 
@@ -116,28 +113,27 @@ local function style_buffer_tab(nr)
       or ("%#TbLineBufOffClose#" .. close_btn)
     name = "%#TbLineBufOff#" .. name .. close_btn
   end
-
   return name
 end
 
 local M = {}
 
-M.offset_tree = function()
-  return "%#NvimTreeNormal#" .. string.rep(" ", nvim_tree_width() - 1) .. "%#NvimTreeWinSeparator#" .. "▕"
+function M.offset_tree()
+  return "%#NeoTreeNormal#" .. string.rep(" ", nvim_tree_width("neo-tree") - 1) -- .. "%#NeoTreeWinSeparator#"  -- .. "▕"
 end
 
-M.cover_nvim_tree = function()
-  return "%#NvimTreeNormal#" .. (vim.g.nvimtree_side == "right" and "" or string.rep(" ", nvim_tree_width()))
+function M.cover_nvim_tree()
+  return "%NvimTreeNormal#" .. (vim.g.nvimtree_side == "left" and "" or string.rep(" ", nvim_tree_width("neo-tree")))
 end
 
-M.bufferlist = function()
+function M.bufferlist()
   local buffers = {}
-  local available_space = vim.o.columns - nvim_tree_width() - button_width()
+  local available_space = vim.o.columns - nvim_tree_width("neo-tree") - button_width()
   local current_buf = vim.api.nvim_get_current_buf()
   local has_current = false
-
   if vim.g.pickbuffer then
     for index, value in ipairs(vim.g.visiblebuffers) do
+      print("index: " .. tostring(index))
       local name = value:gsub("", "(" .. index .. ")")
       table.insert(buffers, name)
     end
@@ -152,19 +148,17 @@ M.bufferlist = function()
         vim.g.buffirst = vim.g.buffirst + 1
         table.remove(buffers, 1)
       end
-
       has_current = (bufnr == current_buf and true) or has_current
       table.insert(buffers, style_buffer_tab(bufnr))
     end
   end
-
   vim.g.visiblebuffers = buffers
   return table.concat(buffers) .. "%#TbLineFill#" .. "%="
 end
 
 vim.g.toggletabs = 0
 
-M.tablist = function()
+function M.tablist()
   local result, number_of_tabs = "", vim.fn.tabpagenr "$"
 
   if number_of_tabs > 1 then
@@ -173,19 +167,18 @@ M.tablist = function()
       result = result .. ("%" .. i .. "@TbGotoTab@" .. tab_hl .. i .. " ")
       result = (i == vim.fn.tabpagenr() and result .. "%#TbLineTabCloseBtn#" .. "%@TbTabClose@ %X") or result
     end
-
     local new_tab_button = "%#TbLineTabNewBtn#" .. "%@TbNewTab@ %X"
     local tabs_toggle_button = "%@TbToggleTabs@ %#TbTabTitle# TABS %X"
-
     return vim.g.toggletabs == 1 and tabs_toggle_button:gsub("()", { [36] = " " })
       or new_tab_button .. tabs_toggle_button .. result
   end
 end
 
-M.buttons = function()
+function M.buttons()
   local close_all = "%@TbCloseAllBufs@%#TbLineCloseAllBufsBtn#" .. "  " .. "%X"
   local buttons = close_all
   return buttons
 end
 
 return M
+

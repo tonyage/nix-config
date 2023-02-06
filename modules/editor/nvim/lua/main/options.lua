@@ -1,55 +1,53 @@
-local opt = vim.opt
-local g = vim.g
+vim.g.mapleader = " "
+vim.g.colorscheme = "dusk"
+vim.g.statusline_style = "default"
 
-g.mapleader = " "
-g.colorscheme = "dusk"
+vim.opt.autoindent = true
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.smartindent = true
+vim.opt.tabstop = 2
+-- vim.opt.softtabstop = 2
+vim.opt.cursorcolumn = true
+vim.opt.cursorline = true
+vim.opt.laststatus = 3
 
-opt.autoindent = true
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.opt.linebreak = true
+vim.opt.swapfile = false
+vim.opt.textwidth = 99
+vim.opt.virtualedit = "block"
+vim.opt.wrap = true
+vim.opt.showmode = false
 
-opt.cursorcolumn = true
-opt.cursorline = true
-opt.laststatus = 3
+vim.opt.signcolumn = "yes"
+vim.opt.number = true
+vim.opt.numberwidth = 2
+vim.opt.relativenumber = true
+vim.opt.ruler = false
 
-opt.hlsearch = true
-opt.incsearch = true
-opt.linebreak = true
-opt.swapfile = false
-opt.textwidth = 99
-opt.virtualedit = "block"
-opt.wrap = true
-opt.showmode = false
+vim.opt.mouse = "a"
+vim.opt.mousemoveevent = true
 
-opt.signcolumn = "yes"
-opt.number = true
-opt.numberwidth = 2
-opt.relativenumber = true
-opt.ruler = false
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.termguicolors = true
 
-opt.mouse = "a"
-opt.mousemoveevent = true
+vim.opt.backup = false
+vim.opt.writebackup = false
 
-opt.splitbelow = true
-opt.splitright = true
-opt.termguicolors = true
+-- vim.opt.list = true
+-- vim.opt.listchars:append "space: "
+-- vim.opt.listchars:append "eol:↴"
+vim.opt.updatetime = 300
+vim.opt.cmdheight = 1
+vim.opt.whichwrap:append "<>[]hl"
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver100,a:blinkon100"
 
-opt.backup = false
-opt.writebackup = false
-
-opt.list = true
-opt.listchars:append "eol:↴"
-opt.updatetime = 300
-opt.cmdheight = 1
-opt.whichwrap:append "<>[]hl"
-
-opt.fillchars = {
-  vert = "▕",
+vim.opt.fillchars = {
   eob = " ",
-  vertright = "▕",
+  vertright = " ",
 }
 
 local disabled_plugins = {
@@ -58,6 +56,5 @@ local disabled_plugins = {
 }
 
 for _, plugin in pairs(disabled_plugins) do
-  g[ "loaded_" .. plugin ] = 1
+  vim.g[ "loaded_" .. plugin ] = 1
 end
-

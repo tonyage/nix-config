@@ -1,10 +1,10 @@
 local M = {}
 
-M.buf_is_valid = function(bufnr)
-  return vim.bo[bufnr].buflisted and vim.api.nvim_buf_is_valid(bufnr)
+function M.buf_is_valid(bufnr)
+  return vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted 
 end
 
-M.bufilter = function()
+function M.bufilter()
   local bufs = vim.t.bufs or nil
   if not bufs then return {} end
   for i = #bufs, 1, -1 do
@@ -15,7 +15,7 @@ M.bufilter = function()
   return bufs
 end
 
-M.tabufline_next = function()
+function M.tabufline_next()
   local bufs = M.bufilter() or {}
   for i, v in ipairs(bufs) do
     if vim.api.nvim_get_current_buf() == v then
@@ -25,7 +25,7 @@ M.tabufline_next = function()
   end
 end
 
-M.tabufline_prev = function()
+function M.tabufline_prev()
   local bufs = M.bufilter() or {}
   for i, v in ipairs(bufs) do
     if vim.api.nvim_get_current_buf() == v then
@@ -35,7 +35,7 @@ M.tabufline_prev = function()
   end
 end
 
-M.close_buffer = function(bufnr)
+function M.close_buffer(bufnr)
   if vim.bo.buftype == "terminal" then
     vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
   else
@@ -45,7 +45,7 @@ M.close_buffer = function(bufnr)
   end
 end
 
-M.close_all_buffers = function(action)
+function M.close_all_buffers(action)
   local bufs = vim.t.bufs
   if action == "closeTab" then
     vim.cmd("tabclose")
@@ -58,7 +58,7 @@ M.close_all_buffers = function(action)
   end
 end
 
-M.move_buf = function(n)
+function M.move_buf(n)
   local bufs = vim.t.bufs
   for i, bufnr in ipairs(bufs) do
     if bufnr == vim.api.nvim_get_current_buf() then
@@ -74,13 +74,11 @@ M.move_buf = function(n)
   vim.cmd("redrawtabline")
 end
 
-
-
-M.setup = function()
+function M.setup()
   local sections = require("ui.tabline.sections")
   local result = sections.bufferlist() .. (sections.tablist() or "") .. sections.buttons()
-  -- result = sections.offset_tree() .. sections.bufferlist() .. (sections.tablist() or "") .. sections.buttons()
-  return (vim.g.nvimtree_side == "left") and sections.cover_nvim_tree() .. result or result .. sections.cover_nvim_tree()
+  result = sections.offset_tree() .. sections.bufferlist() .. (sections.tablist() or "") .. sections.buttons()
+  return result
 end
 
 return M

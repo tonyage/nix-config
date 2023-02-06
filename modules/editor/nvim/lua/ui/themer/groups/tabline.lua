@@ -1,5 +1,4 @@
 local colors = require("ui.themer").colorscheme("vivid")
-
 return {
   TbLineFill = { bg = colors.base01 },
   TbLineBufOn = { fg = colors.white, bg = colors.black },
@@ -15,3 +14,4 @@ return {
   TbTabTitle = { fg = colors.black, bg = colors.white },
   TbLineCloseAllBufsBtn = { bold = true, bg = colors.red, fg = colors.black },
 }
+

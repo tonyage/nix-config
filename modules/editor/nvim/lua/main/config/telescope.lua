@@ -5,33 +5,39 @@ local builtin = require("telescope.builtin")
 local key = require("main.mappings")
 local windows = require("ui.windows")
 local extensions_list = { "fzf", "themes", "terms" }
+
 local config = {
   defaults = {
-    layout_strategy = "center",
+    prompt_prefix = "  ",
+    results_title = false,
+    dynamic_preview_title = true,
+    selection_strategy = "reset",
+    sorting_strategy = "ascending",
+    layout_strategy = "horizontal",
     layout_config = {
-      center = {
+      horizontal = {
         width = 0.5,
+        preview_width = 0.5,
+        prompt_position = "top"
       },
+      preview_cutoff = 120,
     },
-    borderchars = windows.rounded_borders,
+    border = {},
     mappings = {
       n = {
         ["<Esc>"] = actions.close,
       },
     },
-    prompt_prefix = "   ",
-    results_title = false,
     file_ignore_patterns = { "^node_modules/", "^__pycache__/" },
     path_display = {
       "smart",
       shorten = { len = 1, exclude = { 1, -1 }},
     },
-    set_env = { ["COLORTERM"] = "truecolor" },
   },
   pickers = {
     find_files = {
-      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-      -- find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+      -- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+      find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
     },
   },
 }

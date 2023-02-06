@@ -1,7 +1,7 @@
 require("ui.themer").highlight("git")
 local key = require("main.mappings")
 local windows = require("ui.windows")
-local config = {
+return {
   current_line_blame = true,
   current_line_blame_opts = {
     delay = 150
@@ -27,5 +27,4 @@ local config = {
     key.map("n", "gtd", function() gs.toggle_deleted() end)
   end
 }
-require("gitsigns").setup(config)
 

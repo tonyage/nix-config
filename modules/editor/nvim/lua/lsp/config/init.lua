@@ -1,5 +1,6 @@
 local key = require("main.mappings")
 local windows = require("ui.windows")
+local symbols = require("ui.icons").lsp
 local navic = require("nvim-navic")
 local M = {}
 
@@ -12,28 +13,25 @@ local function lspSymbol(name, icon)
   vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
 end
 
-lspSymbol("Error", "")
-lspSymbol("Info", "")
-lspSymbol("Hint", "")
-lspSymbol("Warn", "")
+for _, symbol in pairs(symbols) do
+  lspSymbol(symbol.name, symbol.icon)
+end
 
 vim.diagnostic.config {
   virtual_text = {
     prefix = "",
   },
-  signs = true,
-  underline = true,
-  update_in_insert = false,
+  signs = false,
 }
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, windows.not_focusable)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, windows.not_focusable)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, windows.hover)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, windows.hover)
+
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 M.on_attach = function(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
-
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -41,10 +39,9 @@ M.on_attach = function(client, bufnr)
   key.map("n", "gd", vim.lsp.buf.definition, opts)
   key.map("n", "gk", vim.lsp.buf.hover, opts)
   key.map("n", "gi", vim.lsp.buf.implementation, opts)
-  key.map("n", "gr", require("telescope.builtin").lsp_references, opts)
+--  key.map("n", "gr", require("telescope.builtin").lsp_references, opts)
   key.map("n", "gsh", vim.lsp.buf.signature_help, opts)
   key.map("n", "gt", vim.lsp.buf.type_definition, opts)
-  key.map("n", "grn", vim.lsp.buf.rename, opts)
   key.map("n", "<A><CR>", vim.lsp.buf.code_action, opts)
   key.map("n", "gfm", function() vim.lsp.buf.format({ async = true }) end, opts)
   key.map("n", "gwa", vim.lsp.buf.add_workspace_folder, opts)
@@ -53,15 +50,10 @@ M.on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders))
   end, opts)
 
-  if client.server_capabilities.signatureHelpProvider then
-    require("lsp.config.signature").setup(client)
-  end
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
 end
-
-M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 return M
 

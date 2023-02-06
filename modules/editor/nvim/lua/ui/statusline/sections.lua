@@ -1,7 +1,7 @@
-local sep_style = vim.g.statusline_sep_style
-local separators = require("ui.icons").statusline_separators[sep_style]
-local sep_l = separators["left"]
-local sep_r = separators["right"]
+local separators = require("ui.icons").statusline_separators[vim.g.statusline_style]
+
+local left_sep = separators["left"]
+local right_sep = separators["right"]
 
 local modes = {
   ["n"]   = { "NORMAL",              "NormalMode"    },
@@ -34,27 +34,14 @@ local modes = {
 
 local M = {}
 
-M.mode = function()
+function M.mode()
   local m = vim.api.nvim_get_mode().mode
   local current_mode = "%#" .. modes[m][2] .. "#" .. "  " .. modes[m][1]
-  local mode_sep1 = "%#" .. modes[m][2] .. "Sep" .. "#" .. sep_r
-  return current_mode .. mode_sep1 .. "%#buffer#" .. sep_r
+  local separator = "%#" .. modes[m][2] .. "Sep" .. "#" .. right_sep
+  return current_mode .. separator .. "%#buffer#" .. right_sep
 end
 
-M.fileInfo = function()
-  local icon = "  "
-  local filename = (vim.fn.expand "%" == "" and "Empty ") or vim.fn.expand "%:t"
-
-  if filename ~= "Empty " then
-    local  devicons = require("nvim-web-devicons")
-    local ft_icon = devicons.get_icon(filename)
-    icon = (ft_icon ~= nil and " " .. ft_icon) or ""
-    filename = " " .. filename .. " "
-  end
-  return "%#file_info#" .. icon .. filename .. "%#file_sep#" .. sep_r
-end
-
-M.git = function()
+function M.git()
   if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
     return ""
   end
@@ -64,11 +51,11 @@ M.git = function()
   local added = (git_status.added and git_status.added ~= 0) and ("%#git_added#" .. "  " .. git_status.added) or ""
   local changed = (git_status.changed and git_status.changed ~= 0) and ("%#git_changed#" .. "  " .. git_status.changed) or ""
   local removed = (git_status.removed and git_status.removed ~= 0) and ("%#git_removed#" .. "  " .. git_status.removed) or ""
-  local sep = " " .. "%#git_sep#" .. sep_r
+  local sep = " " .. "%#git_sep#" .. right_sep
   return branch .. added .. changed .. removed .. sep
 end
 
-M.progress = function()
+function M.progress()
   if not rawget(vim, "lsp") then
     return ""
   end
@@ -79,6 +66,11 @@ M.progress = function()
     return ""
   end
 
+  local updates = ""
+  if require("lazy.status").has_updates() then
+    updates = require("lazy.status").updates()
+  end
+
   local msg = lsp.message or ""
   local percentage = lsp.percentage or 0
   local title = lsp.title or ""
@@ -86,10 +78,10 @@ M.progress = function()
   local ms = vim.loop.hrtime() / 1000000
   local frame = math.floor(ms / 120) % #spinners
   local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
-  return ("%#lsp_progress#" .. content) or ""
+  return ("%#lsp_progress#" .. content .. updates) or ""
 end
 
-M.diagnostics = function()
+function M.diagnostics()
   if not rawget(vim, "lsp") then
     return ""
   end
@@ -107,8 +99,14 @@ M.diagnostics = function()
   return e .. w .. h .. i
 end
 
-M.status = function()
-  local sep = "%#lsp_sep#" .. sep_l
+function M.cwd()
+  local dir_icon = "%#cwd_icon#" .. " "
+  local dir_name = "%#cwd_text#" .. " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " "
+  return (vim.o.columns > 85 and ("%#cwd_sep#" .. left_sep .. dir_icon .. dir_name)) or ""
+end
+
+function M.lsp_status()
+  local sep = "%#lsp_sep#" .. left_sep
   local icon = "%#lsp_icon#" .. "  "
   local text = "%#lsp_text#" .. " "
   if rawget(vim, "lsp") then
@@ -120,14 +118,16 @@ M.status = function()
   end
 end
 
-M.cwd = function()
-  local icon = "%#cwd_icon#" .. " "
-  local name = "%#cwd_text#" .. " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " "
-  return (vim.o.columns > 85 and ("%#cwd_sep#" .. sep_l .. icon .. name)) or ""
+local function readonly()
+  if vim.bo.filetype == "help" then
+    return false
+  end
+  return vim.bo.readonly
 end
 
-M.position = function()
-  local left_sep = "%#pos_sep#" .. sep_l .. "%#pos_icon#" .. " "
+function M.file_info()
+  local icon = "%#pos_sep#" .. left_sep .. "%#pos_icon#" .. " "
+  local encode = vim.bo.fenc ~= "" and vim.bo.fenc or vim.o.enc
 
   local current_line = vim.fn.line "."
   local total_line = vim.fn.line "$"
@@ -135,8 +135,14 @@ M.position = function()
 
   text = (current_line == 1 and "Top") or text
   text = (current_line == total_line and "Bot") or text
+  local result = "%#pos_text#" .. " " ..  encode:upper() .. " │ " .. text .. " "
 
-  return left_sep .. "%#pos_text#" .. " " .. text .. " "
+  if readonly() then
+    result = "%#pos_text#" .. " readonly" .. " │ "  .. encode:upper() .. " │ " .. text .. " "
+  end
+
+  return icon .. result
 end
 
 return M
+

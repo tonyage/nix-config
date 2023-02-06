@@ -1,5 +1,4 @@
 local colors = require("ui.themer").colorscheme("vivid")
-
 return {
   DevIconDefault = { fg = colors.red },
   DevIconc = { fg = colors.blue },
@@ -30,3 +29,4 @@ return {
   DevIconzip = { fg = colors.yellow },
   DevIconZig = { fg = colors.orange },
 }
+

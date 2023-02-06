@@ -38,8 +38,8 @@ navic.setup(config)
 
 vim.api.nvim_create_autocmd({ 'DirChanged', 'CursorMoved', 'BufWinEnter', 'BufFilePost', 'InsertEnter', 'BufWritePost' }, {
   callback = function()
-    local status_ok, _ = pcall(vim.api.nvim_buf_get_var, 0, "lsp_floating_window")
-      if not status_ok then
+    local present, _ = pcall(vim.api.nvim_buf_get_var, 0, "lsp_floating_window")
+      if not present then
         winbar.create()
       end
   end

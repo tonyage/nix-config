@@ -2,10 +2,11 @@ local colors = require("ui.themer").colorscheme("vivid")
 
 return {
   CmpItemAbbr = { fg = colors.white },
+  CmpItemAbbrDeprecated = { fg = colors.grey00, strikethrough = true },
   CmpItemAbbrMatch = { fg = colors.blue, bold = true },
   CmpBorder = { fg = colors.grey00 },
-  CmpDocBorder = { fg = colors.base02, bg = colors.base02 },
-  CmPmenu = { bg = colors.base02 },
+  CmpDocBorder = { fg = colors.grey00, bg = colors.base02 },
+  CmpPmenu = { bg = colors.base02 },
   CmpItemKindConstant = { fg = colors.base09 },
   CmpItemKindFunction = { fg = colors.base0D },
   CmpItemKindIdentifier = { fg = colors.base08 },

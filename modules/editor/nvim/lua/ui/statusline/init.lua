@@ -1,21 +1,20 @@
 local M = {}
-
-vim.g.statusline_sep_style = "default"
 local sections = require("ui.statusline.sections")
 
 function M.setup()
   return table.concat {
     sections.mode(),
     sections.git(),
-
     "%=",
+    "%#StatusLine#",
     sections.progress(),
+    "%#StatusLine#",
     "%=",
-
     sections.diagnostics(),
-    sections.status() or "",
-    sections.position(),
+    sections.lsp_status() or "",
+    sections.file_info(),
   }
 end
 
 return M
+

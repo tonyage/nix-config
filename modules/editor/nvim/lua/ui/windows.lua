@@ -1,10 +1,19 @@
 local M = {}
 
 M.not_focusable = {
-  border = "single",
+  border = "rounded",
   focusable = false,
   relative = "win",
-  anchor = "SE",
+  anchor = "SW",
+  row = 0,
+  col = 0,
+}
+
+M.hover = {
+  border = "rounded",
+  focusable = false,
+  relative = "cursor",
+  anchor = "SW",
   row = 0,
   col = 0,
 }
@@ -37,8 +46,7 @@ end
 
 M.rounded_borders = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
--- M.square_borders = { "─", "│", "─", "│", "⎡", "⎤", "⎦", "⎣" }
-M.square_borders = { "─", "│", "─", "│", "⸢", "⸣", "⸥", "⸤" }
+M.square_borders = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
 
 return M
 

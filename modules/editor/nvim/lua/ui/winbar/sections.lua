@@ -1,8 +1,7 @@
 local M = {}
-
+require("ui.themer").highlight("winbar")
 local devicons = require("nvim-web-devicons")
 local separator = require("ui.icons").winbar["separator"]
-require("ui.themer").highlight("winbar")
 
 local hl_winbar_path = "WinbarPath"
 local hl_winbar_symbols = "WinbarSymbols"
@@ -37,6 +36,11 @@ local file_info = function()
     end
 
     local icon = devicons.get_icon(name, file_type, { default = default })
+
+    if not icon then
+      icon = devicons.get_icon("default_icon")
+    end
+
     hl_icon = "DevIcon" .. file_type
     icon = "%#" .. hl_icon .. "#" .. icon .. " %*"
 

@@ -23,9 +23,6 @@ return function(opts)
     end,
   })
 
-  key.map("n", "<TAB>", function() require("ui.tabline").tabufline_next() end)
-  key.map("n", "<S-TAB>", function() require("ui.tabline").tabufline_prev() end)
-
   vim.api.nvim_create_autocmd("BufDelete", {
     callback = function(args)
       for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
@@ -42,6 +39,9 @@ return function(opts)
       end
     end,
   })
+
+  key.map("n", "<TAB>", function() require("ui.tabline").tabufline_next() end)
+  key.map("n", "<S-TAB>", function() require("ui.tabline").tabufline_prev() end)
 
   if opts.lazyload then
     vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "TabEnter", "TermOpen" }, {
@@ -60,4 +60,3 @@ return function(opts)
     vim.opt.tabline = "%!v:lua.require('ui.tabline').setup()"
   end
 end
-
