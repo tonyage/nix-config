@@ -16,12 +16,20 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
-    nurpkgs.url = "github:nix-community/NUR";
     rust.url = "github:oxalica/rust-overlay";
     devshell.url = "github:numtide/devshell";
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, darwinpkgs, devshell, nurpkgs, rust, ... }@inputs:
+  outputs = { 
+    self,
+    nur,
+    nixpkgs,
+    home-manager,
+    flake-utils,
+    darwinpkgs,
+    devshell,
+    rust, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -37,7 +45,6 @@
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
         nixpkgs = {
           overlays = [
-            nurpkgs.overlay
             rust.overlays.default
             devshell.overlay
           ];
@@ -47,6 +54,7 @@
 	      imports = [
           ./modules/editor
           ./modules/shell
+          ./modules/misc.nix
         ];
         systemd.user.startServices = "sd-switch";
       };
@@ -80,20 +88,17 @@
       };
 
     in {
+      packages = forAllSystems (system:
+        let pkgs = nixpkgs.legacyPackages.${system};
+        in import ./pkgs { inherit pkgs; }
+      );
       overlays = import ./overlays;
-
-      devShell = forAllSystems (system:
+      devShells = forAllSystems (system:
         let pkgs = import nixpkgs {
           inherit system;
           overlays = [ devshell.overlay ];
         };
         in pkgs.devshell.mkShell {
-          envs = [
-            {
-              name = "NIX_CONFIG";
-              value = "experimental-features = nix-command flakes";
-            }
-          ];
           imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
         }
       );

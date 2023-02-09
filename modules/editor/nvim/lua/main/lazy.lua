@@ -112,6 +112,24 @@ require("lazy").setup({
   },
 
   {
+    "nvchad/nvim-colorizer.lua",
+    event = "BufEnter",
+    opts = {
+      filetypes = {
+        "nix",
+        lua = { names = false },
+        css = { rgb_fn = true },
+        "scss",
+        "javascript",
+        html = { names = false }
+      },
+    },
+    config = function(_, opts)
+      require("colorizer").setup(opts)
+    end
+  },
+
+  {
     "zbirenbaum/copilot-cmp",
     event = "InsertEnter",
     dependencies = {
@@ -151,16 +169,6 @@ require("lazy").setup({
       space_char_blankline = " "
     },
   },
-
-  -- {
-  --   "williamboman/mason-lspconfig.nvim",
-  --   event = { "VeryLazy" },
-  --   cmd = "LspInstall",
-  --   config = {
-  --     ensure_installed = constants.servers,
-  --     automatic_installation = true,
-  --   },
-  -- },
 
   {
     "lewis6991/gitsigns.nvim",

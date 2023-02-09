@@ -26,6 +26,7 @@ in {
     #   pointer = colorscheme.magenta;
     #   header  = "#FFFFFF";
     # }'';
+
     defaultCommand = "fd --type f --strip-cwd-prefix";
     fileWidgetCommand = "fd --type f --strip-cwd-prefix --exclude .git";
     defaultOptions = [
@@ -46,6 +47,7 @@ in {
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
+      JAVA_HOME = "${pkgs.jdk11}";
     };
 
     initExtraBeforeCompInit = ''
