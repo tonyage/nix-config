@@ -32,53 +32,36 @@
     rust, ... }@inputs:
     let
       inherit (self) outputs;
-      forAllSystems = nixpkgs.lib.genAttrs [
-        "aarch64-darwin"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "x86_64-linux"
-      ];
-
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
       common = {
         programs.home-manager.enable = true;
         home.stateVersion = "22.11";
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
-        nixpkgs = {
-          overlays = [
-            rust.overlays.default
-            devshell.overlay
-          ];
-          config.allowUnfree = true;
-          config.allowUnfreePredicate = _: true;
-        };
 	      imports = [
           ./modules/editor
           ./modules/shell
-          ./modules/misc.nix
+          ./modules/home.nix
         ];
         systemd.user.startServices = "sd-switch";
       };
-
-      user-common = { ... }: {
+      user-common = {
         imports = [ 
 	        ./modules/browser
           ./modules/editor
           ./modules/chat
           ./modules/shell
-          ./modules/misc.nix
+          ./modules/home.nix
 	      ];
       };
-
-      system-common = { ... }: {
-        imports = [ ./nixos/common/configuration.nix ];
-      };
-
-      tony = { ... }: {
+      system-common = { imports = [ ./nixos/common/configuration.nix ]; };
+      tony = {
         home.homeDirectory = "/home/tony";
         home.username = "tony";
       };
-
-      server = { ... }: {
+      server = {
         home.homeDirectory = "/home/build";
         home.username = "build";
         imports = [
@@ -86,28 +69,11 @@
           ./modules/shell
         ];
       };
-
     in {
-      packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit pkgs; }
-      );
-      overlays = import ./overlays;
-      devShells = forAllSystems (system:
-        let pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ devshell.overlay ];
-        };
-        in pkgs.devshell.mkShell {
-          imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
-        }
-      );
-
       templates.jvm = {
         path = ./templates/jvm;
         description = "jvm devshell";
       };
-
       nixosConfigurations = {
         cyclops = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -126,17 +92,17 @@
           ];
         };
       };
-
       homeConfigurations = {
         "tony@cyclops" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             common
-	          user-common
+            user-common
             tony
-            import [ ./modules/de ]
-	        ];
+            import ./modules/de/sway
+            import ./modules/chat
+          ];
         };
         "tony@jean" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
@@ -144,7 +110,7 @@
           modules = [
             common
             tony
-	        ];
+          ];
         };
         "build@magneto" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
@@ -155,20 +121,42 @@
           ];
         };
       };
-
       darwinConfigurations = {
         "m1" = darwinpkgs.lib.darwinSystem {
           system = "aarch64-darwin";
+          specialArgs = { inherit inputs; };
           inputs = { inherit darwinpkgs nixpkgs; };
           modules = [ 
             common
             user-common
             home-manager.darwinModules.home-manager {
+              users.users."tony.do".home = "/Users/tony.do";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs outputs; };
             }
           ];
         };
       };
-    };
+    } // flake-utils.lib.eachSystem [
+      flake-utils.lib.system.x86_64-linux
+      flake-utils.lib.system.aarch64-linux
+      flake-utils.lib.system.aarch64-darwin
+    ] (system:
+      let pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [
+          rust.overlays.default
+          devshell.overlay
+        ];
+      };
+
+      in {
+        packages = import ./pkgs { inherit pkgs; };
+        devShells.default = pkgs.devshell.mkShell {
+          imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
+        };
+      }
+    );
 }

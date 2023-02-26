@@ -13,28 +13,8 @@
           foreground = colorscheme.white;
         };
 
-        normal = {
-          inherit (colorscheme) black;
-          inherit (colorscheme) red;
-          inherit (colorscheme) green;
-          inherit (colorscheme) yellow;
-          inherit (colorscheme) blue;
-          inherit (colorscheme) magenta;
-          inherit (colorscheme) cyan;
-          inherit (colorscheme) white;
-        };
-
-        bright = {
-          black   = colorscheme.bright-black;
-          red     = colorscheme.bright-red;
-          green   = colorscheme.bright-green;
-          yellow  = colorscheme.bright-yellow;
-          blue    = colorscheme.bright-blue;
-          magenta = colorscheme.bright-magenta;
-          cyan    = colorscheme.bright-cyan;
-          white   = colorscheme.bright-white;
-        };
-
+        inherit (colorscheme) normal;
+        inherit (colorscheme) bright;
       };
 
       cursor = { 

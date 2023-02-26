@@ -1,6 +1,6 @@
 { colorscheme, ... }: {
   programs.bat = {
     enable = true;
-    config.theme = "TwoDark";
+    config.theme = "base16";
   };
 }

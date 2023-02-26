@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-local lspkind = require("ui.icons").lspkind
+local lspkind = require("ui.icons")["lspkind"]
 local constants = require("main.constants")
 local key = require("main.mappings")
 
@@ -84,48 +84,25 @@ require("lazy").setup({
   {
     "nvim-neo-tree/neo-tree.nvim",
     lazy = false,
-    keys = {
-      { "|", "<cmd>Neotree reveal<CR>", desc = "NeoTree" }
-    },
+    keys = { "|" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
-    config = function()
-      -- key.map("n", "|", ":Neotree reveal <CR>")
+    init = function()
+      key.map("n", "|", ":Neotree reveal <CR>")
       require("neo-tree").setup(require("main.config.neotree"))
     end,
   },
 
   {
     "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
+    event = { "InsertEnter" },
     config = function()
       vim.defer_fn(function()
-        require("copilot").setup({
-          suggestion = { enabled = false },
-          panel = { enabled = false }
-        })
+        require("copilot").setup()
       end, 100)
-    end
-  },
-
-  {
-    "nvchad/nvim-colorizer.lua",
-    event = "BufEnter",
-    opts = {
-      filetypes = {
-        "nix",
-        lua = { names = false },
-        css = { rgb_fn = true },
-        "scss",
-        "javascript",
-        html = { names = false }
-      },
-    },
-    config = function(_, opts)
-      require("colorizer").setup(opts)
     end
   },
 
@@ -155,8 +132,26 @@ require("lazy").setup({
   { "numToStr/Comment.nvim", lazy = false, config = true },
 
   {
+    "nvchad/nvim-colorizer.lua",
+    event = "BufEnter",
+    opts = {
+      filetypes = {
+        "nix",
+        lua = { names = false },
+        css = { rgb_fn = true },
+        html = { names = false },
+        "scss",
+        "javascript"
+      },
+    },
+    init = function(_, opts)
+      require("colorizer").setup(opts)
+    end
+  },
+
+  {
     "lukas-reineke/indent-blankline.nvim",
-    event = "VeryLazy",
+    event = { "VeryLazy" },
     init = function()
       vim.g.indent_blankline_char =  "▏"
     end,
@@ -171,9 +166,26 @@ require("lazy").setup({
   },
 
   {
+    "williamboman/mason-lspconfig.nvim",
+    cmd = "LspInstall",
+    config = {
+      ensure_installed = constants.servers,
+      automatic_installation = true,
+    },
+  },
+
+  {
     "lewis6991/gitsigns.nvim",
     event = { "BufEnter" },
     config = require("main.config.gitsigns")
+  },
+
+  {
+    "kylechui/nvim-surround",
+    lazy = false,
+    config = function()
+      require("nvim-surround").setup()
+    end,
   },
 
   {
@@ -205,40 +217,39 @@ require("lazy").setup({
 
   {
     "SmiteshP/nvim-navic",
-    opts = {
-      icons = {
-        File          = " ",
-        Module        = lspkind["Module"],
-        Namespace     = " ",
-        Package       = " ",
-        Class         = lspkind["Class"],
-        Method        = " ",
-        Property      = "練",
-        Field         = " ",
-        Constructor   = " ",
-        Enum          = lspkind["Enum"],
-        Interface     = lspkind["Interface"],
-        Function      = " ",
-        Variable      = " ",
-        Constant      = " ",
-        String        = " ",
-        Number        = " ",
-        Boolean       = "◩ ",
-        Array         = " ",
-        Object        = " ",
-        Key           = " ",
-        Null          = "ﳠ ",
-        Struct        = lspkind["Struct"],
-        Event         = " ",
-        Operator      = " ",
-        TypeParameter = " ",
-      },
-      highlight = true,
-      separator = " " .. require("ui.icons").winbar["separator"]["light"]["right"] .. " ",
-    },
-    config = function(_, opts)
+    config = function()
       vim.g.navic_silence = true
-      require("nvim-navic").setup(opts)
+      require("nvim-navic").setup({
+        icons = {
+          File          = " ",
+          Module        = lspkind["Module"],
+          Namespace     = " ",
+          Package       = " ",
+          Class         = lspkind["Class"],
+          Method        = " ",
+          Property      = "練",
+          Field         = " ",
+          Constructor   = " ",
+          Enum          = lspkind["Enum"],
+          Interface     = lspkind["Interface"],
+          Function      = " ",
+          Variable      = " ",
+          Constant      = " ",
+          String        = " ",
+          Number        = " ",
+          Boolean       = "◩ ",
+          Array         = " ",
+          Object        = " ",
+          Key           = " ",
+          Null          = "ﳠ ",
+          Struct        = lspkind["Struct"],
+          Event         = " ",
+          Operator      = " ",
+          TypeParameter = " ",
+        },
+        highlight = true,
+        separator = " " .. require("ui.icons").winbar["separator"]["light"]["right"] .. " ",
+      })
     end,
   },
 
@@ -246,6 +257,17 @@ require("lazy").setup({
     "saecki/crates.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true
+  },
+
+  {
+    "smjonas/inc-rename.nvim",
+    keys = { "grn" },
+    config = function()
+      key.map("n", "grn", function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end, { expr = true })
+      require("inc_rename").setup()
+    end,
   },
 
   {
@@ -259,13 +281,15 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = "BufReadPost",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-refactor",
-      "nvim-treesitter/nvim-treesitter-context"
     },
-    init = function() require("main.config.treesitter") end
+    config = function()
+      require("main.config.treesitter")
+    end
   },
+
+  { "nvim-treesitter/nvim-treesitter-context", event = { "BufReadPre" }, config = true },
 }, lazy_defaults)
 
