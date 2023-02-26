@@ -1,17 +1,14 @@
-{ pkgs, ... }: {
-  systemd.user.services.mako = {
-    Unit = {
-      Description = "Notification daemon for Wayland";
-      Documentatio = "man:mako(1)";
-      After = "graphical-session-pre.target";
-      PartOf = "sway-session.target"; # Should be terminated when the session ends.
-    };
-    Service = {
-      Slice = "session.slice";
-      BusName = "org.freedesktop.Notifications";
-      ExecStart = "${pkgs.mako}/bin/mako";
-      Restart = "always";
-    };
-    Install.WantedBy = [ "sway-session.target" ];
+{ config, colorscheme, ... }: with colorscheme; {
+  programs.mako = {
+    enable = true;
+    backgroundColor = "${gradients.dark.black10}";
+    borderColor = "${normal.white}";
+    textColor = "${normal.white}";
+    defaultTimeout = 30000;
+    font = "JetBrainsMono Nerd Font 12";
+    icons = true;
+    maxVisible = 5;
+    sort = "-time";
+    width = 500;
   };
 }

@@ -3,28 +3,31 @@
     enable = true;
     settings = {
       colors = {
-        regular0 = "${normal.black}";
-        regular1 = "${normal.red}";
-        regular2 = "${normal.green}";
-        regular3 = "${normal.yellow}";
-        regular4 = "${normal.blue}";
-        regular5 = "${normal.magenta}";
-        regular6 = "${normal.cyan}";
-        regular7 = "${normal.white}";
+        background = "${foot.black}";
+        foreground = "${foot.white}";
 
-        bright0 = "${normal.black}";
-        bright1 = "${normal.red}";
-        bright2 = "${normal.green}";
-        bright3 = "${normal.yellow}";
-        bright4 = "${normal.blue}";
-        bright5 = "${normal.magenta}";
-        bright6 = "${normal.cyan}";
-        bright7 = "${normal.white}";
+        regular0 = "${foot.black}";
+        regular1 = "${foot.red}";
+        regular2 = "${foot.green}";
+        regular3 = "${foot.yellow}";
+        regular4 = "${foot.blue}";
+        regular5 = "${foot.magenta}";
+        regular6 = "${foot.cyan}";
+        regular7 = "${foot.white}";
+
+        bright0 = "${foot.black}";
+        bright1 = "${foot.red}";
+        bright2 = "${foot.green}";
+        bright3 = "${foot.yellow}";
+        bright4 = "${foot.blue}";
+        bright5 = "${foot.magenta}";
+        bright6 = "${foot.cyan}";
+        bright7 = "${foot.white}";
       };
       csd = {
         size = 12;
         font = "JetBrainsMono Nerd Font";
-        color = "${gradients.dark.black05}";
+        color = "${foot.black05}";
       };
       cursor = {
         style = "block";
@@ -32,7 +35,7 @@
         beam-thickness = "1.25";
       };
       main = {
-        font = "JetBrainsMono Nerd Font:size=15";
+        font = "JetBrainsMono Nerd Font:size=13";
         dpi-aware = "yes";
       };
       mouse = {

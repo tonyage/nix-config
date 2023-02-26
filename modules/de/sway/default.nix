@@ -1,4 +1,5 @@
 { colorscheme, pkgs, ... }: with colorscheme; {
+  imports = [ ./services ];
   home.packages = (with pkgs; [
     grim
     slurp
@@ -20,17 +21,7 @@
       modifier = "Mod4";
       terminal = "${pkgs.foot}/bin/footclient";
       menu = "${pkgs.fuzzel}/bin/fuzzel";
-      bars = [{
-        colors = {
-          background = "${normal.black}";
-          statusline = "${normal.black}";
-        };
-        fonts = {
-          name = [ "Noto Sans" "" ];
-          size = 15.0;
-        };
-        position = "top";
-      }];
+      bars = [];
       assigns = {
         "1" = [ { app_id = "foot"; } ];
         "2" = [ { class = "Chromium"; } ];
@@ -76,7 +67,9 @@
           natural_scroll = "enabled";
         };
       };
-      keybindings = {
+      keybindings = let
+        inherit terminal menu left down up right;
+      in {
         "${modifier}+Return" = "exec ${terminal}";
         "${modifier}+q" = "kill";
         "${modifier}+space" = "exec ${menu}";
@@ -141,6 +134,7 @@
       };
       startup = [
         { command = "foot"; }
+        { command = "${pkgs.mako}/bin/mako"; always = true; }
       ];
       window.commands = [
         {
@@ -149,14 +143,14 @@
         }
         {
           command = "move to workspace 3";
-          critieria.class = "Spotify";
+          criteria.class = "Spotify";
         }
       ];
       workspaceAutoBackAndForth = true;
-      wrapperFeatures = {
-        base = true;
-        gtk = true;
-      };
+    };
+    wrapperFeatures = {
+      base = true;
+      gtk = true;
     };
   };
   systemd.user.services.swayidle.Service.Slice = "session.slice";

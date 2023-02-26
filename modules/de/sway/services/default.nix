@@ -1,6 +1,6 @@
 {
   imports = [ 
-    ./mako.nix  
+    ./mako.nix
     ./fuzzel.nix
     ./kanshi.nix
     ./swayidle.nix
