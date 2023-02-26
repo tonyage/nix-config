@@ -5,8 +5,6 @@ let
   tty = ./p10k/.p10k.tty.zsh;
 in {
 
-  home.packages = with pkgs; [ zoxide ];
-
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;

@@ -7,7 +7,7 @@
 
   users.users.tony = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "docker" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" "input" ];
     shell = pkgs.zsh;
   };
 

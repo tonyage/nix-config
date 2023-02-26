@@ -1,6 +1,7 @@
 { colorscheme, ... }: with colorscheme; {
   programs.foot = {
     enable = true;
+    server.enable = true;
     settings = {
       colors = {
         background = "${foot.black}";
@@ -35,8 +36,8 @@
         beam-thickness = "1.25";
       };
       main = {
-        font = "JetBrainsMono Nerd Font:size=13";
-        dpi-aware = "yes";
+        font = "JetBrainsMono Nerd Font:size=15";
+        dpi-aware = "no";
       };
       mouse = {
         hide-when-typing = "yes";
