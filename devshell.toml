@@ -1,7 +1,6 @@
-imports = ["git.hooks"]
-
 [devshell]
 name = "nix-config"
+interactive."nix-config".text = "./ssh.sh"
 
 [[commands]]
 help = "global linter and formatter orchestrator"
@@ -38,7 +37,3 @@ category = "bootstrap"
 [[env]]
 name = "NIX_CONFIG"
 value = "experimental-features = nix-command flakes"
-
-[git.hooks]
-enable = true
-
