@@ -18,8 +18,10 @@
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
-    permitRootLogin = "no";
+    settings = {
+      passwordAuthentication = false;
+      permitRootLogin = "no";
+    };
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
