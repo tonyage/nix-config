@@ -4,11 +4,11 @@
     dpi-aware=yes
 
     [colors]
-    background=${base01}ff
-    text=${white}ff
-    match=${green}ff
-    selection=${blue}ff
-    selection-text=${black}ff
-    border=${base01}ff
+    background=${foot.black05}ff
+    text=${foot.white}ff
+    match=${foot.green}ff
+    selection=${foot.blue}ff
+    selection-text=${foot.black}ff
+    border=${foot.black05}ff
   '';
 }

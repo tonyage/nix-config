@@ -44,6 +44,7 @@
 
   foot = {
     black     = "161616";
+    black05   = "222222";
     red       = "ef596f";
     green     = "89ca78";
     yellow    = "e5c07b";
@@ -64,10 +65,6 @@
   white   = "#abb2bf";
   orange  = "#ea9560";
   error   = "#f44747";
-
-  grey00 = "#393939";
-  grey01 = "#454545";
-  grey90 = "#707070";
 
   base00 = "#161616";
   base01 = "#222222";

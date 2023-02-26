@@ -1,4 +1,4 @@
-{ colorscheme, pkgs, ... }: {
+{ colorscheme, pkgs, ... }: with colorscheme; {
   programs.alacritty = {
     enable = true;
 
@@ -9,12 +9,12 @@
       window.decorations_theme_variant = "dark";
       colors = {
         primary = {
-          background = colorscheme.black;
-          foreground = colorscheme.white;
+          background = normal.black;
+          foreground = normal.white;
         };
 
-        inherit (colorscheme) normal;
-        inherit (colorscheme) bright;
+        inherit normal;
+        inherit bright;
       };
 
       cursor = { 

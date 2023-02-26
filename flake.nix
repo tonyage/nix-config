@@ -10,11 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    darwinpkgs = {
-      url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-utils.url = "github:numtide/flake-utils";
     rust.url = "github:oxalica/rust-overlay";
     devshell.url = "github:numtide/devshell";
@@ -27,36 +22,31 @@
     nixpkgs,
     home-manager,
     flake-utils,
-    darwinpkgs,
     devshell,
     rust, ... }@inputs:
     let
       inherit (self) outputs;
+      system = "x86_64-linux";
       pkgs = import nixpkgs {
-        system = "x86_64-linux";
+        inherit system;
         config.allowUnfree = true;
+        overlays = [
+          rust.overlays.default
+          devshell.overlay
+        ];
       };
       common = {
         programs.home-manager.enable = true;
         home.stateVersion = "22.11";
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
-	      imports = [
+        imports = [
+          ./modules/browser
           ./modules/editor
           ./modules/shell
           ./modules/home.nix
         ];
         systemd.user.startServices = "sd-switch";
       };
-      user-common = {
-        imports = [ 
-	        ./modules/browser
-          ./modules/editor
-          ./modules/chat
-          ./modules/shell
-          ./modules/home.nix
-	      ];
-      };
-      system-common = { imports = [ ./nixos/common/configuration.nix ]; };
       tony = {
         home.homeDirectory = "/home/tony";
         home.username = "tony";
@@ -70,42 +60,37 @@
         ];
       };
     in {
-      templates.jvm = {
-        path = ./templates/jvm;
-        description = "jvm devshell";
-      };
       nixosConfigurations = {
         cyclops = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           specialArgs = { inherit inputs outputs; };
           modules = [
-            system-common
+            ./nixos/common/configuration.nix
             ./nixos/cyclops/configuration.nix
           ];
         };
         magneto = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           specialArgs = { inherit inputs outputs; };
           modules = [
-            system-common
+            ./nixos/common/configuration.nix
             ./nixos/magneto/configuration.nix
           ];
         };
       };
       homeConfigurations = {
         "tony@cyclops" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             common
-            user-common
             tony
-            import ./modules/de/sway
-            import ./modules/chat
+            ./modules/de/sway
+            ./modules/de/waybar
           ];
         };
         "tony@jean" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             common
@@ -113,7 +98,7 @@
           ];
         };
         "build@magneto" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             common
@@ -121,40 +106,26 @@
           ];
         };
       };
-      darwinConfigurations = {
-        "m1" = darwinpkgs.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = { inherit inputs; };
-          inputs = { inherit darwinpkgs nixpkgs; };
-          modules = [ 
-            common
-            user-common
-            home-manager.darwinModules.home-manager {
-              users.users."tony.do".home = "/Users/tony.do";
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs outputs; };
-            }
-          ];
-        };
+      devShells.default = pkgs.devshell.mkShell {
+        imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
+      };
+      templates.jvm = {
+        path = ./templates/jvm;
+        description = "A devshell for JVM projects";
       };
     } // flake-utils.lib.eachSystem [
       flake-utils.lib.system.x86_64-linux
-      flake-utils.lib.system.aarch64-linux
     ] (system:
       let pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfree = true;
         overlays = [
-          rust.overlays.default
+          rust.overlays
           devshell.overlay
         ];
       };
-
       in {
         devShells.default = pkgs.devshell.mkShell {
           imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
         };
-      }
-    );
+    });
 }

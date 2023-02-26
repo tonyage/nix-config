@@ -1,5 +1,4 @@
-{ self, pkgs, ... }: {
-
+{ config, pkgs, ... }: with config; {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     cantarell-fonts
@@ -18,5 +17,16 @@
       enable = true;
       defaultCursor = "Adwaita";
     };
+  };
+  xdg.userDirs = {
+    desktop = "${home.homeDirectory}/";
+    music = "${home.homeDirectory}/";
+    templates = "${home.homeDirectory}/";
+    videos = "${home.homeDirectory}/";
+
+    documents = "${home.homeDirectory}/git";
+    download = "${home.homeDirectory}/dl";
+    publicShare = "${home.homeDirectory}/pub";
+    pictures = "${home.homeDirectory}/pics";
   };
 }

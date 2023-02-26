@@ -1,4 +1,4 @@
-{ colorscheme, pkgs, ... }: {
+{ colorscheme, pkgs, ... }: with colorscheme; {
   home.packages = (with pkgs; [
     grim
     slurp
@@ -22,8 +22,8 @@
       menu = "${pkgs.fuzzel}/bin/fuzzel";
       bars = [{
         colors = {
-          background = "${colorscheme.black}";
-          statusline = "${colorscheme.black}";
+          background = "${normal.black}";
+          statusline = "${normal.black}";
         };
         fonts = {
           name = [ "Noto Sans" "" ];
@@ -41,32 +41,32 @@
       };
       colors = {
         focused = {
-          background = "${colorscheme.black}";
-          border = "${colorscheme.black}";
-          childBorder = "${colorscheme.black}";
-          indicator = "${colorscheme.black}";
-          text = "${colorscheme.white}";
+          background = "${normal.black}";
+          border = "${normal.black}";
+          childBorder = "${normal.black}";
+          indicator = "${normal.black}";
+          text = "${normal.white}";
         };
         focusedInactive = {
-          background = "${colorscheme.black}";
-          border = "${colorscheme.black}";
-          childBorder = "${colorscheme.black}";
-          indicator = "${colorscheme.black}";
-          text = "${colorscheme.white}";
+          background = "${normal.black}";
+          border = "${normal.black}";
+          childBorder = "${normal.black}";
+          indicator = "${normal.black}";
+          text = "${normal.white}";
         };
         unfocused = {
-          background = "${colorscheme.base02}";
-          border = "${colorscheme.base02}";
-          childBorder = "${colorscheme.base02}";
-          indicator = "${colorscheme.base02}";
-          text = "${colorscheme.white}";
+          background = "${gradients.dark.black10}";
+          border = "${gradients.dark.black10}";
+          childBorder = "${gradients.dark.black10}";
+          indicator = "${gradients.dark.black10}";
+          text = "${normal.white}";
         };
         urgent = {
-          background = "${colorscheme.black}";
-          border = "${colorscheme.red}";
-          childBorder = "${colorscheme.red}";
-          indicator = "${colorscheme.red}";
-          text = "${colorscheme.white}";
+          background = "${normal.black}";
+          border = "${normal.red}";
+          childBorder = "${normal.red}";
+          indicator = "${normal.red}";
+          text = "${normal.white}";
         };
       };
       input = {

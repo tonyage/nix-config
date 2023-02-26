@@ -1,179 +1,178 @@
 { colorscheme, ... }: with colorscheme; {
   programs.waybar = {
     enable = true;
-    layer = "top";
-    position = "bottom";
-    height = 30;
-    width = 1280;
-    spacing = 4;
-    modules-left = [ "custom/launcher" "sway/workspaces" "sway/mode" "sway/scratchpad" ];
-    modules-center = [ "sway/window" ];
-    modules-right = [
-      "mpd"
-      "idle_inhibitor"
-      "pulseaudio"
-      "network"
-      "cpu"
-      "memory"
-      "temperature"
-      "backlight"
-      "keyboard-state"
-      "sway/language"
-      "battery"
-      "battery#bat2"
-      "clock"
-      "tray"
-    ];
-    "sway/workspaces" = {
-      disable-scroll = true;
-      all-outputs = true;
-      format = "{name} = {icon}";
-      format-icons = {
-          "1" = "";
-          "2" = "";
-          "3" = "";
-          "4" = "";
-          "5" = "";
-          "urgent" = "";
-          "focused" = "";
-          "default" = "";
-      };
-    };
-    "custom/launcher" = { format = ""; };
-    "keyboard-state" = {
-        numlock = true;
-        capslock = true;
-        format = "{name} {icon}";
+    settings = {
+      layer = "top";
+      position = "bottom";
+      modules-left = [ "custom/launcher" "sway/workspaces" "sway/mode" "sway/scratchpad" ];
+      modules-center = [ "sway/window" ];
+      modules-right = [
+        "mpd"
+        "idle_inhibitor"
+        "pulseaudio"
+        "network"
+        "cpu"
+        "memory"
+        "temperature"
+        "backlight"
+        "keyboard-state"
+        "sway/language"
+        "battery"
+        "battery#bat2"
+        "clock"
+        "tray"
+      ];
+      "sway/workspaces" = {
+        disable-scroll = true;
+        all-outputs = true;
+        format = "{name} = {icon}";
         format-icons = {
-          locked = "";
-          unlocked = "";
+            "1" = "";
+            "2" = "";
+            "3" = "";
+            "4" = "";
+            "5" = "";
+            "urgent" = "";
+            "focused" = "";
+            "default" = "";
         };
-    };
-    "sway/mode" = {
-      format = "<span style=\"italic\">{}</span>";
-    };
-    "sway/scratchpad" = {
-      format = "{icon} {count}";
-      show-empty = false;
-      format-icons = [ "" "" ];
-      tooltip = true;
-      tooltip-format = "{app} = {title}";
-    };
-    "mpd" = {
-      format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime =%M =%S}/{totalTime =%M =%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ";
-      format-disconnected = "Disconnected ";
-      format-stopped = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ";
-      unknown-tag = "N/A";
-      interval = 2;
-      consume-icons = {
-        "on" = " ";
       };
-      random-icons = {
-        off = "<span color=\"${base0F}\"></span> ";
-        on = " ";
+      "custom/launcher" = { format = ""; };
+      "keyboard-state" = {
+          numlock = true;
+          capslock = true;
+          format = "{name} {icon}";
+          format-icons = {
+            locked = "";
+            unlocked = "";
+          };
       };
-      repeat-icons = {
-        "on" = " ";
+      "sway/mode" = {
+        format = "<span style=\"italic\">{}</span>";
       };
-      single-icons = {
-        "on" = "1 ";
+      "sway/scratchpad" = {
+        format = "{icon} {count}";
+        show-empty = false;
+        format-icons = [ "" "" ];
+        tooltip = true;
+        tooltip-format = "{app} = {title}";
       };
-      state-icons = {
-        "paused" = "";
-        "playing" = "";
+      mpd = {
+        format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime =%M =%S}/{totalTime =%M =%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ";
+        format-disconnected = "Disconnected ";
+        format-stopped = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ";
+        unknown-tag = "N/A";
+        interval = 2;
+        consume-icons = {
+          "on" = " ";
+        };
+        random-icons = {
+          off = "<span color=\"${error}\"></span> ";
+          on = " ";
+        };
+        repeat-icons = {
+          "on" = " ";
+        };
+        single-icons = {
+          "on" = "1 ";
+        };
+        state-icons = {
+          "paused" = "";
+          "playing" = "";
+        };
+        tooltip-format = "MPD (connected)";
+        tooltip-format-disconnected = "MPD (disconnected)";
       };
-      tooltip-format = "MPD (connected)";
-      tooltip-format-disconnected = "MPD (disconnected)";
-    };
-    "idle_inhibitor" = {
-      format = "{icon}";
-      format-icons = {
-        activated = "";
-        deactivated = "";
+      idle_inhibitor = {
+        format = "{icon}";
+        format-icons = {
+          activated = "";
+          deactivated = "";
+        };
       };
-    };
-    "tray" = {
-      icon-size = 21;
-      spacing = 10;
-    };
-    "clock" = {
-      timezone = "America/Chicago";
-      tooltip-format = "<big>{ =%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-      format-alt = "{:%b %a  %r %p}";
-    };
-    "cpu" = {
-      format = "{usage}% ";
-      tooltip = false;
-    };
-    "memory" = {
-      format = "{}% ";
-    };
-    "temperature" = {
-      thermal-zone = 2;
-      hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-      critical-threshold = 80;
-      format-critical = "{temperatureC}°C {icon}";
-      format = "{temperatureC}°C {icon}";
-      format-icons = ["" "" ""];
-    };
-    "backlight" = {
+      tray = {
+        icon-size = 21;
+        spacing = 10;
+      };
+      clock = {
+        timezone = "America/Chicago";
+        tooltip-format = "<big>{ =%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        format-alt = "{:%b %a  %r %p}";
+      };
+      cpu = {
+        format = "{usage}% ";
+        tooltip = false;
+      };
+      memory = {
+        format = "{}% ";
+      };
+      temperature = {
+        thermal-zone = 2;
+        hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+        critical-threshold = 80;
+        format-critical = "{temperatureC}°C {icon}";
+        format = "{temperatureC}°C {icon}";
+        format-icons = ["" "" ""];
+      };
+      backlight = {
         device = "acpi_video1";
         format = "{percent}% {icon}";
         format-icons = [ "" "" "" "" "" "" "" "" "" ];
-    };
-    "battery" = {
-      states = {
-        good = 95;
-        warning = 50;
-        critical = 15;
       };
-      format = "{capacity}% {icon}";
-      format-charging = "{capacity}% ";
-      format-plugged = "{capacity}% ";
-      format-alt = "{time} {icon}";
-      format-good = "";
-      format-full = "";
-      format-icons = [ "" "" "" "" "" ];
-    };
-    "network" = {
-      interface = "wlp2*";
-      format-wifi = "{essid} ({signalStrength}%) ";
-      format-ethernet = "{ipaddr}/{cidr} ";
-      tooltip-format = "{ifname} via {gwaddr} ";
-      format-linked = "{ifname} (No IP) ";
-      format-disconnected = "Disconnected ⚠";
-      format-alt = "{ifname} = {ipaddr}/{cidr}";
-    };
-    "pulseaudio" = {
-      scroll-step = 1;
-      format = "{volume}% {icon} {format_source}";
-      format-bluetooth = "{volume}% {icon} {format_source}";
-      format-bluetooth-muted = " {icon} {format_source}";
-      format-muted = " {format_source}";
-      format-source = "{volume}% ";
-      format-source-muted = "";
-      format-icons = {
-        headphone = "";
-        hands-free = "";
-        headset = "";
-        phone = "";
-        portable = "";
-        car = "";
-        default = [ "" "" "" ];
+      battery = {
+        states = {
+          good = 95;
+          warning = 50;
+          critical = 15;
+        };
+        format = "{capacity}% {icon}";
+        format-charging = "{capacity}% ";
+        format-plugged = "{capacity}% ";
+        format-alt = "{time} {icon}";
+        format-good = "";
+        format-full = "";
+        format-icons = [ "" "" "" "" "" ];
       };
-      "on-click" = "pavucontrol";
+      network = {
+        interface = "wlp2*";
+        format-wifi = "{essid} ({signalStrength}%) ";
+        format-ethernet = "{ipaddr}/{cidr} ";
+        tooltip-format = "{ifname} via {gwaddr} ";
+        format-linked = "{ifname} (No IP) ";
+        format-disconnected = "Disconnected ⚠";
+        format-alt = "{ifname} = {ipaddr}/{cidr}";
+      };
+      pulseaudio = {
+        scroll-step = 1;
+        format = "{volume}% {icon} {format_source}";
+        format-bluetooth = "{volume}% {icon} {format_source}";
+        format-bluetooth-muted = " {icon} {format_source}";
+        format-muted = " {format_source}";
+        format-source = "{volume}% ";
+        format-source-muted = "";
+        format-icons = {
+          headphone = "";
+          hands-free = "";
+          headset = "";
+          phone = "";
+          portable = "";
+          car = "";
+          default = [ "" "" "" ];
+        };
+        "on-click" = "pavucontrol";
+      };
     };
   };
-  xdg.configFile."waybar/config".text = ''
+  xdg.configFile."waybar/style.css".text = ''
     * {
       font-family: Cantarell, FontAwesome;
       font-size: 15px;
       border-radius 3px;
     }
     window#waybar {
-      background-color: ${black00};
-      border-bottom: 3px solid ${blue};
-      color: ${white};
+      background-color: ${gradients.dark.black};
+      border-bottom: 3px solid ${normal.blue};
+      color: ${normal.white};
       transition-property: background-color;
       transition-duration: .5s;
     }
@@ -182,11 +181,11 @@
     }
     
     window#waybar.termite {
-      background-color: ${base01};
+      background-color: ${gradients.dark.black05};
     }
     
     window#waybar.chromium {
-        background-color: ${black00};
+        background-color: ${gradients.dark.black};
         border: none;
     }
     
@@ -200,13 +199,13 @@
     
     button:hover {
       background: inherit;
-      box-shadow: inset 0 -3px ${white};
+      box-shadow: inset 0 -3px ${normal.white};
     }
     
     #workspaces button {
       padding: 0 5px;
       background-color: transparent;
-      color: ${white};
+      color: ${normal.white};
     }
     
     #workspaces button:hover {
@@ -215,16 +214,16 @@
     
     #workspaces button.focused {
       background-color: #64727D;
-      box-shadow: inset 0 -3px ${white};
+      box-shadow: inset 0 -3px ${normal.white};
     }
     
     #workspaces button.urgent {
-      background-color: ${base0F};
+      background-color: ${error};
     }
     
     #mode {
       background-color: #64727D;
-      border-bottom: 3px solid ${white};
+      border-bottom: 3px solid ${normal.white};
     }
     
     #clock,
@@ -244,7 +243,7 @@
     #scratchpad,
     #mpd {
       padding: 0 10px;
-      color: ${white};
+      color: ${normal.white};
     }
     
     #window,
@@ -265,25 +264,25 @@
     }
     
     #battery {
-      background-color: ${white};
+      background-color: ${normal.white};
       color: ${gradients.black};
     }
     
     #battery.charging, #battery.plugged {
-      color: ${white};
+      color: ${normal.white};
       background-color: #26A65B;
     }
     
     @keyframes blink {
       to {
-        background-color: ${white};
+        background-color: ${normal.white};
         color: ${gradients.black};
       }
     }
     
     #battery.critical:not(.charging) {
-      background-color: ${base0F};
-      color: ${white};
+      background-color: ${error};
+      color: ${normal.white};
       animation-name: blink;
       animation-duration: 0.5s;
       animation-timing-function: linear;
@@ -317,7 +316,7 @@
     }
     
     #network.disconnected {
-      background-color: ${base0F};
+      background-color: ${error};
     }
     
     #pulseaudio {
@@ -336,7 +335,7 @@
     }
     
     #wireplumber.muted {
-      background-color: ${base0F};
+      background-color: ${error};
     }
     
     #custom-media {
@@ -358,7 +357,7 @@
     }
     
     #temperature.critical {
-      background-color: #eb4d4b;
+      background-color: ${error};
     }
     
     #tray {
@@ -371,7 +370,7 @@
     
     #tray > .needs-attention {
       -gtk-icon-effect: highlight;
-      background-color: #eb4d4b;
+      background-color: ${error};
     }
     
     #idle_inhibitor {
@@ -389,7 +388,7 @@
     }
     
     #mpd.disconnected {
-      background-color: ${base0F};
+      background-color: ${error};
     }
     
     #mpd.stopped {
@@ -421,7 +420,7 @@
     }
     
     #keyboard-state > label.locked {
-      background: ${black};
+      background: ${gradients.black00};
     }
     
     #scratchpad {
