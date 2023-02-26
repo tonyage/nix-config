@@ -25,7 +25,7 @@ in {
     enableAutosuggestions = true;
     enableCompletion = true;
     enableSyntaxHighlighting = true;
-    shellAliases = import ./aliases.nix;
+    shellAliases = import ../aliases.nix;
     defaultKeymap = "viins";
     sessionVariables = {
       EDITOR = "nvim";

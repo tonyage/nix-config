@@ -46,7 +46,7 @@
         select-begin = "BTN_LEFT";
         select-extend = "BTN_RIGHT";
         select-word = "BTN_LEFT-2";
-        select-word-row = "BTN_LEFT-3";
+        select-row = "BTN_LEFT-3";
         select-word-whitespace = "Control+BTN_LEFT-2";
       };
       scrollback = {
