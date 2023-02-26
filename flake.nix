@@ -141,7 +141,6 @@
     } // flake-utils.lib.eachSystem [
       flake-utils.lib.system.x86_64-linux
       flake-utils.lib.system.aarch64-linux
-      flake-utils.lib.system.aarch64-darwin
     ] (system:
       let pkgs = import nixpkgs {
         inherit system;
@@ -153,7 +152,6 @@
       };
 
       in {
-        packages = import ./pkgs { inherit pkgs; };
         devShells.default = pkgs.devshell.mkShell {
           imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
         };
