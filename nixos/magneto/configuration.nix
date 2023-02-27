@@ -23,6 +23,14 @@
     };
   };
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
+  };
+
   virtualisation.oci-containers.containers = {
     pihole = {
       image = "pihole/pihole:latest";

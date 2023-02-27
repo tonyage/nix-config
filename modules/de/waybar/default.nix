@@ -1,4 +1,5 @@
-{ colorscheme, ... }: with colorscheme; {
+{ colorscheme, pkgs, ... }: with colorscheme; {
+  home.packages = with pkgs; [ nerdfonts ];
   programs.waybar = {
     enable = true;
     systemd.enable = true;
