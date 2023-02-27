@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -8,4 +8,5 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   imports = [ ./alacritty ./bat ./bash ./git ./foot ./ssh ./zellij ./zsh ];
+  home.packages = with pkgs; [ fd htop ];
 }

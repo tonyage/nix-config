@@ -1,4 +1,7 @@
-{ colorscheme, ... }: with colorscheme; {
+{ colorscheme, pkgs, ... }: with colorscheme;
+let
+  fontSize = 11;
+in {
   programs.foot = {
     enable = true;
     server.enable = true;
@@ -26,7 +29,7 @@
         bright7 = "${foot.white}";
       };
       csd = {
-        size = 12;
+        size = fontSize;
         font = "JetBrainsMono Nerd Font";
         color = "${foot.black05}";
       };
@@ -36,8 +39,9 @@
         beam-thickness = "1.25";
       };
       main = {
-        font = "JetBrainsMono Nerd Font:size=15";
+        font = "JetBrainsMono Nerd Font:size=${builtins.toString fontSize}";
         dpi-aware = "no";
+        shell = "${pkgs.zsh}/bin/zsh";
       };
       mouse = {
         hide-when-typing = "yes";

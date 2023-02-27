@@ -1,10 +1,9 @@
-{ config, pkgs, ... }: with config; {
+{ config, inputs, pkgs, ... }: with config; {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    cantarell-fonts
     noto-fonts
-    material-icons
     noto-fonts-emoji
+    nerdfonts
     (nerdfonts.override { 
       fonts = [ "JetBrainsMono" ];
     })

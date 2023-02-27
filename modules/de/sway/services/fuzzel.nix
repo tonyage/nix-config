@@ -1,6 +1,7 @@
 { colorscheme, ... }: with colorscheme; {
   xdg.configFile."fuzzel/fuzzel.ini".text = ''
-    font=JetBrainsMono
+    prompt="  "
+    font=JetBrainsMono Nerd Font
     dpi-aware=yes
 
     [colors]

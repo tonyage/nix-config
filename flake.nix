@@ -14,12 +14,16 @@
     rust.url = "github:oxalica/rust-overlay";
     devshell.url = "github:numtide/devshell";
     nur.url = "github:nix-community/NUR";
+    apple-fonts = {
+      url = "github:tonyage/apple-fonts.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { 
-    self,
+  outputs = { self,
     nur,
     nixpkgs,
+    apple-fonts,
     home-manager,
     flake-utils,
     devshell,
@@ -86,7 +90,6 @@
             common
             tony
             ./modules/de/sway
-            ./modules/de/waybar
           ];
         };
         "tony@jean" = home-manager.lib.homeManagerConfiguration {
@@ -106,26 +109,15 @@
           ];
         };
       };
-      devShells.default = pkgs.devshell.mkShell {
-        imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
-      };
+      devShells = flake-utils.lib.eachSystem [
+        flake-utils.lib.system.x86_64-linux
+      ] (system:
+        import ./shell.nix { inherit pkgs; }
+      );
+
       templates.jvm = {
         path = ./templates/jvm;
         description = "A devshell for JVM projects";
       };
-    } // flake-utils.lib.eachSystem [
-      flake-utils.lib.system.x86_64-linux
-    ] (system:
-      let pkgs = import nixpkgs {
-        inherit system;
-        overlays = [
-          rust.overlays
-          devshell.overlay
-        ];
-      };
-      in {
-        devShells.default = pkgs.devshell.mkShell {
-          imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
-        };
-    });
-}
+    };
+  }

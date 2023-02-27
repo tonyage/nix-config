@@ -1,5 +1,5 @@
 { colorscheme, pkgs, ... }: with colorscheme; {
-  imports = [ ./services ];
+  imports = [ ./services ../waybar ];
   home.packages = (with pkgs; [
     grim
     slurp
@@ -13,6 +13,7 @@
   wayland.windowManager.sway = {
     enable = true;
     systemdIntegration = true;
+    extraOptions = [ "--unsupported-gpu" ];
     config = rec {
       left = "h";
       down = "j";
@@ -21,7 +22,7 @@
       modifier = "Mod4";
       terminal = "${pkgs.foot}/bin/footclient";
       menu = "${pkgs.fuzzel}/bin/fuzzel";
-      bars = [];
+      bars = [ ];
       assigns = {
         "1" = [ { app_id = "foot"; } ];
         "2" = [ { class = "Chromium"; } ];
@@ -71,10 +72,11 @@
         inherit terminal menu left down up right;
       in {
         "${modifier}+Return" = "exec ${terminal}";
-        "${modifier}+q" = "kill";
         "${modifier}+space" = "exec ${menu}";
+        "${modifier}+q" = "kill";
         "${modifier}+b" = "split h";
         "${modifier}+v" = "split v";
+        "${modifier}+i" = "exec chromium";
 
         "${modifier}+comma" = "layout stacking";
         "${modifier}+period" = "layout tabbed";
@@ -130,6 +132,8 @@
           Down = "resize shrink height";
           Up = "resize grow height";
           Right = "resize grow width";
+          Escape = "mode default";
+          Return = "mode default";
         };
       };
       startup = [
@@ -148,6 +152,12 @@
       ];
       workspaceAutoBackAndForth = true;
     };
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATIONS="1"
+      export _JAVA_AWT_WM_NONREPARENTING=1
+    '';
     wrapperFeatures = {
       base = true;
       gtk = true;

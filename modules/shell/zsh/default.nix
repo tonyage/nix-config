@@ -24,7 +24,7 @@ in {
     enableCompletion = true;
     enableSyntaxHighlighting = true;
     shellAliases = import ../aliases.nix;
-    defaultKeymap = "viins";
+    defaultKeymap = "emacs";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
@@ -53,7 +53,7 @@ in {
 
     plugins = [
       { name = "powerlevel10k"; src = pkgs.zsh-powerlevel10k; file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme"; }
-      { name = "zsh-autopair"; src = pkgs.zsh-autopair; file = "autopair.zsh"; }
+      { name = "zsh-autopair"; src = pkgs.zsh-autopair; file = "share/zsh/zsh-autopair/autopair.zsh"; }
     ];
   };
 }

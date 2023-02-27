@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, inputs, pkgs, ... }: {
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -18,11 +18,13 @@
 
   programs.dconf.enable = true;
   programs.zsh.enable = true;
+  programs.light.enable = true;
 
   hardware.video.hidpi.enable = true;
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.bluetooth.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -54,19 +56,15 @@
       enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-wlr
-        xdg-desktop-portal-gt k
+        xdg-desktop-portal-gtk
       ];
     };
   };
 
   environment.systemPackages = with pkgs; [
-    fd
-    exa
     git
     curl
     gnused
-    neovim
-    zoxide
     ripgrep
     binutils
     patchelf
@@ -76,9 +74,11 @@
   ];
 
   environment.shells = with pkgs; [ zsh ];
+  fonts.fonts = [ inputs.apple-fonts.packages.${pkgs.system}.sf-pro ];
 
   services.openssh.enable = true;
   services.printing.enable = true;
+  services.blueman.enable = true;
 
   virtualisation.docker = { 
     enable = true;
