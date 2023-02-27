@@ -1,17 +1,17 @@
 local M = {}
 
 M.servers = {
-  "asm_lsp",
   "bashls",
   "cmake",
   "clangd",
   "dockerls",
+  "gopls",
   "gradle_ls",
-  "html",
   "kotlin_language_server",
   "ltex",
   "pyright",
   "tsserver",
+  "yamlls"
 }
 
 return M

@@ -20,17 +20,21 @@
       nodePackages.dockerfile-language-server-nodejs
       hadolint
 
+      ltex-ls
       lua-language-server
       luaformatter
 
+      kotlin-language-server
+
+      gopls
       gitlint
-      texlab
 
       deadnix
       statix
       nil
 
       cmake-language-server
+      llvmPackages_15.llvm
 
       python3Packages.isort
       nodePackages.pyright
@@ -40,8 +44,10 @@
       rustfmt
       clippy
 
+      nodePackages.typescript-language-server
       nodePackages.yaml-language-server
       yamllint
+      yamlfmt
     ];
   };
 

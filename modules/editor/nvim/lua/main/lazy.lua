@@ -49,7 +49,6 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
   "L3MON4D3/LuaSnip",
-  "williamboman/mason.nvim",
   "rcarriga/nvim-notify",
   {
     "rmagatti/auto-session",
@@ -162,15 +161,6 @@ require("lazy").setup({
       use_treesitter_scope = true,
       show_first_indent_level = false,
       space_char_blankline = " "
-    },
-  },
-
-  {
-    "williamboman/mason-lspconfig.nvim",
-    cmd = "LspInstall",
-    config = {
-      ensure_installed = constants.servers,
-      automatic_installation = true,
     },
   },
 
