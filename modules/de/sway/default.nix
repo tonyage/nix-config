@@ -14,6 +14,16 @@
     enable = true;
     systemdIntegration = true;
     extraOptions = [ "--unsupported-gpu" ];
+    extraConfig = ''
+      font pango:Noto Sans 10.000000
+      default_border pixel 1
+      default_floating_border pixel 1
+      focus_wrapping no
+      focus_follows_mouse yes
+      focus_on_window_activation smart
+      mouse_warping output
+      workspace_layout default
+    '';
     config = rec {
       left = "h";
       down = "j";
@@ -32,6 +42,7 @@
         ];
       };
       colors = {
+        background = "${normal.black}";
         focused = {
           background = "${normal.black}";
           border = "${normal.black}";
@@ -60,6 +71,13 @@
           indicator = "${normal.red}";
           text = "${normal.white}";
         };
+        placeholder = {
+          background = "${gradients.dark.black20}";
+          border = "${gradients.dark.black20}";
+          childBorder = "${gradients.dark.black20}";
+          indicator = "${gradients.dark.black20}";
+          text = "${normal.white}";
+        };
       };
       input = {
         "type:touchpad" = {
@@ -77,6 +95,10 @@
         "${modifier}+b" = "split h";
         "${modifier}+v" = "split v";
         "${modifier}+i" = "exec chromium";
+        "${modifier}+r" = "mode resize";
+        "${modifier}+s" = "scratchpad show";
+        "${modifier}+Shift+S" = "move container to scratchpad";
+        "${modifier}+t" = "floating toggle";
 
         "${modifier}+comma" = "layout stacking";
         "${modifier}+period" = "layout tabbed";
@@ -88,8 +110,6 @@
 
         "${modifier}+Shift+c" = "reload";
         "${modifier}+Shift+r" = "restart";
-        
-        "${modifier}+r" = "mode resize";
 
         "${modifier}+${left}" = "focus left";
         "${modifier}+${down}" = "focus down";
@@ -100,7 +120,9 @@
         "${modifier}+Shift+${up}" = "move up";
         "${modifier}+Shift+${right}" = "move right";
 
-        "${modifier}+apostrophe" = "move workspace to output right";
+        "${modifier}+Left" = "move workspace to output left";
+        "${modifier}+Right" = "move workspace to output right";
+
         "${modifier}+1" = "workspace number 1";
         "${modifier}+2" = "workspace number 2";
         "${modifier}+3" = "workspace number 3";

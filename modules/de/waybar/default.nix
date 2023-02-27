@@ -6,7 +6,7 @@
       height = 30;
       layer = "top";
       position = "top";
-      modules-left = [ "custom/os-icon" "sway/workspaces" "sway/mode" "sway/window" "sway/scratchpad" ];
+      modules-left = [ "custom/os-icon" "sway/workspaces" "sway/mode" "sway/scratchpad" "sway/window" ];
       modules-center = [ ];
       modules-right = [
         "pulseaudio"
@@ -181,10 +181,14 @@
       }
 
       #custom-os-icon {
-        margin-left: 5px;
+        font-size: 30px;
+        margin-right: 0px;
+        margin-left: 10px;
+        background: ${normal.black};
       }
       #workspaces {
         margin-left: 0px; 
+        margin-right: 0px;
       }
 
       #clock,
@@ -261,18 +265,21 @@
       #custom-media,
       #tray,
       #mode,
-      #idle_inhibitor, 
-      #scratchpad {
+      #idle_inhibitor {
         font-size: 15px;
         border-radius: 3px;
-        margin: 0px 5px;
-        padding: 0px 5px;
+        margin: 0px 10px;
+        padding: 0px 10px;
         color: ${normal.black};
       }
       
       #clock {
+        font-size: 15px;
         background: ${gradients.dark.black};
         color: ${normal.white};
+        padding: 0px 10px;
+        margin-left: 0px;
+        margin-right: 10px;
       }
       
       #battery {
@@ -280,7 +287,8 @@
         color: ${normal.black};
       }
 
-      #battery.charging, #battery.plugged {
+      #battery.charging,
+      #battery.plugged {
         color: ${normal.white};
         background-color: ${normal.yellow};
       }
@@ -336,19 +344,6 @@
         background-color: ${normal.orange};
       }
       
-      #tray {
-        background: ${gradients.dark.black00};
-      }
-      
-      #tray > .passive {
-        -gtk-icon-effect: dim;
-      }
-      
-      #tray > .needs-attention {
-        -gtk-icon-effect: highlight;
-        background-color: ${error};
-      }
-      
       #idle_inhibitor {
         color: ${normal.white};
       }
@@ -359,12 +354,21 @@
       }
       
       #scratchpad {
-        background: ${gradients.dark.black00};
+        font-size: 15px;
+        border-radius: 3px;
+        padding: 0px 10px;
+        margin-left: 0px;
+        background: ${gradients.dark.black05};
         color: ${normal.white};
       }
       #scratchpad.empty {
         background: transparent;
       }    
+
+      #tray {
+        background: ${gradients.dark.black00};
+      }
+      
     '';
   };
 }

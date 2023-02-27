@@ -9,15 +9,6 @@ in {
       colors = {
         background = "${builtins.replaceStrings [ "#" ][ "" ] gradients.dark.black00}";
         foreground = "${builtins.replaceStrings [ "#" ][ "" ] normal.white}";
-
-        # regular0 = "${foot.black}";
-        # regular1 = "${foot.red}";
-        # regular2 = "${foot.green}";
-        # regular3 = "${foot.yellow}";
-        # regular4 = "${foot.blue}";
-        # regular5 = "${foot.magenta}";
-        # regular6 = "${foot.cyan}";
-        # regular7 = "${foot.white}";
         
         inherit (foot.regular) regular0;
         inherit (foot.regular) regular1;

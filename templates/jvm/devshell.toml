@@ -9,14 +9,15 @@ packages = [
   "bison",
   "flex",
   "gperf",
-  "python39",
+  "python311",
   "cmake",
   "ninja",
   "ccache",
   "libffi",
   "openssl",
   "dfu-util",
-  "libusb1"
+  "libusb1",
+  "pkg-config",
 ]
 
 [[commands]]
@@ -32,6 +33,41 @@ package = "gradle"
 category = "build"
 
 [[commands]]
+package = "llvmPackages_15.openmp"
+category = "dependency"
+
+[[commands]]
+package = "fmt"
+category = "dependency"
+
+[[commands]]
+package = "boost180"
+category = "dependency"
+
+[[commands]]
+package = "protobuf"
+category = "dependency"
+
+[[commands]]
+package = "spdlog"
+category = "dependency"
+
+[[commands]]
 package = "treefmt"
 category = "linter"
 
+[[commands]]
+package = "black"
+category = "linter"
+
+[[commands]]
+package = "clang-tools_15"
+category = "linter"
+
+[[commands]]
+package = "yamlfmt"
+category = "linter"
+
+[[commands]]
+package = "yamllint"
+category = "linter"

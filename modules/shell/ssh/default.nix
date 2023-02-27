@@ -17,7 +17,7 @@
         identityFile = "~/.ssh/work";
       };
       "magneto" = {
-        hostname = "magneto";
+        hostname = "192.168.0.63";
         user = "build";
         identityFile = "~/.ssh/magneto";
       };

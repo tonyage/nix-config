@@ -43,9 +43,8 @@
   dim = {};
 
   foot = {
-    black = "161616";
     regular = {
-      regular0 = builtins.replaceStrings [ "#" ][ "" ] "#2d2d2d";
+      regular0 = builtins.replaceStrings [ "#" ][ "" ] "#161616";
       regular1 = builtins.replaceStrings [ "#" ][ "" ] "#ef596f";
       regular2 = builtins.replaceStrings [ "#" ][ "" ] "#89ca78";
       regular3 = builtins.replaceStrings [ "#" ][ "" ] "#e5c07b";
@@ -55,7 +54,7 @@
       regular7 = builtins.replaceStrings [ "#" ][ "" ] "#abb2bf";
     };
     bright = {
-      bright0 = builtins.replaceStrings [ "#" ][ "" ] "#393939";
+      bright0 = builtins.replaceStrings [ "#" ][ "" ] "#2d2d2d";
       bright1 = builtins.replaceStrings [ "#" ][ "" ] "#f96379";
       bright2 = builtins.replaceStrings [ "#" ][ "" ] "#93d482";
       bright3 = builtins.replaceStrings [ "#" ][ "" ] "#efca85";

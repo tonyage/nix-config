@@ -22,15 +22,14 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        devshell.overlay
+        devshell.overlays.default
         self.overlay
       ];
     };
     in {
       packages = {
         android-sdk = android.sdk.${system} (sdkPkgs: with sdkPkgs; [
-          build-tools-33-0-0
-          build-tools-30-0-3
+          build-tools-33-0-1
           cmdline-tools-latest
           emulator
           platform-tools
