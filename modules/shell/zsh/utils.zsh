@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-#
+
 flakify() {
   if [ ! -e flake.nix ]; then
     nix flake new -t github:nix-community/nix-direnv
@@ -24,3 +24,10 @@ gi() {
   curl -sL https://www.gitignore.io/api/$argv >> ./.gitignore
 }
 
+bdiff() {
+  git diff --name-only --relative --diff-filter=d | xargs bat --diff
+}
+
+help() {
+  "$@" --help 2>&1 | bat --plain --language=help
+}

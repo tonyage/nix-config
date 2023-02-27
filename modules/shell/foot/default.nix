@@ -7,31 +7,40 @@ in {
     server.enable = true;
     settings = {
       colors = {
-        background = "${foot.black}";
-        foreground = "${foot.white}";
+        background = "${builtins.replaceStrings [ "#" ][ "" ] gradients.dark.black00}";
+        foreground = "${builtins.replaceStrings [ "#" ][ "" ] normal.white}";
 
-        regular0 = "${foot.black}";
-        regular1 = "${foot.red}";
-        regular2 = "${foot.green}";
-        regular3 = "${foot.yellow}";
-        regular4 = "${foot.blue}";
-        regular5 = "${foot.magenta}";
-        regular6 = "${foot.cyan}";
-        regular7 = "${foot.white}";
+        # regular0 = "${foot.black}";
+        # regular1 = "${foot.red}";
+        # regular2 = "${foot.green}";
+        # regular3 = "${foot.yellow}";
+        # regular4 = "${foot.blue}";
+        # regular5 = "${foot.magenta}";
+        # regular6 = "${foot.cyan}";
+        # regular7 = "${foot.white}";
+        
+        inherit (foot.regular) regular0;
+        inherit (foot.regular) regular1;
+        inherit (foot.regular) regular2;
+        inherit (foot.regular) regular3;
+        inherit (foot.regular) regular4;
+        inherit (foot.regular) regular5;
+        inherit (foot.regular) regular6;
+        inherit (foot.regular) regular7;
 
-        bright0 = "${foot.black}";
-        bright1 = "${foot.red}";
-        bright2 = "${foot.green}";
-        bright3 = "${foot.yellow}";
-        bright4 = "${foot.blue}";
-        bright5 = "${foot.magenta}";
-        bright6 = "${foot.cyan}";
-        bright7 = "${foot.white}";
+        inherit (foot.bright) bright0;
+        inherit (foot.bright) bright1;
+        inherit (foot.bright) bright2;
+        inherit (foot.bright) bright3;
+        inherit (foot.bright) bright4;
+        inherit (foot.bright) bright5;
+        inherit (foot.bright) bright6;
+        inherit (foot.bright) bright7;
       };
       csd = {
         size = fontSize;
         font = "JetBrainsMono Nerd Font";
-        color = "${foot.black05}";
+        color = "${foot.regular.regular0}";
       };
       cursor = {
         style = "block";

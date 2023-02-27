@@ -43,16 +43,27 @@
   dim = {};
 
   foot = {
-    black     = "161616";
-    black05   = "222222";
-    red       = "ef596f";
-    green     = "89ca78";
-    yellow    = "e5c07b";
-    blue      = "61afef";
-    magenta   = "c678dd";
-    cyan      = "60c0cc";
-    white     = "abb2bf";
-    orange    = "ea9560";
+    black = "161616";
+    regular = {
+      regular0 = builtins.replaceStrings [ "#" ][ "" ] "#2d2d2d";
+      regular1 = builtins.replaceStrings [ "#" ][ "" ] "#ef596f";
+      regular2 = builtins.replaceStrings [ "#" ][ "" ] "#89ca78";
+      regular3 = builtins.replaceStrings [ "#" ][ "" ] "#e5c07b";
+      regular4 = builtins.replaceStrings [ "#" ][ "" ] "#61afef";
+      regular5 = builtins.replaceStrings [ "#" ][ "" ] "#c678dd";
+      regular6 = builtins.replaceStrings [ "#" ][ "" ] "#60c0cc";
+      regular7 = builtins.replaceStrings [ "#" ][ "" ] "#abb2bf";
+    };
+    bright = {
+      bright0 = builtins.replaceStrings [ "#" ][ "" ] "#393939";
+      bright1 = builtins.replaceStrings [ "#" ][ "" ] "#f96379";
+      bright2 = builtins.replaceStrings [ "#" ][ "" ] "#93d482";
+      bright3 = builtins.replaceStrings [ "#" ][ "" ] "#efca85";
+      bright4 = builtins.replaceStrings [ "#" ][ "" ] "#6bb9f9";
+      bright5 = builtins.replaceStrings [ "#" ][ "" ] "#df69e8";
+      bright6 = builtins.replaceStrings [ "#" ][ "" ] "#6fcfdb";
+      bright7 = builtins.replaceStrings [ "#" ][ "" ] "#b5bcc9";
+    };
   };
 
   black   = "#161616";

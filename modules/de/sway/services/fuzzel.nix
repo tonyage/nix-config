@@ -5,11 +5,11 @@
     dpi-aware=yes
 
     [colors]
-    background=${foot.black05}ff
-    text=${foot.white}ff
-    match=${foot.green}ff
-    selection=${foot.blue}ff
-    selection-text=${foot.black}ff
-    border=${foot.black05}ff
+    background=${builtins.replaceStrings [ "#" ][ "" ] gradients.dark.black05}ff
+    text=${builtins.replaceStrings [ "#" ][ "" ] normal.white}ff
+    match=${builtins.replaceStrings [ "#" ][ "" ] normal.green}ff
+    selection=${builtins.replaceStrings [ "#" ][ "" ] normal.blue}ff
+    selection-text=${builtins.replaceStrings [ "#" ][ "" ] gradients.dark.black00}ff
+    border=${builtins.replaceStrings [ "#" ][ "" ] gradients.dark.black05}ff
   '';
 }
