@@ -97,4 +97,7 @@
     green = "#d0ffd0";
     dark-green = "#a0efa0";
   };
+  misc = {
+    pink = "#de8c92";
+  };
 }
