@@ -1,3 +1,3 @@
 {
-  imports = [ ./chromium ];
+  imports = [ ./chromium ./firefox ];
 }

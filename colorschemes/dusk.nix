@@ -13,6 +13,16 @@
       black25 = "#505050";
       black90 = "#707070";
     };
+    light = {
+      white   = "#ffffff";
+      white00 = "#abb2bf";
+      white05 = "#b5bcc9";
+      white10 = "#b9bfcc";
+      white15 = "#bcc3ce";
+      white20 = "#c4c9d4";
+      white25 = "#c7cdd6";
+      white90 = "#f8f8fa";
+    };
   };
 
   normal = {
@@ -29,7 +39,7 @@
 
   # 10% brighter
   bright = {
-    black   = "#2d2d2d";
+    black   = "#222222";
     red     = "#f96379";
     green   = "#93d482";
     yellow  = "#efca85";
@@ -54,7 +64,7 @@
       regular7 = builtins.replaceStrings [ "#" ][ "" ] "#abb2bf";
     };
     bright = {
-      bright0 = builtins.replaceStrings [ "#" ][ "" ] "#2d2d2d";
+      bright0 = builtins.replaceStrings [ "#" ][ "" ] "#393939";
       bright1 = builtins.replaceStrings [ "#" ][ "" ] "#f96379";
       bright2 = builtins.replaceStrings [ "#" ][ "" ] "#93d482";
       bright3 = builtins.replaceStrings [ "#" ][ "" ] "#efca85";

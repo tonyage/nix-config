@@ -4,7 +4,6 @@ let
 in {
   programs.foot = {
     enable = true;
-    server.enable = true;
     settings = {
       colors = {
         background = "${builtins.replaceStrings [ "#" ][ "" ] gradients.dark.black00}";

@@ -23,7 +23,6 @@
   hardware.video.hidpi.enable = true;
 
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
   hardware.bluetooth.enable = true;
 
   services.pipewire = {
@@ -90,6 +89,7 @@
     };
   };
 
+  security.rtkit.enable = true;
   security.polkit.enable = true;
   security.sudo = {
     enable = true;

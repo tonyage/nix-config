@@ -1,6 +1,7 @@
 { config, inputs, pkgs, ... }: with config; {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    zip
     noto-fonts
     noto-fonts-emoji
     (nerdfonts.override { 
@@ -17,6 +18,7 @@
     };
   };
   xdg.userDirs = {
+    enable = true;
     desktop = "${home.homeDirectory}/";
     music = "${home.homeDirectory}/";
     templates = "${home.homeDirectory}/";

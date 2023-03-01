@@ -89,6 +89,7 @@
           modules = [
             common
             tony
+            ./modules/chat
             ./modules/de/sway
           ];
         };

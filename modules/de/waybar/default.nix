@@ -53,7 +53,7 @@
         };
       };
       "sway/mode" = {
-        format = " {}";
+        format = " {}";
       };
       "sway/scratchpad" = {
         format = "{icon} {count}";
@@ -76,6 +76,7 @@
       clock = {
         timezone = "America/Chicago";
         format = "{:%b %e  %I:%M %p}";
+        tooltip = true;
         tooltip-format = "<big>{ =%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
       };
       cpu = {
@@ -163,6 +164,8 @@
       #waybar {
         font-family: SF Pro, Font Awesome;
         font-size: 24px;  
+        margin: 0px;
+        padding: 0px;
       }
       button {
         box-shadow: inset 0 -3px transparent;
@@ -177,7 +180,7 @@
       #workspaces,
       #custom-os-icon {
         font-size: 18px;
-        padding: 0px 10px;
+        padding: 0px 5px 0px 5px;
         color: ${normal.white};
       }
 
@@ -185,11 +188,10 @@
         font-size: 30px;
         margin-right: 0px;
         margin-left: 10px;
-        background: ${normal.black};
+        background: transparent;
       }
       #workspaces {
-        margin-left: 0px; 
-        margin-right: 0px;
+        margin: 0px 5px 0px 5px;
       }
 
       #clock,
@@ -216,7 +218,7 @@
         box-shadow: inset 0 -3px ${normal.white};
       }
       #workspaces button.urgent {
-        background-color: ${error};
+        box-shadow: inset 0 -3px ${error};
       }
       
       #mode {
@@ -268,9 +270,9 @@
       #mode,
       #idle_inhibitor {
         font-size: 15px;
-        border-radius: 3px;
-        margin: 0px 10px;
-        padding: 0px 10px;
+        border-radius: 5px;
+        margin: 0px 5px 0px 5px;
+        padding: 0px 5px 0px 5px;
         color: ${normal.black};
       }
       
@@ -278,8 +280,8 @@
         font-size: 15px;
         background: ${gradients.dark.black};
         color: ${normal.white};
-        padding: 0px 10px;
-        margin-left: 0px;
+        padding: 0px 5px 0px 5px;
+        margin-left: 5px;
         margin-right: 10px;
       }
       
@@ -359,7 +361,8 @@
         border-radius: 3px;
         padding: 0px 10px;
         margin-left: 0px;
-        background: ${gradients.dark.black05};
+        margin-right: 10px;
+        background: transparent;
         color: ${normal.white};
       }
       #scratchpad.empty {

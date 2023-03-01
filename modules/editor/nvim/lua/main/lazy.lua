@@ -29,8 +29,8 @@ local lazy_defaults = {
   },
   debug = false,
   ui = {
-    size = { width = 0.5, height = 0.5 },
-    border = "double",
+    size = { width = 0.5, height = 0.4 },
+    border = "single",
   },
 }
 

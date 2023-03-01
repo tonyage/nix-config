@@ -14,31 +14,25 @@
     enable = true;
     systemdIntegration = true;
     extraOptions = [ "--unsupported-gpu" ];
-    extraConfig = ''
-      font pango:Noto Sans 10.000000
-      default_border pixel 1
-      default_floating_border pixel 1
-      focus_wrapping no
-      focus_follows_mouse yes
-      focus_on_window_activation smart
-      mouse_warping output
-      workspace_layout default
-    '';
     config = rec {
+      fonts = {
+        names = [ "SF Pro Display" ];
+        size = 10.0;
+      };
       left = "h";
       down = "j";
       up = "k";
       right = "l";
       modifier = "Mod4";
-      terminal = "${pkgs.foot}/bin/footclient";
+      terminal = "${pkgs.foot}/bin/foot";
       menu = "${pkgs.fuzzel}/bin/fuzzel";
       bars = [ ];
       assigns = {
         "1" = [ { app_id = "foot"; } ];
         "2" = [ { class = "Chromium"; } ];
         "4" = [ 
-          { app_id = "Slack"; }
-          { app_id = "Discord"; }
+          { class = "Slack"; }
+          { class = "Discord"; }
         ];
       };
       colors = {
@@ -47,7 +41,7 @@
           background = "${normal.black}";
           border = "${normal.black}";
           childBorder = "${normal.black}";
-          indicator = "${normal.black}";
+          indicator = "${normal.white}";
           text = "${normal.white}";
         };
         focusedInactive = {
@@ -95,6 +89,7 @@
         "${modifier}+b" = "split h";
         "${modifier}+v" = "split v";
         "${modifier}+i" = "exec chromium";
+        "${modifier}+Shift+I" = "exec chromium";
         "${modifier}+r" = "mode resize";
         "${modifier}+s" = "scratchpad show";
         "${modifier}+Shift+S" = "move container to scratchpad";
@@ -120,8 +115,11 @@
         "${modifier}+Shift+${up}" = "move up";
         "${modifier}+Shift+${right}" = "move right";
 
-        "${modifier}+Left" = "move workspace to output left";
-        "${modifier}+Right" = "move workspace to output right";
+        "${modifier}+Shift+left" = "move workspace to output left";
+        "${modifier}+Shift+right" = "move workspace to output right";
+
+        "${modifier}+Control+left" = "move container to workspace prev, workspace next";
+        "${modifier}+Control+right" = "move container to workspace next, workspace next";
 
         "${modifier}+1" = "workspace number 1";
         "${modifier}+2" = "workspace number 2";
@@ -162,17 +160,22 @@
         { command = "foot"; }
         { command = "${pkgs.mako}/bin/mako"; always = true; }
       ];
-      window.commands = [
-        {
-          command = "inhibit_idle fullscreen";
-          criteria.app_id = "chromium";
-        }
-        {
-          command = "move to workspace 3";
-          criteria.class = "Spotify";
-        }
-      ];
+      window = {
+        border = 0;
+        hideEdgeBorders = "both";
+        commands = [
+          {
+            command = "inhibit_idle fullscreen";
+            criteria.app_id = "chromium";
+          }
+          {
+            command = "move to workspace 3";
+            criteria.class = "Spotify";
+          }
+        ];
+      };
       workspaceAutoBackAndForth = true;
+      floating.border = 0;
     };
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland

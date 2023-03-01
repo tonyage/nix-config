@@ -63,7 +63,7 @@ return {
   ["@text.strike"] = { fg = colors.base00, strikethrough = true },
   ["@text.literal"] = { fg = colors.base0B, italic = true },
   ["@text.uri"] = { fg = colors.base09, underline = true },
-  ["@test.reference"] = { fg = colors.base09 },
+  ["@text.reference"] = { fg = colors.base09 },
   ["@text.todo"] = { fg = colors.base09, bg = colors.base00 },
 
   ["@type"] = { fg = colors.base0A, sp = "none", bold = true },

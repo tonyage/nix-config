@@ -45,7 +45,7 @@ in {
 
     initExtra = ''
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
-        [[ ${main} ]] && source ${main}
+        [[ -f ${main} ]] && source ${main}
       else
         [[ -f ${tty} ]] && source ${tty}
       fi
