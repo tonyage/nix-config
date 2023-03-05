@@ -79,6 +79,7 @@
   services.openssh.enable = true;
   services.printing.enable = true;
   services.blueman.enable = true;
+  services.hardware.bolt.enable = true;
 
   virtualisation.docker = { 
     enable = true;
