@@ -21,6 +21,9 @@ vim.diagnostic.config {
   virtual_text = {
     prefix = "",
   },
+  float = {
+    border = "single",
+  },
   signs = false,
 }
 
