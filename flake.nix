@@ -5,6 +5,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
 
+    darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +26,7 @@
 
   outputs = { self,
     nur,
+    darwin,
     nixpkgs,
     apple-fonts,
     home-manager,
@@ -64,6 +69,20 @@
         ];
       };
     in {
+      darwinConfigurations = {
+        "m1" = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [ 
+	    ./nixos/darwin-configuration.nix
+            home-manager.darwinModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."tony.do" = import ./modules/darwin.nix;
+            }
+          ];
+          specialArgs = { inherit inputs outputs; };
+        };
+      };
       nixosConfigurations = {
         cyclops = nixpkgs.lib.nixosSystem {
           inherit system;
