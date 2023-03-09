@@ -24,6 +24,7 @@ M.default = function()
   M.map("x", "<leader>p", [["_dP]])
   M.map("n", "Q", "<nop>")
   M.map("n", "q", "<nop>")
+  M.map("n", "<leader>/", ":nohl<CR>")
 
   M.map( { "n", "t" }, "<F5>", function()
    terminal.toggle("horizontal")

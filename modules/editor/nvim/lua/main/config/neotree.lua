@@ -1,4 +1,8 @@
 require("ui.themer").highlight("neotree")
+local keybind = require("main.mappings")
+keybind.map("n", "<leader>e", ":Neotree toggle show filesystem left<CR>")
+keybind.map("n", "<leader>r", ":Neotree float reveal_file<cfile> reveal_force_cwd<CR>")
+keybind.map("n", "<leader>ns", ":Neotree float git_status<CR>")
 return {
   filesystem = {
     visible = true,
@@ -7,7 +11,8 @@ return {
       ".github/",
       ".envrc",
       ".env",
-      ".editorconfig"
+      ".editorconfig",
+      "build"
     },
   },
   default_component_configs = {

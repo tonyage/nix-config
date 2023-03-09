@@ -90,7 +90,6 @@ require("lazy").setup({
       "MunifTanjim/nui.nvim",
     },
     init = function()
-      key.map("n", "|", ":Neotree reveal <CR>")
       require("neo-tree").setup(require("main.config.neotree"))
     end,
   },
@@ -113,6 +112,15 @@ require("lazy").setup({
     },
     config = function()
       require("copilot_cmp").setup()
+    end
+  },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = "InsertEnter",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+        require("null-ls").setup(require("main.config.null"))
     end
   },
 

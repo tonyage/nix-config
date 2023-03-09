@@ -68,16 +68,24 @@
           ./modules/shell
         ];
       };
+      colorscheme = {
+        _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
+      };
     in {
       darwinConfigurations = {
         "m1" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [ 
-	    ./nixos/darwin-configuration.nix
+	          ./nixos/darwin-configuration.nix
             home-manager.darwinModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users."tony.do" = import ./modules/darwin.nix;
+              home-manager.users."tony.do" = {
+                imports = [
+                  colorscheme
+                  ./modules/darwin.nix
+                ]; 
+              };
             }
           ];
           specialArgs = { inherit inputs outputs; };
