@@ -33,6 +33,7 @@ in {
 
     initExtraBeforeCompInit = ''
       [[ "$(tty)" = "/dev/tty1" ]] && exec sway
+      eval "$(zellij setup --generate-autostart zsh)"
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${gradients.dark.black90}"
@@ -41,6 +42,7 @@ in {
       ${builtins.readFile ./utils.zsh} 
       eval "$(zoxide init zsh)"
       eval "$(direnv hook zsh)"
+      [ -f ~/.zshrc_local ] && {echo "Sourcing local zshrc"; source ~/.zshrc_local;}
     '';
 
     initExtra = ''

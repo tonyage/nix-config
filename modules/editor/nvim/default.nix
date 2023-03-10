@@ -22,7 +22,7 @@
 
       ltex-ls
       lua-language-server
-      luaformatter
+      stylua
 
       kotlin-language-server
 
@@ -34,6 +34,7 @@
       nil
 
       cmake-language-server
+      cmake-format
       llvmPackages_15.llvm
 
       python3Packages.isort

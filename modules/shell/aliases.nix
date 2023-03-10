@@ -10,4 +10,6 @@
   zmux = "zellij";
   zrun = "zellij run";
   zedit = "zellij edit";
+  vi = "nvim";
+  vim = "nvim";
 }

@@ -27,7 +27,7 @@
       shell.program = "${pkgs.zsh}/bin/zsh";
 
       font = {
-        size = 15;
+        size = 13;
         normal.family = "JetBrainsMono Nerd Font";
         normal.style = "Regular";
         bold.family = "JetBrainsMono Nerd Font";
