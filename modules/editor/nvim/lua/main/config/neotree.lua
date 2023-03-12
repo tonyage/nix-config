@@ -1,6 +1,6 @@
 require("ui.themer").highlight("neotree")
 local keybind = require("main.mappings")
-keybind.map("n", "<leader>e", ":Neotree reveal<CR>")
+keybind.map("n", "<leader>e", ":Neotree toggle<CR>")
 keybind.map("n", "<leader>r", ":Neotree float reveal_file<cfile> reveal_force_cwd<CR>")
 keybind.map("n", "<leader>ns", ":Neotree float git_status<CR>")
 return {

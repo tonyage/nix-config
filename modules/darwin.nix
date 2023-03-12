@@ -13,8 +13,9 @@
   imports = [ 
     ./editor/nvim 
     ./shell/alacritty
-    ./shell/git
     ./shell/bat
+    ./shell/git
+    ./shell/wezterm
     ./shell/zellij
   ];
 }

@@ -1,24 +1,65 @@
-{ colorscheme, pkgs, ... }: {
+{ colorscheme, config, pkgs, ... }: {
   programs.zellij = {
     enable = true;
     settings = {
-      theme = "onedarkish";
-      themes.onedarkish = { 
-        fg = colorscheme.white;
-        bg = colorscheme.black;
+      theme = "dusk";
+      themes.dusk = { 
+        bg = colorscheme.normal.black;
+        fg = colorscheme.normal.white;
 
-        inherit (colorscheme) black;
-        inherit (colorscheme) red;
-        inherit (colorscheme) green;
-        inherit (colorscheme) yellow;
-        inherit (colorscheme) blue;
-        inherit (colorscheme) magenta;
-        inherit (colorscheme) cyan;
-        inherit (colorscheme) white;
-        inherit (colorscheme) orange;
+        inherit (colorscheme.bright) black;
+        inherit (colorscheme.bright) red;
+        inherit (colorscheme.bright) green;
+        inherit (colorscheme.bright) yellow;
+        inherit (colorscheme.bright) blue;
+        inherit (colorscheme.bright) magenta;
+        inherit (colorscheme.bright) cyan;
+        inherit (colorscheme.bright) white;
+        inherit (colorscheme.bright) orange;
       };
       copy_on_select = true;
       default_shell = "zsh";
+      default_layout = "compact";
+      layout_dir = "${config.xdg.configHome}/zellij/layouts";
+      copy_command = if pkgs.system == "x86_64-linux" then "wl-copy" else "pb-copy";
     };
   };
+  xdg.configFile."zellij/layouts/config.kdl".text = ''
+    layout {
+      cwd "git/personal/nix-config"
+      pane_template name="config_pane" {
+        children
+        pane size=1 borderless=true {
+          plugin location="zellij:compact-bar"
+        }
+      }
+      tab name="nix-config" {
+        config_pane split_direction="horizontal" {
+          pane name="neovim"
+          pane command="home-manager" size="20%" start_suspended=true {
+            args "switch" "--flake" ".#tony@cyclops"
+          }
+        }
+      }
+    }
+  '';
+  xdg.configFile."zellij/layouts/work.kdl".text = ''
+    layout {
+      cwd "git/work/pison/libs/core"
+      pane_template name="config_pane" {
+        children
+        pane size=1 borderless=true {
+          plugin location="zellij:compact-bar"
+        }
+      }
+      tab name="work" {
+        cmake_pane split_direction="horizontal" {
+          pane name="neovim" size="80%" command="zsh"
+          pane command="./build.sh" size="20%" start_suspended=true {
+            args "-p" "linux" "-a" "x86_64" "-c" "-l"
+          }
+        }
+      }
+    }
+  '';
 }

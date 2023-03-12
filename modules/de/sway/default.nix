@@ -1,4 +1,4 @@
-{ colorscheme, pkgs, ... }: with colorscheme; {
+{ colorscheme, config, pkgs, ... }: with colorscheme; {
   imports = [ ./services ../waybar ];
   home.packages = (with pkgs; [
     grim
@@ -24,7 +24,7 @@
       up = "k";
       right = "l";
       modifier = "Mod4";
-      terminal = "${pkgs.foot}/bin/foot";
+      terminal = "${pkgs.wezterm}/bin/wezterm";
       menu = "${pkgs.fuzzel}/bin/fuzzel";
       bars = [ ];
       assigns = {
@@ -144,6 +144,7 @@
         "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
       };
       output = {
+        "*".bg = ''"${config.home.homeDirectory}/pics/wallpaper-dark.jpg" "fill"'';
         eDP-1 = { scale = "1.25"; };
       };
       modes = {
@@ -157,7 +158,7 @@
         };
       };
       startup = [
-        { command = "foot"; }
+        { command = "${pkgs.wezterm}/bin/wezterm"; }
         { command = "${pkgs.mako}/bin/mako"; always = true; }
       ];
       window = {

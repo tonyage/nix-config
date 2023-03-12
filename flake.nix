@@ -49,7 +49,6 @@
         home.stateVersion = "22.11";
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
         imports = [
-          ./modules/browser
           ./modules/editor
           ./modules/shell
           ./modules/home.nix
@@ -63,10 +62,6 @@
       server = {
         home.homeDirectory = "/home/build";
         home.username = "build";
-        imports = [
-          ./modules/editor
-          ./modules/shell
-        ];
       };
       colorscheme = {
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
@@ -116,8 +111,12 @@
           modules = [
             common
             tony
+            ./modules/browser
             ./modules/chat
+            ./modules/de
             ./modules/de/sway
+            ./modules/shell/ssh
+            ./modules/shell/wezterm
           ];
         };
         "tony@jean" = home-manager.lib.homeManagerConfiguration {
@@ -126,6 +125,11 @@
           modules = [
             common
             tony
+            ./modules/browser
+            ./modules/chat
+            ./modules/de/sway
+            ./modules/shell/ssh
+            ./modules/shell/wezterm
           ];
         };
         "build@magneto" = home-manager.lib.homeManagerConfiguration {

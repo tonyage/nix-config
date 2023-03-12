@@ -1,4 +1,4 @@
-{ colorscheme, lib, pkgs, ... }:
+{ colorscheme, config, pkgs, ... }:
 with colorscheme;
 let
   main = ./p10k/.p10k.zsh;
@@ -33,7 +33,16 @@ in {
 
     initExtraBeforeCompInit = ''
       [[ "$(tty)" = "/dev/tty1" ]] && exec sway
-      eval "$(zellij setup --generate-autostart zsh)"
+      if [[ -z "$ZELLIJ" ]]; then                       
+          if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+              zellij attach -c                          
+          else                                          
+              zellij -l ${config.xdg.configHome}/zellij/layouts/config.kdl
+          fi                                            
+          if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then  
+              exit                                      
+          fi                                            
+      fi                                                
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${gradients.dark.black90}"
