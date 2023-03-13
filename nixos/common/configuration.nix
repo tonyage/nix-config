@@ -64,9 +64,11 @@
   environment.systemPackages = with pkgs; [
     git
     curl
+    lshw
     gnused
     ripgrep
     binutils
+    usbutils
     patchelf
     coreutils
     findutils

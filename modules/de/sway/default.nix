@@ -1,10 +1,12 @@
 { colorscheme, config, pkgs, ... }: with colorscheme; {
   imports = [ ./services ../waybar ];
   home.packages = (with pkgs; [
+    imv
     grim
     slurp
     waypipe
     swaylock
+    wdisplays
     pavucontrol
     wl-clipboard
     sway-contrib.grimshot
@@ -13,7 +15,7 @@
   wayland.windowManager.sway = {
     enable = true;
     systemdIntegration = true;
-    extraOptions = [ "--unsupported-gpu" ];
+    extraOptions = [ "--unsupported-gpu" "-d" ];
     config = rec {
       fonts = {
         names = [ "SF Pro Display" ];
@@ -28,7 +30,7 @@
       menu = "${pkgs.fuzzel}/bin/fuzzel";
       bars = [ ];
       assigns = {
-        "1" = [ { app_id = "foot"; } ];
+        "1" = [ { app_id = "wezterm"; } ];
         "2" = [ { class = "Chromium"; } ];
         "4" = [ 
           { class = "Slack"; }
@@ -117,6 +119,7 @@
 
         "${modifier}+Shift+left" = "move workspace to output left";
         "${modifier}+Shift+right" = "move workspace to output right";
+        "${modifier}+Shift+Control+l" = "${pkgs.swaylock}/bin/swaylock -f -i \"${config.home.homeDirectory}/pics/wallpaper-dark-lock.png\"";
 
         "${modifier}+Control+left" = "move container to workspace prev, workspace next";
         "${modifier}+Control+right" = "move container to workspace next, workspace next";
@@ -145,7 +148,6 @@
       };
       output = {
         "*".bg = ''"${config.home.homeDirectory}/pics/wallpaper-dark.jpg" "fill"'';
-        eDP-1 = { scale = "1.25"; };
       };
       modes = {
         resize = {
@@ -160,6 +162,7 @@
       startup = [
         { command = "${pkgs.wezterm}/bin/wezterm"; }
         { command = "${pkgs.mako}/bin/mako"; always = true; }
+        { command = "${pkgs.systemd}/bin/systemctl --user restart kanshi.service"; always = true; }
       ];
       window = {
         border = 0;
@@ -183,12 +186,13 @@
       export QT_QPA_PLATFORM=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATIONS="1"
       export _JAVA_AWT_WM_NONREPARENTING=1
+      export WLR_NO_HARDWARE_CURSORS=1
+      export WLR_DRM_NO_MODIFIERS=1
     '';
     wrapperFeatures = {
       base = true;
       gtk = true;
     };
   };
-  systemd.user.services.swayidle.Service.Slice = "session.slice";
-  systemd.user.targets.sway-session.Unit.Wants = [ "xdg-desktop-autostart-target" ];
+  systemd.user.targets.sway-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
 }

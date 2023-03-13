@@ -9,7 +9,7 @@ M.servers = {
   "gradle_ls",
   "kotlin_language_server",
   "ltex",
-  "pyright",
+  "ruff_lsp",
   "tsserver",
   "yamlls"
 }

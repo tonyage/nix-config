@@ -1,10 +1,10 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: with config; {
   services.swayidle = {
     enable = true;
     timeouts = [
       {
         timeout = 900;
-        command = "${pkgs.swaylock}/bin/swaylock -f -i \"../../assets/wallpaper-dark.jpg\"";
+        command = "${pkgs.swaylock}/bin/swaylock -f -i \"${home.homeDirectory}/pics/wallpaper-dark-lock.png\"";
       }
       {
         timeout = 1200;
@@ -15,12 +15,13 @@
     events = [
       {
         event = "lock";
-        command = "${pkgs.swaylock}/bin/swaylock -f -i \"../../assets/wallpaper-dark.jpg\"";
+        command = "${pkgs.swaylock}/bin/swaylock -f -i \"${home.homeDirectory}/pics/wallpaper-dark-lock.png\"";
       }
       {
         event = "before-sleep";
-        command = "${pkgs.swaylock}/bin/swaylock -f -i \"../../assets/wallpaper-dark.jpg\"";
+        command = "${pkgs.swaylock}/bin/swaylock -f -i \"${home.homeDirectory}/pics/wallpaper-dark-lock.png\"";
       }
     ];
   };
+  systemd.user.services.swayidle.Service.Slice = "session.slice";
 }

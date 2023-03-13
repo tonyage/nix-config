@@ -1,9 +1,22 @@
-{ pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec "$@"
+  '';
+in {
   imports = [
     ./hardware-configuration.nix
   ];
 
   networking.hostName = "cyclops";
+
+  environment.systemPackages = [ nvidia-offload ];
+  boot.modprobeConfig.enable = true;
+  # boot.blacklistedKernelModules = [ "i2c_nvidia_gpu" ];
 
   users.users.tony = {
     isNormalUser = true;
@@ -25,12 +38,30 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  services.xserver.videoDrivers = [ "nvidia" "intel" ];
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    prime = {
+      offload.enable = true;
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0";
+    };
+  };
+  hardware.nvidia.modesetting.enable = true;
+  services.xserver.videoDrivers = [ "nouveau" "modesetting" ];
+
+  specialisation = {
+    external-display.configuration = {
+      system.nixos.tags = [ "external-display" ];
+      hardware.nvidia.prime.offload.enable = lib.mkForce false;
+      hardware.nvidia.powerManagement.enable = lib.mkForce false;
+    };
+  };
 
   hardware = {
     opengl = {
       enable = true;
       driSupport = true;
+      driSupport32Bit = true;
     };
   };
 

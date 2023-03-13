@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
+    nixpkgs-wl.url = "github:nix-community/nixpkgs-wayland";
 
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -28,6 +29,7 @@
     nur,
     darwin,
     nixpkgs,
+    nixpkgs-wl,
     apple-fonts,
     home-manager,
     flake-utils,
@@ -41,7 +43,7 @@
         config.allowUnfree = true;
         overlays = [
           rust.overlays.default
-          devshell.overlay
+          devshell.overlays.default
         ];
       };
       common = {

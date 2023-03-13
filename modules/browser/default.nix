@@ -1,3 +1,3 @@
 {
-  imports = [ ./chromium ./firefox ];
+  imports = [ ./chromium ./elinks ./firefox ];
 }

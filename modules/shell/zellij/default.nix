@@ -7,7 +7,7 @@
         bg = colorscheme.normal.black;
         fg = colorscheme.normal.white;
 
-        inherit (colorscheme.bright) black;
+        inherit (colorscheme.normal) black;
         inherit (colorscheme.bright) red;
         inherit (colorscheme.bright) green;
         inherit (colorscheme.bright) yellow;
@@ -36,8 +36,13 @@
       tab name="nix-config" {
         config_pane split_direction="horizontal" {
           pane name="neovim"
-          pane command="home-manager" size="20%" start_suspended=true {
-            args "switch" "--flake" ".#tony@cyclops"
+          pane split_direction="vertical" size="20%" {
+            pane command="home-manager" start_suspended=true {
+              args "switch" "--flake" ".#tony@cyclops"
+            }
+            pane command="sudo" start_suspended=true {
+              args "nixos-rebuild" "switch" "--flake" ".#cyclops"
+            }
           }
         }
       }

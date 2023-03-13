@@ -3,6 +3,7 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+    defaultEditor = true;
 
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter.withAllGrammars
@@ -37,9 +38,7 @@
       cmake-format
       llvmPackages_15.llvm
 
-      python3Packages.isort
-      nodePackages.pyright
-      black
+      ruff
 
       rust-analyzer
       rustfmt
