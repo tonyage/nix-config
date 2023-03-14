@@ -53,12 +53,12 @@ local config = {
     completion = {
       border = "none",
       winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
-      scrollbar = false
+      scrollbar = false,
     },
     documentation = {
       border = "none",
       winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
-      scrollbar = false
+      scrollbar = false,
     },
   },
   snippet = {
@@ -67,9 +67,10 @@ local config = {
     end,
   },
   formatting = {
+    fields = { "kind", "abbr", "menu" },
     format = function(_, vim_item)
       local icons = require("ui.icons").lspkind
-      vim_item.kind = string.format("[%s] %s", icons[vim_item.kind], vim_item.kind)
+      vim_item.kind = icons[vim_item.kind]
       return vim_item
     end,
   },
@@ -88,6 +89,9 @@ local config = {
 cmp.setup(config)
 cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
+  view = {
+    entries = { name = "wildmenu", separator = "|" }
+  },
   sources = cmp.config.sources({
     { name = "buffer", opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
   })

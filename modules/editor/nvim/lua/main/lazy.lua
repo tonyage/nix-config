@@ -1,14 +1,12 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lspkind = require("ui.icons")["lspkind"]
-local constants = require("main.constants")
-local key = require("main.mappings")
 
 require("ui.themer").highlight("lazy")
 local lazy_defaults = {
   defaults = { lazy = true },
   checker = {
-    enabled = false,
-    notify = true
+    enabled = true,
+    notify = false,
   },
   change_detection = {
     enabled = true,
@@ -54,26 +52,19 @@ require("lazy").setup({
     "rmagatti/auto-session",
     lazy = false,
     config = function()
-      local manager = require("neo-tree.sources.manager")
-      local function close()
-        manager.close_all()
-      end
-      local function show()
-        manager.show("filesystem")
-      end
       require("auto-session").setup({
         auto_session_suppress_dirs = { "~/", "~/Downloads", "~/git", "~/Code" },
         bypass_session_save_file_types = { "neo-tree", "terminal" },
         auto_save_enabled = true,
         auto_restore_enabled = true,
         auto_session_use_git_branch = true,
-        pre_save_cmds = { close() },
-        pre_restore_cmds = { close() },
-        post_restore_cmds = { show() },
+        pre_save_cmds = { require("neo-tree.sources.manager").close_all() },
+        pre_restore_cmds = { require("neo-tree.sources.manager").close_all() },
+        post_restore_cmds = { require("neo-tree.sources.manager").show("filesystem") },
         cwd_change_handling = {
           restore_upcoming_session = true,
-          pre_cwd_changed_hook = close(),
-          post_cwd_changed_hook = show()
+          pre_cwd_changed_hook = require("neo-tree.sources.manager").close_all(),
+          post_cwd_changed_hook = require("neo-tree.sources.manager").show("filesystem")
         }
       })
       vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
@@ -89,15 +80,13 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
-    init = function()
-      require("neo-tree").setup(require("main.config.neotree"))
-    end,
+    opts = require("main.config.neotree"),
   },
 
   {
     "zbirenbaum/copilot.lua",
     event = { "InsertEnter" },
-    config = function()
+    init = function()
       vim.defer_fn(function()
         require("copilot").setup()
       end, 100)
@@ -110,17 +99,15 @@ require("lazy").setup({
     dependencies = {
       "zbirenbaum/copilot.lua"
     },
-    config = function()
-      require("copilot_cmp").setup()
-    end
+    config = true
   },
 
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = "InsertEnter",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-        require("null-ls").setup(require("main.config.null"))
+    init = function()
+      require("null-ls").setup(require("main.config.null"))
     end
   },
 
@@ -130,7 +117,6 @@ require("lazy").setup({
       "hrsh7th/cmp-nvim-lsp",
       "SmiteshP/nvim-navic",
     },
-    tag = "v0.1.4",
     init = function() require("lsp") end,
   },
 
@@ -151,9 +137,6 @@ require("lazy").setup({
         "javascript"
       },
     },
-    init = function(_, opts)
-      require("colorizer").setup(opts)
-    end
   },
 
   {
@@ -162,7 +145,7 @@ require("lazy").setup({
     init = function()
       vim.g.indent_blankline_char =  "▏"
     end,
-    config = {
+    opts = {
       show_end_of_line = true,
       show_current_context = true,
       show_current_context_start = true,
@@ -175,15 +158,13 @@ require("lazy").setup({
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufEnter" },
-    config = require("main.config.gitsigns")
+    opts = require("main.config.gitsigns")
   },
 
   {
     "kylechui/nvim-surround",
     lazy = false,
-    config = function()
-      require("nvim-surround").setup()
-    end,
+    config = true
   },
 
   {
@@ -258,17 +239,6 @@ require("lazy").setup({
   },
 
   {
-    "smjonas/inc-rename.nvim",
-    keys = { "grn" },
-    config = function()
-      key.map("n", "grn", function()
-        return ":IncRename " .. vim.fn.expand("<cword>")
-      end, { expr = true })
-      require("inc_rename").setup()
-    end,
-  },
-
-  {
     "nvim-tree/nvim-web-devicons",
     config = function()
       require("ui.themer").highlight("devicons")
@@ -287,7 +257,6 @@ require("lazy").setup({
       require("main.config.treesitter")
     end
   },
-
   { "nvim-treesitter/nvim-treesitter-context", event = { "BufReadPre" }, config = true },
 }, lazy_defaults)
 

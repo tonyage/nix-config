@@ -1,4 +1,7 @@
-{ colorscheme, config, ... }: with colorscheme; {
+{ colorscheme, config, pkgs, ... }: with colorscheme;
+let 
+  dpi = if pkgs.system == "x86_64-linux" then "192.0" else "144.0";
+in {
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -7,13 +10,13 @@
           family = "JetBrainsMono Nerd Font",
           weight = "Regular",
         },
-        font_size = 11.0,
-        line_height = 1,
-        dpi = 96.0,
+        font_size = 10.0,
+        line_height = 1.0,
+        dpi = ${dpi},
         color_scheme_dirs = { "${config.home.homeDirectory}/.config/wezterm/colors" },
         color_scheme = "dusk",
         hide_tab_bar_if_only_one_tab = true,
-        underline_thickness = 4.0,
+        underline_thickness = 2.0,
         default_cursor_style = "BlinkingBlock",
         window_padding = {
           left = 0,

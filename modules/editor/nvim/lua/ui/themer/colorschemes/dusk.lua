@@ -24,8 +24,7 @@ gradients.light = {
 }
 
 dusk.normal = {
-  gradients,
-  black   = "#161616";
+  black   = "#161616",
   red     = "#e54f65",
   green   = "#89ca78",
   yellow  = "#e5c07b",
@@ -56,11 +55,14 @@ dusk.normal = {
   base0D  = "#61afef",
   base0E  = "#c678dd",
   base0F  = "#f44747",
+
+  dark    = gradients.dark,
+  light   = gradients.light,
 }
 
 dusk.vivid = {
   gradients,
-  black   = "#161616";
+  black   = "#161616",
   red     = "#ef596f",
   green   = "#93d482",
   yellow  = "#efca85",
@@ -70,6 +72,7 @@ dusk.vivid = {
   white   = "#b5bcc9",
   orange  = "#f49f6a",
   pink    = "#e8969c",
+  error   = "#f44747",
 
   grey00  = "#393939",
   grey01  = "#454545",
@@ -91,6 +94,9 @@ dusk.vivid = {
   base0D  = "#6bb9f9",
   base0E  = "#d55fde",
   base0F  = "#f44747",
+
+  dark    = gradients.dark,
+  light   = gradients.light,
 }
 
 vim.opt.bg = "dark"

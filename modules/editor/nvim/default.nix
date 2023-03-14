@@ -13,6 +13,10 @@
       gcc12
       tree-sitter
       nodejs
+      python311
+
+      buf
+      buf-language-server
 
       nodePackages.bash-language-server
       shellcheck
@@ -26,6 +30,7 @@
       stylua
 
       kotlin-language-server
+      ktlint
 
       gopls
       gitlint

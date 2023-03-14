@@ -9,6 +9,7 @@
     wdisplays
     pavucontrol
     wl-clipboard
+    networkmanagerapplet
     sway-contrib.grimshot
   ]);
 
@@ -162,6 +163,7 @@
       startup = [
         { command = "${pkgs.wezterm}/bin/wezterm"; }
         { command = "${pkgs.mako}/bin/mako"; always = true; }
+        { command = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"; always = true; }
         { command = "${pkgs.systemd}/bin/systemctl --user restart kanshi.service"; always = true; }
       ];
       window = {
@@ -173,13 +175,21 @@
             criteria.app_id = "chromium";
           }
           {
+            command = "inhibit_idle fullscreen";
+            criteria.app_id = "org.wezfurlong.wezterm";
+          }
+          {
             command = "move to workspace 3";
             criteria.class = "Spotify";
           }
         ];
       };
       workspaceAutoBackAndForth = true;
-      floating.border = 0;
+      floating.border = 2;
+      floating.criteria = [
+        { app_id = "nm-*"; }
+        { app_id = ".blue*"; }
+      ];
     };
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland

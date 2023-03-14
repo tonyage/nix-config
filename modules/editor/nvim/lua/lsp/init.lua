@@ -9,7 +9,7 @@ for _, server in ipairs(constants.servers) do
   })
 end
 
-require("lsp.sumneko")
+require("lsp.lua")
 require("lsp.rust")
 require("lsp.yamlls")
 require("lsp.nix")

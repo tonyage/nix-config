@@ -10,16 +10,14 @@
       modules-left = [ "custom/os-icon" "sway/workspaces" "sway/mode" "sway/scratchpad" "sway/window" ];
       modules-center = [ ];
       modules-right = [
-        "pulseaudio"
-        "network"
+        "idle_inhibitor"
         "cpu"
         "memory"
         "temperature"
-        "bluetooth"
         "battery"
-        "backlight"
-        "idle_inhibitor"
+        "pulseaudio"
         "tray"
+        "network"
         "clock"
       ];
       "sway/workspaces" = {
@@ -29,7 +27,7 @@
         format-icons = {
             "1" = "";
             "2" = "";
-            "3" = "";
+            "3" = "<span color=\"${normal.green}\"></span>";
             "4" = "";
             "5" = "";
             "urgent" = "";
@@ -38,20 +36,12 @@
         };
         persistent_workspaces = {
           "1" = [];
-          "2" = [ "eDP-1" "DP-2" ];
+          "2" = [ "eDP-1" "DP-3" ];
           "3" = [ "eDP-1" ];
           "4" = [ "eDP-1" ];
         };
       };
       "custom/os-icon" = { format = ""; };
-      bluetooth = {
-        interval = 30; 
-        format = "{icon}";
-        format-icons = {
-          enabled = "";
-          disabled = "";
-        };
-      };
       "sway/mode" = {
         format = " {}";
       };
@@ -70,14 +60,14 @@
         };
       };
       tray = {
-        icon-size = 24;
+        icon-size = 21;
         spacing = 10;
       };
       clock = {
         timezone = "America/Chicago";
         format = "{:%b %e  %I:%M %p}";
-        tooltip = true;
         tooltip-format = "<big>{ =%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        tooltip = true;
       };
       cpu = {
         format = " {max_frequency}Ghz │ <span color=\"${gradients.dark.black20}\">{usage}%</span>";
@@ -97,11 +87,6 @@
         format = "{icon}  {temperatureC}°C";
         format-icons = ["" "" ""];
       };
-      backlight = {
-        device = "acpi_video1";
-        format = "{icon}";
-        format-icons = [ "" "" "" "" "" "" "" "" "" ];
-      };
       battery = {
         states = {
           good = 95;
@@ -118,7 +103,7 @@
       };
       network = {
         interface = "wlp*";
-        format-wifi = "  {essid} ({signalStrength}%)";
+        format-wifi = "  {essid} {signalStrength}%";
         format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
         format-linked = "{ifname} (No IP) ";
         format-disconnected = "\ue648";
@@ -163,7 +148,7 @@
 
       #waybar {
         font-family: SF Pro, Font Awesome;
-        font-size: 24px;  
+        font-size: 15px;  
         margin: 0px;
         padding: 0px;
       }
@@ -260,24 +245,22 @@
       #memory,
       #disk,
       #temperature,
-      #backlight,
-      #bluetooth,
       #network,
       #pulseaudio,
       #wireplumber,
       #custom-media,
-      #tray,
       #mode,
       #idle_inhibitor {
         font-size: 15px;
         border-radius: 5px;
-        margin: 0px 5px 0px 5px;
+        margin: 5px 5px 5px 5px;
         padding: 0px 5px 0px 5px;
         color: ${normal.black};
       }
       
       #clock {
         font-size: 15px;
+        font-weight: bold;
         background: ${gradients.dark.black};
         color: ${normal.white};
         padding: 0px 5px 0px 5px;
@@ -292,7 +275,7 @@
 
       #battery.charging,
       #battery.plugged {
-        color: ${normal.white};
+        color: ${normal.black};
         background-color: ${normal.yellow};
       }
       
@@ -303,11 +286,6 @@
       
       #memory {
         background: ${normal.magenta};
-      }
-      
-      #backlight {
-        background: transparent;
-        color: ${normal.white};
       }
       
       #network {
@@ -325,7 +303,6 @@
       }
       
       #wireplumber {
-        background-color: #fff0f5;
         color: ${gradients.dark.black};
       }
       
@@ -348,18 +325,12 @@
       }
       
       #idle_inhibitor {
-        color: ${normal.white};
+        color: ${gradients.light.white90};
+        font-weight: bold;
       }
 
-      #bluetooth {
-        background: ${normal.blue};
-        color: ${normal.black};
-      }
-      
       #scratchpad {
         font-size: 15px;
-        border-radius: 3px;
-        padding: 0px 10px;
         margin-left: 0px;
         margin-right: 10px;
         background: transparent;
@@ -370,9 +341,19 @@
       }    
 
       #tray {
-        background: ${gradients.dark.black00};
+        background: transparent;
+        border-radius: 5px;
+        margin: 2px 5px 2px 5px;
+        padding: 0px 5px 0px 5px;
       }
-      
+
+      #tray > .needs-attention {
+        -gtk-icon-effect: highlight;
+      }
+
+      #tray > .passive {
+        -gtk-icon-effect: dim;
+      }
     '';
   };
 }

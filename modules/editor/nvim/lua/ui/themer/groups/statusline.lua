@@ -1,5 +1,5 @@
 local colors = require("ui.themer").colorscheme("vivid")
-local statusline_bg = colors.base01
+local statusline_bg = colors.dark.black05
 
 return {
   StatusLine = { bg = statusline_bg },
@@ -8,7 +8,7 @@ return {
   git_added = { fg = colors.green, bg = colors.base02, bold = true },
   git_changed = { fg = colors.yellow, bg = colors.base02, bold = true },
   git_removed = { fg = colors.red, bg = colors.base02, bold = true },
-  git_sep = { fg = colors.base02, bg = statusline_bg }, 
+  git_sep = { fg = colors.base02, bg = statusline_bg },
 
   lsp_error = { fg = colors.base0F, bg = colors.base01 },
   lsp_warning = { fg = colors.base09, bg = colors.base01 },
@@ -43,10 +43,12 @@ return {
 
   file_info = { fg = colors.white, bg = colors.base02 },
   file_sep = { fg = colors.base02, bg = statusline_bg },
-  cwd_icon = { fg = colors.black, bg = colors.red },
-  cwd_text = { fg = colors.white, bg = colors.base02 },
-  cwd_sep = { fg = colors.red, bg = statusline_bg },
+  cwd_icon = { fg = colors.magenta, bg = statusline_bg },
+  cwd_text = { fg = colors.dark.black25, bg = statusline_bg },
+  cwd_sep = { fg = statusline_bg, bg = statusline_bg },
   pos_sep = { fg = colors.green, bg = colors.base01 },
   pos_icon = { fg = colors.black, bg = colors.green },
   pos_text = { fg = colors.green, bg = colors.base01 },
+  updates = { fg = colors.black, bg = colors.orange, bold = true },
+  block_sep = { fg = colors.orange, bg = colors.orange }
 }

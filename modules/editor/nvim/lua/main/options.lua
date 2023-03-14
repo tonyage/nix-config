@@ -7,7 +7,7 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
 vim.opt.tabstop = 2
--- vim.opt.softtabstop = 2
+vim.opt.softtabstop = 2
 vim.opt.cursorcolumn = true
 vim.opt.cursorline = true
 vim.opt.laststatus = 3
@@ -37,9 +37,6 @@ vim.opt.termguicolors = true
 vim.opt.backup = false
 vim.opt.writebackup = false
 
--- vim.opt.list = true
--- vim.opt.listchars:append "space: "
--- vim.opt.listchars:append "eol:↴"
 vim.opt.updatetime = 300
 vim.opt.cmdheight = 1
 vim.opt.whichwrap:append "<>[]hl"

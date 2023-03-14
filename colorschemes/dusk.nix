@@ -2,7 +2,6 @@
   name = "dusk";
 
   gradients = {
-    # 5% brighter for black/grey gradients
     dark = {
       black   = "#000000";
       black00 = "#161616";

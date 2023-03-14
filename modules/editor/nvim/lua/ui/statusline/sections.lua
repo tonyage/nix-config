@@ -1,35 +1,36 @@
 local separators = require("ui.icons").statusline_separators[vim.g.statusline_style]
+local blocks = require("ui.icons").statusline_separators["block"]
 
 local left_sep = separators["left"]
 local right_sep = separators["right"]
 
 local modes = {
-  ["n"]   = { "NORMAL",              "NormalMode"    },
-  ["niI"] = { "NORMAL i",            "NormalMode"    },
-  ["niR"] = { "NORMAL r",            "NormalMode"    },
-  ["niV"] = { "NORMAL v",            "NormalMode"    },
-  ["no"]  = { "N-PENDING",           "NormalMode"    },
-  ["i"]   = { "INSERT",              "InsertMode"    },
-  ["ic"]  = { "INSERT (completion)", "InsertMode"    },
-  ["ix"]  = { "INSERT completion",   "InsertMode"    },
-  ["t"]   = { "TERMINAL",            "TerminalMode"  },
-  ["nt"]  = { "NTERMINAL",           "NTerminalMode" },
-  ["v"]   = { "VISUAL",              "VisualMode"    },
-  ["V"]   = { "V-LINE",              "VisualMode"    },
-  ["Vs"]  = { "V-LINE (Ctrl O)",     "VisualMode"    },
-  [""]  = { "V-BLOCK",             "VisualMode"    },
-  ["R"]   = { "REPLACE",             "ReplaceMode"   },
-  ["Rv"]  = { "V-REPLACE",           "ReplaceMode"   },
-  ["s"]   = { "SELECT",              "SelectMode"    },
-  ["S"]   = { "S-LINE",              "SelectMode"    },
-  [""]  = { "S-BLOCK",             "SelectMode"    },
-  ["c"]   = { "COMMAND",             "CommandMode"   },
-  ["cv"]  = { "COMMAND",             "CommandMode"   },
-  ["ce"]  = { "COMMAND",             "CommandMode"   },
-  ["r"]   = { "PROMPT",              "ConfirmMode"   },
-  ["rm"]  = { "MORE",                "ConfirmMode"   },
-  ["r?"]  = { "CONFIRM",             "ConfirmMode"   },
-  ["!"]   = { "SHELL",               "TerminalMode"  },
+  ["n"]   = { "NORMAL ",              "NormalMode"    },
+  ["niI"] = { "NORMAL i ",            "NormalMode"    },
+  ["niR"] = { "NORMAL r ",            "NormalMode"    },
+  ["niV"] = { "NORMAL v ",            "NormalMode"    },
+  ["no"]  = { "N-PENDING ",           "NormalMode"    },
+  ["i"]   = { "INSERT ",              "InsertMode"    },
+  ["ic"]  = { "INSERT (completion) ", "InsertMode"    },
+  ["ix"]  = { "INSERT completion ",   "InsertMode"    },
+  ["t"]   = { "TERMINAL ",            "TerminalMode"  },
+  ["nt"]  = { "NTERMINAL ",           "NTerminalMode" },
+  ["v"]   = { "VISUAL ",              "VisualMode"    },
+  ["V"]   = { "V-LINE ",              "VisualMode"    },
+  ["Vs"]  = { "V-LINE (Ctrl O) ",     "VisualMode"    },
+  [""]  = { "V-BLOCK ",             "VisualMode"    },
+  ["R"]   = { "REPLACE ",             "ReplaceMode"   },
+  ["Rv"]  = { "V-REPLACE ",           "ReplaceMode"   },
+  ["s"]   = { "SELECT ",              "SelectMode"    },
+  ["S"]   = { "S-LINE ",              "SelectMode"    },
+  [""]  = { "S-BLOCK ",             "SelectMode"    },
+  ["c"]   = { "COMMAND ",             "CommandMode"   },
+  ["cv"]  = { "COMMAND ",             "CommandMode"   },
+  ["ce"]  = { "COMMAND ",             "CommandMode"   },
+  ["r"]   = { "PROMPT ",              "ConfirmMode"   },
+  ["rm"]  = { "MORE ",                "ConfirmMode"   },
+  ["r?"]  = { "CONFIRM ",             "ConfirmMode"   },
+  ["!"]   = { "SHELL ",               "TerminalMode"  },
 }
 
 local M = {}
@@ -38,16 +39,16 @@ function M.mode()
   local m = vim.api.nvim_get_mode().mode
   local current_mode = "%#" .. modes[m][2] .. "#" .. "  " .. modes[m][1]
   local separator = "%#" .. modes[m][2] .. "Sep" .. "#" .. right_sep
-  return current_mode .. separator .. "%#buffer#" .. right_sep
+  return current_mode .. separator ..  "%#buffer#" .. right_sep
 end
 
 function M.git()
   if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
-    return ""
+    return "%#StatusLine#" .. "%#git_sep#" .. right_sep
   end
 
   local git_status = vim.b.gitsigns_status_dict
-  local branch = "%#git_branch#".. "  " .. git_status.head
+  local branch = "%#git_branch#".. " " .. git_status.head
   local added = (git_status.added and git_status.added ~= 0) and ("%#git_added#" .. "  " .. git_status.added) or ""
   local changed = (git_status.changed and git_status.changed ~= 0) and ("%#git_changed#" .. "  " .. git_status.changed) or ""
   local removed = (git_status.removed and git_status.removed ~= 0) and ("%#git_removed#" .. "  " .. git_status.removed) or ""
@@ -55,7 +56,17 @@ function M.git()
   return branch .. added .. changed .. removed .. sep
 end
 
+function M.updates()
+  local updates = ""
+  local lazy = require("lazy.status")
+  if lazy.has_updates() then
+    updates = lazy.updates()
+  end
+  return "%#block_sep#" .. blocks["left"] .. "%#updates#" .. updates .. " UPDATES" .. "%#block_sep#" .. blocks["right"]
+end
+
 function M.progress()
+
   if not rawget(vim, "lsp") then
     return ""
   end
@@ -66,11 +77,6 @@ function M.progress()
     return ""
   end
 
-  local updates = ""
-  if require("lazy.status").has_updates() then
-    updates = require("lazy.status").updates()
-  end
-
   local msg = lsp.message or ""
   local percentage = lsp.percentage or 0
   local title = lsp.title or ""
@@ -78,7 +84,7 @@ function M.progress()
   local ms = vim.loop.hrtime() / 1000000
   local frame = math.floor(ms / 120) % #spinners
   local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
-  return ("%#lsp_progress#" .. content .. updates) or ""
+  return ("%#lsp_progress#" .. content) or ""
 end
 
 function M.diagnostics()
@@ -102,7 +108,8 @@ end
 function M.cwd()
   local dir_icon = "%#cwd_icon#" .. " "
   local dir_name = "%#cwd_text#" .. " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " "
-  return (vim.o.columns > 85 and ("%#cwd_sep#" .. left_sep .. dir_icon .. dir_name)) or ""
+  -- local abs_path = "%#cwd_text#" .. vim.fn.expand("%:~:.")
+  return (vim.o.columns > 85 and ("%#cwd_sep#" .. dir_icon .. dir_name .. "%#cwd_sep#" .. right_sep)) or ""
 end
 
 function M.lsp_status()
@@ -126,7 +133,8 @@ local function readonly()
 end
 
 function M.file_info()
-  local icon = "%#pos_sep#" .. left_sep .. "%#pos_icon#" .. " "
+  -- local icon = "%#pos_sep#" .. left_sep .. "%#pos_icon#" .. "  "
+  local icon = "%#pos_icon#" .. "  "
   local encode = vim.bo.fenc ~= "" and vim.bo.fenc or vim.o.enc
 
   local current_line = vim.fn.line "."
@@ -135,10 +143,10 @@ function M.file_info()
 
   text = (current_line == 1 and "Top") or text
   text = (current_line == total_line and "Bot") or text
-  local result = "%#pos_text#" .. " " ..  encode:upper() .. " │ " .. text .. " "
+  local result = "%#pos_text#" .. " " ..  encode:upper() .. " " .. "│" .. " " .. text .. " "
 
   if readonly() then
-    result = "%#pos_text#" .. " readonly" .. " │ "  .. encode:upper() .. " │ " .. text .. " "
+    result = "%#pos_text#" .. " readonly" .. " │ "  .. encode:upper() .. " " .. "│" .. " " .. text .. " "
   end
 
   return icon .. result

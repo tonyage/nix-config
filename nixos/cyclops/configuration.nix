@@ -16,7 +16,7 @@ in {
 
   environment.systemPackages = [ nvidia-offload ];
   boot.modprobeConfig.enable = true;
-  # boot.blacklistedKernelModules = [ "i2c_nvidia_gpu" ];
+  boot.blacklistedKernelModules = [ "i2c_nvidia_gpu" ];
 
   users.users.tony = {
     isNormalUser = true;
@@ -46,16 +46,8 @@ in {
       intelBusId = "PCI:0:2:0";
     };
   };
+  services.xserver.videoDrivers = [ "nvidia" "modesetting" ];
   hardware.nvidia.modesetting.enable = true;
-  services.xserver.videoDrivers = [ "nouveau" "modesetting" ];
-
-  specialisation = {
-    external-display.configuration = {
-      system.nixos.tags = [ "external-display" ];
-      hardware.nvidia.prime.offload.enable = lib.mkForce false;
-      hardware.nvidia.powerManagement.enable = lib.mkForce false;
-    };
-  };
 
   hardware = {
     opengl = {

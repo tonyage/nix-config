@@ -1,7 +1,6 @@
 require("ui.themer").highlight("treesitter")
 
-
-parser_install_dir = vim.fn.stdpath("data") .. "/treesitter"
+local parser_install_dir = vim.fn.stdpath("data") .. "/treesitter"
 vim.fn.mkdir(parser_install_dir, "p")
 vim.opt.runtimepath:append(parser_install_dir)
 
@@ -42,6 +41,7 @@ local config = {
     "vim",
     "yaml"
   },
+  parser_install_dir = parser_install_dir,
   auto_install = true,
   indent = { enable = true },
   highlight = {
@@ -50,6 +50,14 @@ local config = {
   },
   refactor = {
     highlight_definitions = { enable = true },
+    smart_rename = {
+      enable = true,
+      keymaps = { smart_rename = "grn" },
+    },
+    navigation = {
+      enable = true,
+      goto_definition_lsp_fallback = "gD"
+    },
   },
   textobjects = {
     select = {
