@@ -1,3 +1,4 @@
+require("ui.themer").highlight("lsp")
 local key = require("main.mappings")
 local windows = require("ui.windows")
 local symbols = require("ui.icons").lsp

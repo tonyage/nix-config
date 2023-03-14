@@ -61,8 +61,9 @@ function M.updates()
   local lazy = require("lazy.status")
   if lazy.has_updates() then
     updates = lazy.updates()
+    updates = "%#block_sep#" .. blocks["left"] .. "%#updates#" .. updates .. " UPDATES" .. "%#block_sep#" .. blocks["right"]
   end
-  return "%#block_sep#" .. blocks["left"] .. "%#updates#" .. updates .. " UPDATES" .. "%#block_sep#" .. blocks["right"]
+  return updates
 end
 
 function M.progress()

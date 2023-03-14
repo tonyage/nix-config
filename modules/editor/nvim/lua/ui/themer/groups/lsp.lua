@@ -6,9 +6,10 @@ return {
   LspReferenceWrite = { fg = colors.black, bg = colors.white },
 
   LspInfoTitle = { fg = colors.red, bg = colors.dark.black10 },
+  LspInfoTips = { bg = colors.black },
   LspInfoList = { fg = colors.cyan },
   LspInfoFiletype = { fg = colors.orange },
-  LspInfoBorder = { bg = colors.dark.black10 },
+  LspInfoBorder = { fg = colors.dark.black90 },
 
   DiagnosticHint = { fg = colors.magenta },
   DiagnosticError = { fg = colors.red },

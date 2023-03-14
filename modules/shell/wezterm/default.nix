@@ -11,7 +11,7 @@ in {
           weight = "Regular",
         },
         font_size = 10.0,
-        line_height = 1.0,
+        line_height = 1.2,
         dpi = ${dpi},
         color_scheme_dirs = { "${config.home.homeDirectory}/.config/wezterm/colors" },
         color_scheme = "dusk",
@@ -21,7 +21,7 @@ in {
         window_padding = {
           left = 0,
           right = 0,
-          top = 1,
+          top = 0,
           bottom = 0,
         },
       }

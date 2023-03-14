@@ -24,6 +24,21 @@
       copy_command = if pkgs.system == "x86_64-linux" then "wl-copy" else "pb-copy";
     };
   };
+  xdg.configFile."zellij/layouts/base.kdl".text = ''
+    layout {
+      pane_template name="base_pane" {
+        children
+        pane size=1 borderless=true {
+          plugin location="zellij:compact-bar"
+        }
+      }
+      tab name="local" {
+        base_pane split_direction="horizontal" {
+          pane name="neovim"
+        }
+      }
+    }
+  '';
   xdg.configFile."zellij/layouts/config.kdl".text = ''
     layout {
       cwd "git/personal/nix-config"
@@ -59,7 +74,7 @@
       }
       tab name="work" {
         cmake_pane split_direction="horizontal" {
-          pane name="neovim" size="80%" command="zsh"
+          pane name="neovim"
           pane command="./build.sh" size="20%" start_suspended=true {
             args "-p" "linux" "-a" "x86_64" "-c" "-l"
           }

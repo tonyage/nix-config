@@ -1,6 +1,6 @@
 local colors = require("ui.themer").colorscheme("vivid")
 return {
-  LazyTaskError = { fg = colors.base0F },
+  LazyTaskError = { fg = colors.error },
   LazyProgressDone = { fg = colors.blue },
   LazyProgressTodo = { fg = colors.blue },
   LazyProp = { fg = colors.magenta },
