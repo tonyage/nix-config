@@ -19,8 +19,8 @@
     extraOptions = [ "--unsupported-gpu" "-d" ];
     config = rec {
       fonts = {
-        names = [ "SF Pro Display" ];
-        size = 10.0;
+        names = [ "Noto Sans,Greyscale" ];
+        size = 11.0;
       };
       left = "h";
       down = "j";
@@ -44,7 +44,7 @@
           background = "${normal.black}";
           border = "${normal.black}";
           childBorder = "${normal.black}";
-          indicator = "${normal.white}";
+          indicator = "${gradients.dark.black25}";
           text = "${normal.white}";
         };
         focusedInactive = {
@@ -52,14 +52,14 @@
           border = "${normal.black}";
           childBorder = "${normal.black}";
           indicator = "${normal.black}";
-          text = "${normal.white}";
+          text = "${gradients.dark.black25}";
         };
         unfocused = {
           background = "${gradients.dark.black10}";
           border = "${gradients.dark.black10}";
           childBorder = "${gradients.dark.black10}";
           indicator = "${gradients.dark.black10}";
-          text = "${normal.white}";
+          text = "${gradients.dark.black25}";
         };
         urgent = {
           background = "${normal.black}";

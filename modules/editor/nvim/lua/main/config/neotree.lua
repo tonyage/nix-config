@@ -6,16 +6,19 @@ keybind.map("n", "<leader>ns", ":Neotree float git_status<CR>")
 return {
   close_if_last_window = true,
   filesystem = {
-    visible = true,
-    always_show = {
-      ".github/",
-      ".envrc",
-      ".env",
-      ".editorconfig",
-      "build",
-      ".gitignore"
+    filtered_items = {
+      visible = true,
+      always_show = {
+        ".github/",
+        ".envrc",
+        ".env",
+        ".editorconfig",
+        "build/",
+        ".gitignore"
+      },
     },
   },
+  use_libuv_file_watcher = true,
   default_component_configs = {
     container = {
       right_padding = 1

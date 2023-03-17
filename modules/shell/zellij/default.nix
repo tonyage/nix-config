@@ -65,7 +65,7 @@
   '';
   xdg.configFile."zellij/layouts/work.kdl".text = ''
     layout {
-      cwd "git/work/pison/libs/core"
+      cwd "${config.home.homeDirectory}/git/work/pison/libs/core"
       pane_template name="cmake_pane" {
         children
         pane size=1 borderless=true {

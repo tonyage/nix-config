@@ -85,7 +85,7 @@ local function add_file_info(name, bufnr)
             local value_current = current[i]
             local other_current = other[i]
             if value_current ~= other_current then
-              name = value_current .. "/../" .. name
+              name = value_current .. "/" .. name
               break
             end
           end

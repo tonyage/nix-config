@@ -96,16 +96,14 @@ require("lazy").setup({
   {
     "zbirenbaum/copilot-cmp",
     event = "InsertEnter",
-    dependencies = {
-      "zbirenbaum/copilot.lua"
-    },
+    dependencies = "zbirenbaum/copilot.lua",
     config = true
   },
 
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = "InsertEnter",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = "nvim-lua/plenary.nvim",
     init = function()
       require("null-ls").setup(require("main.config.null"))
     end
@@ -120,8 +118,10 @@ require("lazy").setup({
     init = function() require("lsp") end,
   },
 
-  { "tpope/vim-fugitive", event = { "VeryLazy" } },
-  { "windwp/nvim-autopairs", event = { "InsertEnter" }, config = true },
+  { "tpope/vim-fugitive", event = "VeryLazy" },
+  { "mbbill/undotree", event = "InsertEnter" },
+  { "ThePrimeagen/harpoon", event = "InsertEnter", config = true },
+  { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
   { "numToStr/Comment.nvim", lazy = false, config = true },
 
   {

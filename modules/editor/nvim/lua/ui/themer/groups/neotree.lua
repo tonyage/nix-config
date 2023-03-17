@@ -1,14 +1,14 @@
 local colors = require("ui.themer").colorscheme("vivid")
 
 return {
-  NeoTreeNormal = { bg = colors.base01 },
-  NeoTreePreview = { bg = colors.base01 },
-  NeoTreeFilterTerm = { bg = colors.base02 },
-  NeoTreeWinSeparator = { bg = colors.base00, fg = colors.base00 },
+  NeoTreeNormal = { bg = colors.dark.black05 },
+  NeoTreePreview = { bg = colors.dark.black05 },
+  NeoTreeFilterTerm = { bg = colors.dark.black10 },
+  NeoTreeWinSeparator = { bg = colors.black, fg = colors.black },
   NeoTreeModified = { fg = colors.orange },
-  NeoTreeTabActive = { bg = colors.base01 },
-  NeoTreeTabInactive = { bg = colors.base00 },
-  NeoTreeTabSeparatorActive = { bg = colors.base01, fg = colors.base01},
-  NeoTreeTabSeparatorInactive = { bg = colors.base00, fg = colors.base00 },
+  NeoTreeTabActive = { bg = colors.dark.black05 },
+  NeoTreeTabInactive = { bg = colors.black },
+  NeoTreeTabSeparatorActive = { bg = colors.dark.black05, fg = colors.dark.black05},
+  NeoTreeTabSeparatorInactive = { bg = colors.black, fg = colors.black },
 }
 
