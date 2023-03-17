@@ -1,0 +1,92 @@
+[devshell]
+name = "pison"
+motd = "{202}🔨 pison developer environment 🔨{reset}\n$(type -p menu &>/dev/null && menu)\n"
+
+[[commands]]
+package = "treefmt"
+category = "linters"
+
+[[commands]]
+package = "android-studio"
+category = "editor"
+
+[[commands]]
+package = "jetbrains.idea-ultimate"
+category = "editor"
+
+[[commands]]
+name = "idea-community"
+package = "jetbrains.idea-community"
+category = "editor"
+
+[[commands]]
+package = "black"
+category = "linters"
+[[commands]]
+package = "clang-tools_15"
+category = "linters"
+
+[[commands]]
+package = "ktlint"
+category = "linters"
+
+[[commands]]
+package = "nixpkgs-fmt"
+category = "linters"
+
+[[commands]]
+package = "nodePackages.prettier"
+category = "linters"
+
+[[commands]]
+name = "shellcheck"
+package = "shellcheck"
+category = "linters"
+
+[[commands]]
+package = "shfmt"
+category = "linters"
+
+[[commands]]
+package = "yamllint"
+category = "linters"
+
+[[commands]]
+package = "yamlfmt"
+category = "linters"
+
+[[commands]]
+package = "ccache"
+category = "toolchain"
+
+[[commands]]
+package = "cmake"
+category = "toolchain"
+
+[[commands]]
+package = "gradle"
+category = "toolchain"
+
+[[commands]]
+package = "ninja"
+category = "toolchain"
+
+[[commands]]
+package = "python311"
+category = "toolchain"
+
+[[commands]]
+package = "gh"
+category = "vcs"
+
+[[commands]]
+package = "git"
+category = "vcs"
+
+[[commands]]
+package = "google-cloud-sdk"
+category = "bins"
+
+[[commands]]
+package = "mdbook"
+category = "docs"
