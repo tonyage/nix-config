@@ -246,6 +246,7 @@ require("lazy").setup({
     end,
   },
 
+  { "nvim-treesitter/playground" },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",

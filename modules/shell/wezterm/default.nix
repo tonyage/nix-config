@@ -1,6 +1,8 @@
 { colorscheme, config, pkgs, ... }: with colorscheme;
 let 
-  dpi = if pkgs.system == "x86_64-linux" then "192.0" else "144.0";
+  dpi = if pkgs.system == "x86_64-linux" then "192.0" else "96.0";
+  fontSize = if pkgs.system == "x86_64-linux" then "10.0" else "12.0";
+  lineHeight = if pkgs.system == "x86_64-linux" then "1.2" else "1.1";
 in {
   programs.wezterm = {
     enable = true;
@@ -10,8 +12,8 @@ in {
           family = "JetBrainsMono Nerd Font",
           weight = "Regular",
         },
-        font_size = 10.0,
-        line_height = 1.2,
+        font_size = ${fontSize},
+        line_height = ${lineHeight},
         dpi = ${dpi},
         color_scheme_dirs = { "${config.home.homeDirectory}/.config/wezterm/colors" },
         color_scheme = "dusk",

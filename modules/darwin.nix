@@ -8,11 +8,10 @@
   programs.exa.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-  home.packages = with pkgs; [ fd htop ];
+  home.packages = with pkgs; [ fd bottom ];
 
   imports = [ 
     ./editor/nvim 
-    ./shell/alacritty
     ./shell/bat
     ./shell/git
     ./shell/wezterm
