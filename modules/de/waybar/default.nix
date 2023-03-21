@@ -164,7 +164,7 @@
 
       #workspaces,
       #custom-os-icon {
-        font-size: 18px;
+        font-size: 24px;
         padding: 0px 5px 0px 5px;
         color: ${normal.white};
       }
