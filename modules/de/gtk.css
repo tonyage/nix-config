@@ -1,0 +1,6 @@
+box * {
+  font: 20px;
+}
+* {
+  border-radius: 0;  
+}

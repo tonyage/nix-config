@@ -46,6 +46,8 @@ in {
       intelBusId = "PCI:0:2:0";
     };
   };
+
+  services.gnome.gnome-browser-connector.enable = true;
   services.xserver.videoDrivers = [ "nvidia" "modesetting" ];
   hardware.nvidia.modesetting.enable = true;
 

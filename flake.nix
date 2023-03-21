@@ -6,6 +6,10 @@
     hardware.url = "github:nixos/nixos-hardware";
     nixpkgs-wl.url = "github:nix-community/nixpkgs-wayland";
 
+    apple-fonts = {
+      url = "github:tonyage/apple-fonts.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,17 +23,12 @@
     rust.url = "github:oxalica/rust-overlay";
     devshell.url = "github:numtide/devshell";
     nur.url = "github:nix-community/NUR";
-    apple-fonts = {
-      url = "github:tonyage/apple-fonts.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { self,
     nur,
     darwin,
     nixpkgs,
-    nixpkgs-wl,
     apple-fonts,
     home-manager,
     flake-utils,
@@ -42,8 +41,9 @@
         inherit system;
         config.allowUnfree = true;
         overlays = [
-          rust.overlays.default
           devshell.overlays.default
+          nur.overlay
+          rust.overlays.default
         ];
       };
       common = {
@@ -152,6 +152,10 @@
       templates.jvm = {
         path = ./templates/jvm;
         description = "A devshell for JVM projects";
+      };
+      templates.cpp = {
+        path = ./templates/cpp;
+        description = "A devshell for c++ projects";
       };
     };
   }

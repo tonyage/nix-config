@@ -1,4 +1,7 @@
-{ colorscheme, config, pkgs, ... }: {
+{ colorscheme, config, pkgs, ... }:
+let 
+  copy = if pkgs.system == "x86_64-linux" then "wl-copy" else "pb-copy";
+in {
   programs.zellij = {
     enable = true;
     settings = {
@@ -19,9 +22,10 @@
       };
       copy_on_select = true;
       default_shell = "zsh";
-      default_layout = "compact";
+      default_layout = "default";
       layout_dir = "${config.xdg.configHome}/zellij/layouts";
-      copy_command = if pkgs.system == "x86_64-linux" then "wl-copy" else "pb-copy";
+      copy_command = "${copy}";
+      mouse_mode = true;
     };
   };
   xdg.configFile."zellij/layouts/base.kdl".text = ''
@@ -43,9 +47,12 @@
     layout {
       cwd "git/personal/nix-config"
       pane_template name="config_pane" {
-        children
         pane size=1 borderless=true {
-          plugin location="zellij:compact-bar"
+          plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+          plugin location="zellij:status-bar"
         }
       }
       tab name="nix-config" {
@@ -67,14 +74,17 @@
     layout {
       cwd "${config.home.homeDirectory}/git/work/pison/libs/core"
       pane_template name="cmake_pane" {
-        children
         pane size=1 borderless=true {
-          plugin location="zellij:compact-bar"
+          plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+          plugin location="zellij:status-bar"
         }
       }
       tab name="work" {
-        cmake_pane split_direction="horizontal" {
-          pane name="neovim"
+        cmake_pane cwd="git/work/pison" split_direction="horizontal" {
+          pane cwd="libs/core" name="neovim"
           pane command="./build.sh" size="20%" start_suspended=true {
             args "-p" "linux" "-a" "x86_64" "-c" "-l"
           }
