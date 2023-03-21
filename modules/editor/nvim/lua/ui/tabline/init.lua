@@ -1,7 +1,7 @@
 local M = {}
 
 function M.buf_is_valid(bufnr)
-  return vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted 
+  return vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted and vim.bo[bufnr].filetype ~= "qf"
 end
 
 function M.bufilter()

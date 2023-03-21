@@ -145,7 +145,7 @@
       };
       devShells = flake-utils.lib.eachSystem [
         flake-utils.lib.system.x86_64-linux
-      ] (system:
+      ] (_:
         import ./shell.nix { inherit pkgs; }
       );
 

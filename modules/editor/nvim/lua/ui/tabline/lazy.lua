@@ -9,7 +9,6 @@ return function(opts)
         vim.t.bufs = vim.api.nvim_get_current_buf() == args.buf and {} or { args.buf }
       else
         local bufs = vim.t.bufs
-
         if
           not vim.tbl_contains(bufs, args.buf)
           and (args.event == "BufEnter" or vim.bo[args.buf].buflisted)

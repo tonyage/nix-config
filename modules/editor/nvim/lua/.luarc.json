@@ -29,6 +29,7 @@
         "/Users/tony.do/.local/share/nvim/lazy/crates.nvim",
         "/Users/tony.do/.local/share/nvim/lazy/plenary.nvim",
         "/Users/tony.do/.local/share/nvim/lazy/cmp-cmdline",
-        "${3rd}/luassert/library"
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
     ]
 }

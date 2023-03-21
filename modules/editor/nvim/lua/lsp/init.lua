@@ -4,8 +4,8 @@ local lspconfig = require("lspconfig")
 
 for _, server in ipairs(constants.servers) do
   lspconfig[server].setup({
-    on_attach = config.on_attach,
-    capabilities = config.capabilities,
+    handlers = config.handlers,
+    capabilities = config.capabilities
   })
 end
 

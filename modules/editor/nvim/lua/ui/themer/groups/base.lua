@@ -32,7 +32,7 @@ return {
   MoreMsg = { fg = colors.green },
   NonText = { fg = colors.dark.black25 },
   Normal = { fg = colors.light.white05, bg = colors.black },
-  Pmenu = { bg = colors.dark.black10 },
+  Pmenu = { bg = colors.dark.black15 },
   PmenuSbar = { bg = colors.dark.black10 },
   PmenuSel = { bg = colors.dark.black25 },
   PmenuThumb = { bg = colors.dark.black15 },

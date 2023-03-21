@@ -9,22 +9,22 @@ return {
   preview_config = windows.not_focusable,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
-    key.map("n", "gcn", function()
-      if vim.wo.diff then return "gcn" end
+    key.map("n", "<leader>cn", function()
+      if vim.wo.diff then return "<leader>cn" end
       vim.schedule(function() gs.next_hunk() end)
       return "<Ignore>"
     end, { expr = true, buffer = bufnr })
-    key.map("n", "gcb", function()
-      if vim.wo.diff then return "gcb" end
+    key.map("n", "<leader>cb", function()
+      if vim.wo.diff then return "<leader>cb" end
       vim.schedule(function() gs.prev_hunk() end)
       return "<Ignore>"
     end, { expr = true, buffer = bufnr })
-    key.map("n", "gdt", gs.diffthis)
-    key.map("n", "gsh", function() gs.stage_hunk() end)
-    key.map("n", "grh", function() gs.reset_hunk() end)
-    key.map("n", "gph", function() gs.preview_hunk() end)
-    key.map("n", "gbl", function() gs.blame_line({ full = true }) end)
-    key.map("n", "gtd", function() gs.toggle_deleted() end)
+    key.map("n", "<leader>dt", gs.diffthis)
+    key.map("n", "<leader>sh", function() gs.stage_hunk() end)
+    key.map("n", "<leader>rh", function() gs.reset_hunk() end)
+    key.map("n", "<leader>ph", function() gs.preview_hunk() end)
+    key.map("n", "<leader>bl", function() gs.blame_line({ full = true }) end)
+    key.map("n", "<leader>td", function() gs.toggle_deleted() end)
   end
 }
 

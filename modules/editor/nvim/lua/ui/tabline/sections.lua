@@ -133,7 +133,6 @@ function M.bufferlist()
   local has_current = false
   if vim.g.pickbuffer then
     for index, value in ipairs(vim.g.visiblebuffers) do
-      print("index: " .. tostring(index))
       local name = value:gsub("", "(" .. index .. ")")
       table.insert(buffers, name)
     end

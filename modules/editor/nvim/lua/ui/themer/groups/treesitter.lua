@@ -78,5 +78,13 @@ return {
   ["@field"] = { fg = colors.red },
   ["@include"] = { fg = colors.magenta, italic = true },
   ["@conditional"] = { fg = colors.magenta, italic = true },
+
+  Constant = { fg = colors.orange },
+  Function = { fg = colors.blue, bold = true },
+  Identifier = { fg = colors.yellow },
+  Macro = { fg = colors.red },
+  Structure = { fg = colors.magenta, bold = true },
+  Type = { fg = colors.orange, bold = true },
+  TypeDef = { fg = colors.orange, italic = true }
 }
 

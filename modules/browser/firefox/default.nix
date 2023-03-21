@@ -12,7 +12,6 @@ in {
     package = pkgs.firefox.override {
       cfg = {
         enableBrowserpass = false;
-        enableGnomeExtensions = true;
         enableTridactylNative = true;
       };
     };
@@ -30,6 +29,9 @@ in {
             { title = "github"; url = "https://github.com"; }
             { title = "gmail"; url = "https://mail.google.com"; }
             { title = "twitter"; url = "https://twitter.com"; }
+            { title = "reddit"; url = "https://reddit.com"; }
+            { title = "amazon"; url = "https://amazon.com"; }
+            { title = "wikipedia"; url = "https://wikipedia.org"; }
           ];
         };
         search = {
@@ -67,9 +69,27 @@ in {
           bitwarden
           darkreader
           enhanced-github
+          firefox-color
           multi-account-containers
         ];
         userChrome = ''
+          :root {
+            --tab-border-radius: 0px !important;
+            --tab-block-margin: 0px !important;
+          }
+          :root[uidensity="compact"] {
+            --tab-min-height: 18px !important;
+            --tab-border-radius: 0px !important;
+            --tab-block-margin: 0px !important;
+          }
+          #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
+            height: initial !important;
+          }
+          .titlebar-buttonbox-container {
+            display: none;
+          }
+        '';
+        userContent = ''
           @-moz-document
             url(chrome://browser/content/browser.xul),
             url(chrome://browser/content/browser.xhtml) {
@@ -79,9 +99,6 @@ in {
 
             @import uri(./ss/tabs-hide-if-only-one.css);
           }
-        '';
-        userContent = ''
-          
         '';
       };
     };

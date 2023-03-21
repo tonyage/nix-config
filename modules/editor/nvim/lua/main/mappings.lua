@@ -16,6 +16,11 @@ M.default = function()
   M.map("v", "J", ":m '>+1<CR>gv=gv'")
   M.map("v", "K", ":m '<-2<CR>gv=gv'")
 
+  M.map("n", "<C-h>", "<C-W>h")
+  M.map("n", "<C-j>", "<C-W>j")
+  M.map("n", "<C-k>", "<C-W>k")
+  M.map("n", "<C-l>", "<C-W>l")
+
   M.map("x", "<leader>p", [["_dP]])
   M.map("n", "Q", "<nop>")
   M.map("n", "q", "<nop>")
