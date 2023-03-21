@@ -49,28 +49,31 @@ require("lazy").setup({
   "L3MON4D3/LuaSnip",
   "rcarriga/nvim-notify",
   {
-    "rmagatti/auto-session",
+    "willothy/flatten.nvim",
+    config = true,
     lazy = false,
-    config = function()
-      require("auto-session").setup({
-        auto_session_suppress_dirs = { "~/", "~/Downloads", "~/git", "~/Code" },
-        bypass_session_save_file_types = { "neo-tree", "terminal" },
-        auto_save_enabled = true,
-        auto_restore_enabled = true,
-        auto_session_use_git_branch = true,
-        pre_save_cmds = { require("neo-tree.sources.manager").close_all() },
-        pre_restore_cmds = { require("neo-tree.sources.manager").close_all() },
-        post_restore_cmds = { require("neo-tree.sources.manager").show("filesystem") },
-        cwd_change_handling = {
-          restore_upcoming_session = true,
-          pre_cwd_changed_hook = require("neo-tree.sources.manager").close_all(),
-          post_cwd_changed_hook = require("neo-tree.sources.manager").show("filesystem")
-        }
-      })
-      vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-    end
+    priority = 1001
   },
-
+  {
+    'bennypowers/splitjoin.nvim',
+    lazy = "BufEnter",
+    keys = {
+      {
+        "gj",
+        function()
+          require("splitjoin").join()
+        end,
+        desc = "Join the object under the cursor"
+      },
+      {
+        "g,",
+        function()
+          require("splitjoin").split()
+        end,
+        desc = "Split the object under the cursor"
+      },
+    }
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     lazy = false,

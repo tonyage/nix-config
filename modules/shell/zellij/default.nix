@@ -20,12 +20,15 @@ in {
         inherit (colorscheme.bright) white;
         inherit (colorscheme.bright) orange;
       };
-      copy_on_select = true;
-      default_shell = "zsh";
-      default_layout = "default";
-      layout_dir = "${config.xdg.configHome}/zellij/layouts";
       copy_command = "${copy}";
+      copy_on_select = true;
+      default_layout = "simplified";
+      default_shell = "zsh";
+      layout_dir = "${config.xdg.configHome}/zellij/layouts";
       mouse_mode = true;
+      scroll_buffer_size = 100000;
+      scrollback_editor = "${pkgs.neovim}/bin/nvim";
+      simplified_ui = true;
     };
   };
   xdg.configFile."zellij/layouts/base.kdl".text = ''

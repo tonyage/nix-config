@@ -53,7 +53,6 @@ return {
   VisualNOS = { fg = colors.error },
   WarningMsg = { fg = colors.yellow },
   WildMenu = { fg = colors.red, bg = colors.yellow },
-
   DiagnosticError = { fg = colors.error },
   DiagnosticWarn = { fg = colors.orange },
   DiagnosticInfo = { fg = colors.green },
