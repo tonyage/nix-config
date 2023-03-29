@@ -18,14 +18,12 @@ return {
 
     null.builtins.diagnostics.actionlint,
     null.builtins.diagnostics.buf,
-    null.builtins.diagnostics.clang_check,
     null.builtins.diagnostics.cpplint,
     null.builtins.diagnostics.cmake_lint,
     null.builtins.diagnostics.deadnix,
     null.builtins.diagnostics.hadolint,
     null.builtins.diagnostics.jsonlint,
     null.builtins.diagnostics.ktlint,
-    null.builtins.diagnostics.luacheck,
     null.builtins.diagnostics.markdownlint,
     null.builtins.diagnostics.ruff,
     null.builtins.diagnostics.stylelint,
@@ -36,7 +34,9 @@ return {
 
     null.builtins.formatting.buf,
     null.builtins.formatting.clang_format.with({
-      extra_args = { "-i", "--style=Google" }
+      extra_args = {
+        '--style="{ BasedOnStyle: Google, AccessModifierOffset: -1 }"'
+      }
     }),
     null.builtins.formatting.cmake_format,
     null.builtins.formatting.jq,

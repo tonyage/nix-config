@@ -134,6 +134,15 @@
             ./modules/shell/wezterm
           ];
         };
+        "tony@iceman" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            common
+            tony
+            ./modules/shell/ssh
+          ];
+        };
         "build@magneto" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };

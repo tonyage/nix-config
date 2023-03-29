@@ -123,9 +123,19 @@ require("lazy").setup({
 
   { "tpope/vim-fugitive", event = "VeryLazy" },
   { "mbbill/undotree", event = "InsertEnter" },
-  { "ThePrimeagen/harpoon", event = "InsertEnter", config = true },
   { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
   { "numToStr/Comment.nvim", lazy = false, config = true },
+
+  { "ThePrimeagen/harpoon", event = "InsertEnter", config = true },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    event = "InsertEnter",
+    config = true
+  },
 
   {
     "nvchad/nvim-colorizer.lua",
