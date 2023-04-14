@@ -1,8 +1,8 @@
 { colorscheme, config, pkgs, ... }: with colorscheme;
 let 
-  dpi = if pkgs.system == "x86_64-linux" then "192.0" else "96.0";
-  fontSize = if pkgs.system == "x86_64-linux" then "10.0" else "12.0";
-  lineHeight = if pkgs.system == "x86_64-linux" then "1.2" else "1.1";
+  dpi = if pkgs.system == "x86_64-linux" then "192.0" else "144.0";
+  fontSize = if pkgs.system == "x86_64-linux" then "10.0" else "14.0";
+  lineHeight = if pkgs.system == "x86_64-linux" then "1.2" else "1.2";
 in {
   programs.wezterm = {
     enable = true;
@@ -18,7 +18,10 @@ in {
         color_scheme_dirs = { "${config.home.homeDirectory}/.config/wezterm/colors" },
         color_scheme = "dusk",
         hide_tab_bar_if_only_one_tab = true,
+        underline_position = -12,
         underline_thickness = 2.0,
+        use_fancy_tab_bar = false,
+        tab_bar_at_bottom = true,
         default_cursor_style = "BlinkingBlock",
         window_padding = {
           left = 0,
@@ -26,10 +29,26 @@ in {
           top = 0,
           bottom = 0,
         },
+        wsl_domains = wezterm.default_wsl_domains(),
       }
     '';
     colorSchemes = {
       dusk = {
+        tab_bar = {
+          background = normal.black;
+          active_tab = {
+            bg_color = normal.black;
+            fg_color = normal.white;
+            intensity = "Bold";
+            underline = "None";
+          };
+          inactive_tab = {
+            bg_color = gradients.dark.black10;
+            fg_color = normal.white;
+            intensity = "Normal";
+            underline = "None";
+          };
+        };
         ansi = [
           normal.black
           normal.red

@@ -11,7 +11,7 @@
   home.packages = with pkgs; [ fd bottom ];
 
   imports = [ 
-    ./editor/nvim 
+#    ./editor/nvim
     ./shell/bat
     ./shell/git
     ./shell/wezterm
