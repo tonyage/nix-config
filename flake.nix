@@ -141,6 +141,7 @@
             common
             tony
             ./modules/shell/ssh
+            ./modules/shell/wezterm
           ];
         };
         "build@magneto" = home-manager.lib.homeManagerConfiguration {

@@ -1,3 +1,2 @@
-require("main")
-require("ui")
-require("lsp")
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
