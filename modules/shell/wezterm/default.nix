@@ -2,10 +2,11 @@
 let 
   dpi = if pkgs.system == "x86_64-linux" then "192.0" else "144.0";
   fontSize = if pkgs.system == "x86_64-linux" then "10.0" else "14.0";
-  lineHeight = if pkgs.system == "x86_64-linux" then "1.2" else "1.2";
+  lineHeight = "1.2";
 in {
   programs.wezterm = {
     enable = true;
+    package = pkgs.wezterm;
     extraConfig = ''
       return {
         font = wezterm.font {
@@ -29,7 +30,6 @@ in {
           top = 0,
           bottom = 0,
         },
-        wsl_domains = wezterm.default_wsl_domains(),
       }
     '';
     colorSchemes = {

@@ -18,6 +18,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:guibou/nixGL";
 
     flake-utils.url = "github:numtide/flake-utils";
     rust.url = "github:oxalica/rust-overlay";
@@ -33,6 +34,7 @@
     home-manager,
     flake-utils,
     devshell,
+    nixgl,
     rust, ... }@inputs:
     let
       inherit (self) outputs;
@@ -44,6 +46,7 @@
           devshell.overlays.default
           nur.overlay
           rust.overlays.default
+          nixgl.overlay
         ];
       };
       common = {
@@ -51,7 +54,7 @@
         home.stateVersion = "22.11";
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
         imports = [
-          ./modules/editor
+          ./modules/editor/nvim
           ./modules/shell
           ./modules/home.nix
         ];
@@ -107,8 +110,8 @@
         };
       };
       homeConfigurations = {
+        inherit pkgs;
         "tony@cyclops" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             common
@@ -140,8 +143,11 @@
           modules = [
             common
             tony
-            ./modules/shell/ssh
+            ./modules/browser/firefox
             ./modules/shell/wezterm
+            ./modules/chat/slack
+            ./modules/shell/ssh
+            ./modules/entries
           ];
         };
         "build@magneto" = home-manager.lib.homeManagerConfiguration {

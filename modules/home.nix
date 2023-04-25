@@ -1,12 +1,18 @@
-{ config, inputs, pkgs, ... }: with config; {
+{ config, lib, inputs, pkgs, ... }: with config; {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     zip
+    rustc
+    cargo
+    ripgrep
     noto-fonts
     noto-fonts-emoji
     (nerdfonts.override { 
       fonts = [ "JetBrainsMono" ];
     })
+  ] ++ lib.optionals stdenv.isLinux [
+    nixgl.nixGLIntel
+    nixgl.nixVulkanIntel
   ];
   home.pointerCursor = {
     name = "Adwaita";
