@@ -110,16 +110,15 @@
         };
       };
       homeConfigurations = {
-        inherit pkgs;
         "tony@cyclops" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             common
             tony
-            ./modules/browser
+            ./modules/browser/firefox
             ./modules/chat
             ./modules/de
-            ./modules/de/sway
             ./modules/shell/ssh
             ./modules/shell/wezterm
           ];
@@ -148,6 +147,7 @@
             ./modules/chat/slack
             ./modules/shell/ssh
             ./modules/entries
+            ./modules/de
           ];
         };
         "build@magneto" = home-manager.lib.homeManagerConfiguration {

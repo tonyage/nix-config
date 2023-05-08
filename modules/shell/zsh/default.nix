@@ -30,7 +30,6 @@ in {
       VISUAL = "nvim";
       JAVA_HOME = "${pkgs.jdk11}";
     };
-
     initExtraBeforeCompInit = ''
       [[ "$(tty)" = "/dev/tty1" ]] && exec sway
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"

@@ -12,7 +12,7 @@
     firefox = {
       name = "Firefox";
       exec = "${pkgs.firefox}/bin/firefox %u";
-      icon = "${pkgs.firefox}/share/icons/hicolor/32x32/apps/firefox.png";
+      #icon = "${pkgs.firefox}/share/icons/hicolor/128x128/apps/firefox.png";
       terminal = false;
       categories = [ "Application" "Network" "WebBrowser" ];
       mimeType = [ "text/html" "text/xml" ];

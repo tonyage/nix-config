@@ -1,10 +1,10 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     gnome.dconf-editor
-    gnome.gnome-tweaks
     gnome.gnome-themes-extra
     gnomeExtensions.pop-shell
     gnomeExtensions.bluetooth-quick-connect
+    gnome-extension-manager
   ];
 
   gtk = {
