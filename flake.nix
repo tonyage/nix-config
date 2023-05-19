@@ -142,6 +142,7 @@
           modules = [
             common
             tony
+            ./modules/editor/jetbrains
             ./modules/browser/firefox
             ./modules/shell/wezterm
             ./modules/chat/slack

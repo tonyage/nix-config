@@ -33,9 +33,6 @@
 
     ruff
 
-    rust-analyzer
-    rustfmt
-    clippy
     pyright
 
     nodePackages.typescript-language-server

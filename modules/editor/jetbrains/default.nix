@@ -51,7 +51,7 @@
     nmap <S-TAB> <Action>(PreviousTab)
     map ge <Action>(ShowErrorDescription)
     
-    nmap grr <Action>(RenameElement)
+    nmap grn <Action>(RenameElement)
     nmap grg <Action>(Generate)
   '';
 }

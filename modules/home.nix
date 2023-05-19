@@ -2,8 +2,7 @@
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     zip
-    rustc
-    cargo
+    rustup
     ripgrep
     noto-fonts
     noto-fonts-emoji
