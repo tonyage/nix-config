@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    gcc12
     tree-sitter
     nodejs
     gopls
