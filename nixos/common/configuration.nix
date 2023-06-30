@@ -9,6 +9,23 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.initrd.kernelModules = [
+    "vfio_pci"
+    "vfio"
+    "vfio_iommu_type1"
+    "vfio_virqfd"
+
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_uvm"
+    "nvidia_drm"
+  ];
+
+  boot.kernelParams = [
+    "amd_iommu=on"
+    "vfio-pci.ids;'10de:2206, 10de:1aef'"
+  ];
+
   documentation.nixos.enable = false;
 
   networking.networkmanager.enable = true;
@@ -19,8 +36,6 @@
   programs.dconf.enable = true;
   programs.zsh.enable = true;
   programs.light.enable = true;
-
-  hardware.video.hidpi.enable = true;
 
   sound.enable = true;
   hardware.bluetooth.enable = true;

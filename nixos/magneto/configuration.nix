@@ -13,7 +13,7 @@
   };
 
   services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "build";
+  services.xserver.displayManager.autoLogin.user = "tony";
 
   services.openssh = {
     enable = true;
@@ -23,13 +23,8 @@
     };
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware = {
-    opengl = {
-      enable = true;
-      driSupport = true;
-    };
-  };
+  hardware.opengl.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   virtualisation.oci-containers.containers = {
     pihole = {
