@@ -4,7 +4,7 @@
     enable = true;
     systemd.enable = true;
     settings = [{
-      height = 30;
+      height = 24;
       layer = "top";
       position = "top";
       modules-left = [ "custom/os-icon" "sway/workspaces" "sway/mode" "sway/scratchpad" "sway/window" ];
@@ -60,7 +60,7 @@
         };
       };
       tray = {
-        icon-size = 21;
+        icon-size = 18;
         spacing = 10;
       };
       clock = {
@@ -148,7 +148,7 @@
 
       #waybar {
         font-family: SF Pro, Font Awesome;
-        font-size: 15px;  
+        font-size: 18px;  
         margin: 0px;
         padding: 0px;
       }
@@ -164,14 +164,14 @@
 
       #workspaces,
       #custom-os-icon {
-        font-size: 24px;
+        font-size: 18px;
         padding: 0px 5px 0px 5px;
         color: ${normal.white};
       }
 
       #custom-os-icon {
-        font-size: 30px;
-        margin-right: 0px;
+        font-size: 16px;
+        margin-right: 10px;
         margin-left: 10px;
         background: transparent;
       }
@@ -181,7 +181,7 @@
 
       #clock,
       #window {
-        font-size: 15px; 
+        font-size: 11px; 
       }
       window#waybar {
         background-color: ${gradients.dark.black};
@@ -251,7 +251,7 @@
       #custom-media,
       #mode,
       #idle_inhibitor {
-        font-size: 15px;
+        font-size: 11px;
         border-radius: 5px;
         margin: 5px 5px 5px 5px;
         padding: 0px 5px 0px 5px;
@@ -259,7 +259,7 @@
       }
       
       #clock {
-        font-size: 15px;
+        font-size: 11px;
         font-weight: bold;
         background: ${gradients.dark.black};
         color: ${normal.white};
@@ -330,7 +330,7 @@
       }
 
       #scratchpad {
-        font-size: 15px;
+        font-size: 11px;
         margin-left: 0px;
         margin-right: 10px;
         background: transparent;

@@ -31,6 +31,26 @@ in {
           }
         ];
       };
+      main = {
+        outputs = [
+          {
+            criteria = "${lg-1}";
+            mode = "3840x2160@144Hz";
+            scale = 1.00;
+            status = "enable";
+            position = "0,0";
+            transform = "normal";
+          }
+          {
+            criteria = "DP-2";
+            mode = "2560x1440@240Hz";
+            scale = 1.00;
+            status = "enable";
+            position = "3840,460";
+            transform = "normal";
+          }
+        ];
+      };
     };
   };
 }

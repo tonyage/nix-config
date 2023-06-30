@@ -68,8 +68,6 @@ in {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
           darkreader
-          enhanced-github
-          firefox-color
           multi-account-containers
         ];
         userChrome = ''

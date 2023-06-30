@@ -1,7 +1,7 @@
 { colorscheme, config, pkgs, ... }: with colorscheme;
 let 
   dpi = if pkgs.system == "x86_64-linux" then "192.0" else "144.0";
-  fontSize = if pkgs.system == "x86_64-linux" then "10.0" else "14.0";
+  fontSize = if pkgs.system == "x86_64-linux" then "9.0" else "14.0";
   lineHeight = "1.2";
 in {
   programs.wezterm = {

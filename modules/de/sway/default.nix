@@ -16,11 +16,11 @@
   wayland.windowManager.sway = {
     enable = true;
     systemdIntegration = true;
-    extraOptions = [ "--unsupported-gpu" "-d" ];
+    extraOptions = [ "--unsupported-gpu" ];
     config = rec {
       fonts = {
         names = [ "Noto Sans,Greyscale" ];
-        size = 11.0;
+        size = 10.0;
       };
       left = "h";
       down = "j";
@@ -91,7 +91,7 @@
         "${modifier}+q" = "kill";
         "${modifier}+b" = "split h";
         "${modifier}+v" = "split v";
-        "${modifier}+i" = "exec chromium";
+        "${modifier}+i" = "exec firefox";
         "${modifier}+Shift+I" = "exec chromium";
         "${modifier}+r" = "mode resize";
         "${modifier}+s" = "scratchpad show";

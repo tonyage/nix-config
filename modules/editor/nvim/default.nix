@@ -4,6 +4,8 @@
     nodejs
     gopls
 
+    gcc13
+
     buf
     buf-language-server
 
@@ -29,6 +31,7 @@
     cmake-language-server
     cmake-format
     llvmPackages_15.llvm
+    llvmPackages_15.clang-unwrapped
 
     ruff
 
