@@ -41,7 +41,7 @@
     vimPlugins.nvim-treesitter.withAllGrammars
   ];
   programs.neovim = {
-    enable = false;
+    enable = true;
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
