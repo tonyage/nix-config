@@ -8,8 +8,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "amd_iommu=on" ];
 
-  boot.initrd.kernelModules = [
+  boot.extraModprobeConfig = "options vfio-pci ids=10de:2206,10de:1aef";
+
+  boot.kernelModules = [
+    "kvm-amd"
     "vfio_pci"
     "vfio"
     "vfio_iommu_type1"
@@ -21,10 +25,13 @@
     "nvidia_drm"
   ];
 
-  boot.kernelParams = [
-    "amd_iommu=on"
-    "vfio-pci.ids;'10de:2206, 10de:1aef'"
-  ];
+  boot.postBootCommands = ''
+    DEVS="0000:0c:00.0 0000:0c:00.1"
+    for DEV in $DEVS; do
+      echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
+    done
+    modprobe -i vfio-pci
+  '';
 
   documentation.nixos.enable = false;
 
@@ -87,11 +94,11 @@
     patchelf
     coreutils
     findutils
+    virtmanager
     inotify-tools
   ];
 
   environment.shells = with pkgs; [ zsh ];
-  fonts.fonts = [ inputs.apple-fonts.packages.${pkgs.system}.sf-pro ];
 
   services.openssh.enable = true;
   services.printing.enable = true;
@@ -104,6 +111,14 @@
     rootless = {
       enable = true;
       setSocketVariable = true;
+    };
+  };
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      ovmf.enable = true;
+      runAsRoot = false;
     };
   };
 
