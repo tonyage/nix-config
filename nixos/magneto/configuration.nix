@@ -6,7 +6,7 @@
 
   networking.hostName = "magneto";
 
-  users.users.build = {
+  users.users.tony = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;

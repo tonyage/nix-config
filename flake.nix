@@ -64,10 +64,6 @@
         home.homeDirectory = "/home/tony";
         home.username = "tony";
       };
-      server = {
-        home.homeDirectory = "/home/build";
-        home.username = "build";
-      };
       colorscheme = {
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
       };
@@ -123,19 +119,6 @@
             ./modules/shell/wezterm
           ];
         };
-        "tony@jean" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            common
-            tony
-            ./modules/browser
-            ./modules/chat
-            ./modules/de/sway
-            ./modules/shell/ssh
-            ./modules/shell/wezterm
-          ];
-        };
         "tony@iceman" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
@@ -165,14 +148,6 @@
             ./modules/de
             ./modules/de/sway
             ./modules/de/waybar
-          ];
-        };
-        "build@magneto" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            common
-            server
           ];
         };
       };
