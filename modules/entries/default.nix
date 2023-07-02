@@ -9,13 +9,13 @@
       categories = [ "System" "TerminalEmulator" "Utility" ];
       terminal = false;
     };
-    firefox = {
-      name = "Firefox";
-      exec = "${pkgs.firefox}/bin/firefox %u";
-      #icon = "${pkgs.firefox}/share/icons/hicolor/128x128/apps/firefox.png";
-      terminal = false;
-      categories = [ "Application" "Network" "WebBrowser" ];
-      mimeType = [ "text/html" "text/xml" ];
-    };
+    #firefox = {
+    #  name = "Firefox";
+    #  exec = "${pkgs.firefox}/bin/firefox %u";
+    #  #icon = "${pkgs.firefox}/share/icons/hicolor/128x128/apps/firefox.png";
+    #  terminal = false;
+    #  categories = [ "Application" "Network" "WebBrowser" ];
+    #  mimeType = [ "text/html" "text/xml" ];
+    #};
   };
 }

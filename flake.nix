@@ -134,6 +134,21 @@
             ./modules/de
           ];
         };
+        "tony@cable" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            common
+            tony
+            ./modules/editor/jetbrains
+            ./modules/browser/firefox
+            ./modules/shell/wezterm
+            ./modules/chat/slack
+            ./modules/shell/ssh
+            ./modules/entries
+            ./modules/de
+          ];
+        };
         "tony@magneto" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };

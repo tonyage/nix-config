@@ -1,5 +1,6 @@
 { config, lib, inputs, pkgs, ... }: with config; {
   fonts.fontconfig.enable = true;
+  targets.genericLinux.enable = true;
   home.packages = with pkgs; [
     zip
     rustup
