@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     spotify
-    gparted
     gimp-with-plugins
     pciutils
+    bridge-utils
     unzip
   ];
   home.keyboard.options = [ "ctrl:nocaps" ];

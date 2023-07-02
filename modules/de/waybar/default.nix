@@ -11,13 +11,13 @@
       modules-center = [ ];
       modules-right = [
         "idle_inhibitor"
-        "cpu"
-        "memory"
-        "temperature"
-        "battery"
+        #"cpu"
+        #"memory"
+        #"temperature"
+        #"battery"
         "pulseaudio"
         "tray"
-        "network"
+        #"network"
         "clock"
       ];
       "sway/workspaces" = {
@@ -27,8 +27,8 @@
         format-icons = {
             "1" = "";
             "2" = "";
-            "3" = "<span color=\"${normal.green}\"></span>";
-            "4" = "";
+            "3" = "";
+            "4" = "<span color=\"${normal.green}\"></span>";
             "5" = "";
             "urgent" = "";
             "focused" = "";
@@ -36,7 +36,7 @@
         };
         persistent_workspaces = {
           "1" = [];
-          "2" = [ "eDP-1" "DP-3" ];
+          "2" = [ "eDP-1" "DP-1" "DP-3" ];
           "3" = [ "eDP-1" ];
           "4" = [ "eDP-1" ];
         };
@@ -48,7 +48,7 @@
       "sway/scratchpad" = {
         format = "{icon} {count}";
         show-empty = false;
-        format-icons = [ "" "" ];
+        format-icons = [ "" " " ];
         tooltip = true;
         tooltip-format = "{app}: {title}";
       };
@@ -60,7 +60,7 @@
         };
       };
       tray = {
-        icon-size = 18;
+        icon-size = 20;
         spacing = 10;
       };
       clock = {
@@ -72,7 +72,7 @@
       cpu = {
         format = " {max_frequency}Ghz │ <span color=\"${gradients.dark.black20}\">{usage}%</span>";
         on-click = "footclient htop --sort-key PERCENT_CPU";
-        min-length = 13;
+        min-length = 15;
         tooltip = false;
       };
       memory = {
@@ -148,7 +148,7 @@
 
       #waybar {
         font-family: SF Pro, Font Awesome;
-        font-size: 18px;  
+        font-size: 12px;  
         margin: 0px;
         padding: 0px;
       }
@@ -164,24 +164,21 @@
 
       #workspaces,
       #custom-os-icon {
-        font-size: 18px;
+        font-size: 12px;
         padding: 0px 5px 0px 5px;
         color: ${normal.white};
       }
 
       #custom-os-icon {
-        font-size: 16px;
+        font-size: 12px;
         margin-right: 10px;
         margin-left: 10px;
         background: transparent;
       }
-      #workspaces {
-        margin: 0px 5px 0px 5px;
-      }
 
       #clock,
       #window {
-        font-size: 11px; 
+        font-size: 12px; 
       }
       window#waybar {
         background-color: ${gradients.dark.black};
@@ -194,13 +191,13 @@
       }
 
       #workspaces button {
-        padding: 0px 10px;
+        padding: 0px 5px;
         background-color: transparent;
         color: ${normal.white};
       }
       #workspaces button.focused {
         background-color: ${gradients.dark.black00};
-        box-shadow: inset 0 -3px ${normal.white};
+        box-shadow: inset 0 -3px ${normal.blue};
       }
       #workspaces button.urgent {
         box-shadow: inset 0 -3px ${error};
@@ -251,7 +248,7 @@
       #custom-media,
       #mode,
       #idle_inhibitor {
-        font-size: 11px;
+        font-size: 12px;
         border-radius: 5px;
         margin: 5px 5px 5px 5px;
         padding: 0px 5px 0px 5px;
@@ -259,7 +256,7 @@
       }
       
       #clock {
-        font-size: 11px;
+        font-size: 12px;
         font-weight: bold;
         background: ${gradients.dark.black};
         color: ${normal.white};
@@ -313,7 +310,7 @@
       #custom-media {
         background-color: #66cc99;
         color: #2a5c45;
-        min-width: 100px;
+        min-width: 150px;
       }
       
       #custom-media.custom-spotify {
@@ -330,11 +327,11 @@
       }
 
       #scratchpad {
-        font-size: 11px;
-        margin-left: 0px;
+        font-size: 10px;
+        margin-left: 5px;
         margin-right: 10px;
         background: transparent;
-        color: ${normal.white};
+        color: ${normal.orange};
       }
       #scratchpad.empty {
         background: transparent;

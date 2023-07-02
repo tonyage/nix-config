@@ -6,21 +6,18 @@
 
   networking.hostName = "magneto";
 
+  security.tpm2.enable = true;
+  security.tpm2.tctiEnvironment.enable = true;
+
   users.users.tony = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "tss" ];
     shell = pkgs.zsh;
   };
 
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "tony";
-
-  services.openssh = {
-    enable = true;
-    settings = {
-      passwordAuthentication = false;
-      permitRootLogin = "no";
-    };
+  services.openssh.settings = {
+    PasswordAuthentication = false;
+    PermitRootLogin = "no";
   };
 
   hardware.opengl.enable = true;
@@ -49,6 +46,10 @@
       ];
       workdir = "/var/lib/pihole";
     };
+  };
+
+  security.pam.services.swaylock = {
+    text = "auth include login";
   };
 }
 

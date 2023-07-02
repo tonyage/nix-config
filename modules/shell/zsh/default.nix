@@ -22,7 +22,7 @@ in {
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     shellAliases = import ../aliases.nix;
     defaultKeymap = "emacs";
     sessionVariables = {

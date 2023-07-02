@@ -1,6 +1,8 @@
 { pkgs, ... }:
 let 
   lg-1 = "LG Electronics 27GN950 101NTFAC5283";
+  dell-1 = "Dell Inc. Dell AW2721D #GTIYMxgwABpO";
+  dell-2 = "Dell Inc. Dell AW2721D #GTIYMxgwAAda";
 in {
   services.kanshi = {
     enable = true;
@@ -18,7 +20,7 @@ in {
         outputs = [
           {
             criteria = "eDP-1";
-            scale = 1.20;
+            scale = 1.50;
             status = "enable";
           }
           {
@@ -36,17 +38,25 @@ in {
           {
             criteria = "${lg-1}";
             mode = "3840x2160@144Hz";
+            scale = 1.50;
+            status = "enable";
+            position = "0,0";
+            transform = "normal";
+          }
+          {
+            criteria = "${dell-1}";
+            mode = "2560x1440@240Hz";
             scale = 1.00;
             status = "enable";
             position = "0,0";
             transform = "normal";
           }
           {
-            criteria = "DP-2";
+            criteria = "${dell-2}";
             mode = "2560x1440@240Hz";
             scale = 1.00;
             status = "enable";
-            position = "3840,460";
+            position = "2560,0";
             transform = "normal";
           }
         ];

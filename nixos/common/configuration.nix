@@ -14,11 +14,10 @@
 
   boot.kernelModules = [
     "kvm-amd"
-    "vfio_pci"
-    "vfio"
-    "vfio_iommu_type1"
     "vfio_virqfd"
-
+    "vfio_pci"
+    "vfio_iommu_type1"
+    "vfio"
     "nvidia"
     "nvidia_modeset"
     "nvidia_uvm"
@@ -94,13 +93,17 @@
     patchelf
     coreutils
     findutils
+    pulseaudio
     virtmanager
     inotify-tools
   ];
 
+  fonts.fonts = [ inputs.apple-fonts.packages.${pkgs.system}.sf-pro ];
+
   environment.shells = with pkgs; [ zsh ];
 
   services.openssh.enable = true;
+
   services.printing.enable = true;
   services.blueman.enable = true;
   services.hardware.bolt.enable = true;
@@ -127,8 +130,6 @@
     enable = true;
     wheelNeedsPassword = false;
   };
-
-  system.autoUpgrade.enable = true;
   system.stateVersion = "22.05";
 }
 

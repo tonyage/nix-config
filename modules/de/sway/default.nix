@@ -8,6 +8,7 @@
     swaylock
     wdisplays
     pavucontrol
+    vulkan-tools
     wl-clipboard
     networkmanagerapplet
     sway-contrib.grimshot
@@ -15,11 +16,11 @@
 
   wayland.windowManager.sway = {
     enable = true;
-    systemdIntegration = true;
+    systemd.enable = true;
     extraOptions = [ "--unsupported-gpu" ];
     config = rec {
       fonts = {
-        names = [ "Noto Sans,Greyscale" ];
+        names = [ "SF Pro" ];
         size = 10.0;
       };
       left = "h";
@@ -32,11 +33,15 @@
       bars = [ ];
       assigns = {
         "1" = [ { app_id = "wezterm"; } ];
-        "2" = [ { class = "Chromium"; } ];
-        "4" = [ 
+        "2" = [
+          { class = "Chromium"; }
+          { class = "Firefox"; }
+        ];
+        "3" = [ 
           { class = "Slack"; }
           { class = "Discord"; }
         ];
+        "4" = [ { class = "Spotify"; } ];
       };
       colors = {
         background = "${normal.black}";
@@ -147,8 +152,15 @@
         "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 10";
         "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
       };
-      output = {
+      output = let
+        lg-1 = "LG Electronics 27GN950 101NTFAC5283";
+        dell-1 = "Dell Inc. Dell AW2721D #GTIYMxgwABpO";
+        dell-2 = "Dell Inc. Dell AW2721D #GTIYMxgwAAda";
+      in {
         "*".bg = ''"${config.home.homeDirectory}/pics/wallpaper-dark.jpg" "fill"'';
+        "${lg-1}" = { pos = "0 0"; mode = "3840x2160@140Hz"; scale = "1.50"; };
+        "${dell-1}" = { pos = "2560 0"; mode = "2560x1440@240Hz"; };
+        "${dell-2}" = { pos = "5120 0"; mode = "2560x1440@240Hz"; };
       };
       modes = {
         resize = {
@@ -191,13 +203,17 @@
         { app_id = ".blue*"; }
       ];
     };
+    #export WLR_RENDERER=vulkan
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
       export QT_QPA_PLATFORM=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATIONS="1"
       export _JAVA_AWT_WM_NONREPARENTING=1
+      export GBM_BACKEND=nvidia-drm
+      export __GLX_VENDOR_LIBRARY_NAME=nvidia
       export WLR_NO_HARDWARE_CURSORS=1
       export WLR_DRM_NO_MODIFIERS=1
+      export XWAYLAND_NO_GLAMOUR=1
     '';
     wrapperFeatures = {
       base = true;

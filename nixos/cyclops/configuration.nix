@@ -29,12 +29,9 @@ in {
     xkbVariant = "";
   };
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      passwordAuthentication = false;
-      permitRootLogin = "no";
-    };
+  services.openssh.settings = {
+    passwordAuthentication = false;
+    permitRootLogin = "no";
   };
 
   nixpkgs.config.allowUnfree = true;

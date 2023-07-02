@@ -76,7 +76,7 @@ in {
             --tab-block-margin: 0px !important;
           }
           :root[uidensity="compact"] {
-            --tab-min-height: 18px !important;
+            --tab-min-height: 10px !important;
             --tab-border-radius: 0px !important;
             --tab-block-margin: 0px !important;
           }
