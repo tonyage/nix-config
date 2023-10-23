@@ -141,9 +141,9 @@
             common
             tony
             ./modules/editor/jetbrains
-            ./modules/browser/firefox
+            ./modules/browser
             ./modules/shell/wezterm
-            ./modules/chat/slack
+            ./modules/chat
             ./modules/shell/ssh
             ./modules/entries
             ./modules/de

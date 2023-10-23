@@ -49,6 +49,10 @@
     orange  = "#f49f6a";
   };
 
+  bg-accents = {
+    red = "#3D2226";
+  };
+
   dim = {};
   error   = "#f44747";
   diff = {

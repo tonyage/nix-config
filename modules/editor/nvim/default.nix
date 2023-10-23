@@ -4,7 +4,7 @@
     nodejs
     gopls
 
-    gcc13
+    #gcc13
 
     buf
     buf-language-server
@@ -31,14 +31,15 @@
     cmake-language-server
     cmake-format
     llvmPackages_15.llvm
-    llvmPackages_15.clang-unwrapped
+    llvmPackages_15.libcxxClang
 
     ruff
 
     pyright
 
-    nodePackages.typescript-language-server
-    nodePackages.yaml-language-server
+    typescript
+    nodePackages_latest.typescript-language-server
+    nodePackages_latest.yaml-language-server
     yamllint
     yamlfmt
     vimPlugins.nvim-treesitter.withAllGrammars

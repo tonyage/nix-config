@@ -2,8 +2,8 @@
   programs.git = {
     enable = true;
     includes = [
-      { path = "~/git/personal/.gitconfig";  condition = "gitdir:~/git/personal/";  }
-      { path = "~/git/work/.gitconfig"; condition = "gitdir:~/git/work/"; }
+      { path = "~/git/personal/.gitconfig";  condition = "gitdir:~/git/personal";  }
+      { path = "~/git/work/.gitconfig"; condition = "gitdir:~/git/work"; }
     ];
 
     aliases = {
@@ -13,9 +13,6 @@
       mc = "merge --continue";
       plog = "log --all --decorate --oneline --graph";
     };
-
-    userName = "Tony Do";
-    userEmail = "tonyttdo@gmail.com";
 
     delta = {
       enable = true;
@@ -40,7 +37,7 @@
   };
 
   programs.gh = {
-    enable = true;
+   enable = true;
     settings = {
       git_protocol = "ssh";
       editor = "nvim";

@@ -7,9 +7,12 @@
     ripgrep
     noto-fonts
     noto-fonts-emoji
+    inputs.apple-fonts.packages.${pkgs.system}.sf-pro
     (nerdfonts.override { 
       fonts = [ "JetBrainsMono" ];
     })
+    xclip
+    protobuf
   ] ++ lib.optionals stdenv.isLinux [
     nixgl.nixGLIntel
     nixgl.nixVulkanIntel

@@ -11,14 +11,18 @@
 
   users.users.tony = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "tss" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "tss" "adbusers" ];
     shell = pkgs.zsh;
   };
+
+  programs.adb.enable = true;
 
   services.openssh.settings = {
     PasswordAuthentication = false;
     PermitRootLogin = "no";
   };
+
+  services.udev.packages = [ pkgs.android-udev-rules ];
 
   hardware.opengl.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;

@@ -28,7 +28,7 @@ in {
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-      JAVA_HOME = "${pkgs.jdk11}";
+      JAVA_HOME = "${pkgs.jdk17}";
     };
     initExtraBeforeCompInit = ''
       [[ "$(tty)" = "/dev/tty1" ]] && exec sway
@@ -46,7 +46,9 @@ in {
     initExtra = ''
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
         [[ -f ${main} ]] && source ${main}
-      else
+      elif [[ "$TERMINAL_EMULATOR" = "JetBrains-JediTerm" ]]; then
+        [[ -f ${tty} ]] && source ${tty}
+      else 
         [[ -f ${tty} ]] && source ${tty}
       fi
     '';

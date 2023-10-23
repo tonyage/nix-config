@@ -4,9 +4,7 @@
 #  home.packages = with pkgs; [ jetbrains.idea-ultimate ];
 #  services.idea-ultimate-remote.enable = true
 
-  home.packages = with pkgs; [
-    jdk11
-  ];
+  home.packages = with pkgs; [ jdk17 ];
 
   home.file.".ideavimrc".text = ''
     set argtextobj
@@ -37,11 +35,35 @@
     map <leader>o <Action>(OptimizeImports)
     map <leader>d <Action>(Debug)
     map <leader>b <Action>(ToggleLineBreakpoint)
+    map <leader>r <Action>(Run)
+    map <leader>s <Action>(Stop)
+    map <leader>ch <Action>(CallHierarchy)
+    map <leader>chm <Action>(CallHierarchy.BaseOnThisMethod)
     map <leader>e :NERDTreeToggle<CR>
+
+    sethandler <c-h> Vim
+    sethandler <c-l> Vim
+    sethandler <c-j> Vim
+    sethandler <c-k> Vim
+    sethandler <a-s-h> Vim
+    sethandler <a-s-l> Vim
+    sethandler <c-s-t> Vim
+
+    nmap <c-h> <C-W>h
+    nmap <c-j> <C-W>j
+    nmap <c-k> <C-W>k
+    nmap <c-l> <C-W>l
 
     vnoremap < <gv
     vnoremap > >gv
     vnoremap = =gv
+
+    map <a-b> <Action>(ActivateBuildToolWindow)
+    map <a-g> <Action>(ActivateGradleToolWindow)
+    map <a-l> <Action>(ActivateLogcatToolWindow)
+    map <a-s-l> <Action>(SplittingTabsToolWindow.MoveTabRight)
+    map <a-s-h> <Action>(SplittingTabsToolWindow.MoveTabLeft)
+    map <c-s-t> <Action>(ReopenClosedTab)
 
     nmap = <Action>(EditorIncreaseFontSize)
     nmap - <Action>(EditorDecreaseFontSize)
@@ -52,9 +74,10 @@
     nmap gp <Action>(ParameterInfo)
     nmap gf <Action>(GotoFile)
     nmap gc <Action>(CommentByLineComment)
+    nmap ge <Action>(ShowErrorDescription)
+
     nmap <TAB> <Action>(NextTab)
     nmap <S-TAB> <Action>(PreviousTab)
-    nmap ge <Action>(ShowErrorDescription)
     
     nmap grn <Action>(RenameElement)
     nmap grg <Action>(Generate)

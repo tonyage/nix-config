@@ -21,6 +21,10 @@
         user = "build";
         identityFile = "~/.ssh/magneto";
       };
+      "tmate" = {
+        hostname = "sfo2.tmate.io";
+        identityFile = "~/.ssh/tmate";
+      };
     };
   };
 }
