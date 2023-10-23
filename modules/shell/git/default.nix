@@ -25,8 +25,11 @@
       };
     };
 
+    userName = "Tony Do";
+    userEmail = "tonyttdo@gmail.com";
+
     extraConfig = {
-      pull.ff = "only";
+      pull.rebase = true;
       push.autoSetupRemote = true;
       init.defaultBranch = "main";
       difftool.prompt = true;

@@ -3,6 +3,7 @@ with colorscheme;
 let
   main = ./p10k/.p10k.zsh;
   tty = ./p10k/.p10k.tty.zsh;
+  jb = ./p10k/.p10k.jb.zsh;
 in {
 
   programs.fzf = {
@@ -47,7 +48,7 @@ in {
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
         [[ -f ${main} ]] && source ${main}
       elif [[ "$TERMINAL_EMULATOR" = "JetBrains-JediTerm" ]]; then
-        [[ -f ${tty} ]] && source ${tty}
+        [[ -f ${jb} ]] && source ${jb}
       else 
         [[ -f ${tty} ]] && source ${tty}
       fi
