@@ -25,7 +25,7 @@ in {
         tab_bar_at_bottom = true,
         default_cursor_style = "BlinkingBlock",
         initial_rows = 40,
-        intiial_cols = 120,
+        initial_cols = 200,
         window_padding = {
           left = 0,
           right = 0,
