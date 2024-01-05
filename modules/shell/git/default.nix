@@ -29,7 +29,7 @@
     userEmail = "tonyttdo@gmail.com";
 
     extraConfig = {
-      pull.rebase = true;
+      pull.rebase = "merges";
       push.autoSetupRemote = true;
       init.defaultBranch = "main";
       difftool.prompt = true;

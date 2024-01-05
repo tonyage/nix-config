@@ -1,11 +1,4 @@
 { pkgs, ... }: {
-#  imports = [ ./remote.nix ];
-#
-#  home.packages = with pkgs; [ jetbrains.idea-ultimate ];
-#  services.idea-ultimate-remote.enable = true
-
-  home.packages = with pkgs; [ jdk17 ];
-
   home.file.".ideavimrc".text = ''
     set argtextobj
     set clipboard=unnamedplus,unnamed,ideaput

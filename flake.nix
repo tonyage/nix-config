@@ -6,10 +6,6 @@
     hardware.url = "github:nixos/nixos-hardware";
     nixpkgs-wl.url = "github:nix-community/nixpkgs-wayland";
 
-    apple-fonts = {
-      url = "github:tonyage/apple-fonts.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +26,6 @@
     nur,
     darwin,
     nixpkgs,
-    apple-fonts,
     home-manager,
     flake-utils,
     devshell,
@@ -87,53 +82,7 @@
           specialArgs = { inherit inputs outputs; };
         };
       };
-      nixosConfigurations = {
-        cyclops = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./nixos/common/configuration.nix
-            ./nixos/cyclops/configuration.nix
-          ];
-        };
-        magneto = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./nixos/common/configuration.nix
-            ./nixos/magneto/configuration.nix
-          ];
-        };
-      };
       homeConfigurations = {
-        "tony@cyclops" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            common
-            tony
-            ./modules/browser/firefox
-            ./modules/chat
-            ./modules/de
-            ./modules/shell/ssh
-            ./modules/shell/wezterm
-          ];
-        };
-        "tony@iceman" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            common
-            tony
-            ./modules/editor/jetbrains
-            ./modules/browser/firefox
-            ./modules/shell/wezterm
-            ./modules/chat/slack
-            ./modules/shell/ssh
-            ./modules/entries
-            ./modules/de
-          ];
-        };
         "tony@cable" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
@@ -141,28 +90,10 @@
             common
             tony
             ./modules/editor/jetbrains
-            ./modules/browser
             ./modules/shell/wezterm
             ./modules/chat
             ./modules/shell/ssh
             ./modules/entries
-            ./modules/de
-          ];
-        };
-        "tony@magneto" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            common
-            tony
-            ./modules/editor/jetbrains
-            ./modules/browser/firefox
-            ./modules/shell/wezterm
-            ./modules/chat/slack
-            ./modules/shell/ssh
-            ./modules/de
-            ./modules/de/sway
-            ./modules/de/waybar
           ];
         };
       };

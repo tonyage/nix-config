@@ -1,9 +1,9 @@
 { colorscheme, config, pkgs, ... }:
 with colorscheme;
 let
-  main = ./p10k/.p10k.zsh;
-  tty = ./p10k/.p10k.tty.zsh;
-  jb = ./p10k/.p10k.jb.zsh;
+  main = ./p10k/main.zsh;
+  tty = ./p10k/tty.zsh;
+  jb = ./p10k/jb.zsh;
 in {
 
   programs.fzf = {
@@ -29,7 +29,6 @@ in {
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-      JAVA_HOME = "${pkgs.jdk17}";
     };
     initExtraBeforeCompInit = ''
       [[ "$(tty)" = "/dev/tty1" ]] && exec sway

@@ -3,11 +3,9 @@
   targets.genericLinux.enable = true;
   home.packages = with pkgs; [
     zip
-    rustup
     ripgrep
     noto-fonts
     noto-fonts-emoji
-    inputs.apple-fonts.packages.${pkgs.system}.sf-pro
     (nerdfonts.override { 
       fonts = [ "JetBrainsMono" ];
     })
@@ -17,15 +15,6 @@
     nixgl.nixGLIntel
     nixgl.nixVulkanIntel
   ];
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
-    size = 24;
-    x11 = {
-      enable = true;
-      defaultCursor = "Adwaita";
-    };
-  };
   xdg.userDirs = {
     enable = true;
     desktop = "${home.homeDirectory}/";
