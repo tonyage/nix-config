@@ -1,7 +1,5 @@
 { colorscheme, config, pkgs, ... }: with colorscheme;
 let 
-  #dpi = if pkgs.system == "x86_64-linux" then "192.0" else "144.0";
-  #dpi = ${dpi},
   fontSize = if pkgs.system == "x86_64-linux" then "10.0" else "14.0";
   lineHeight = "1.2";
 in {
@@ -10,10 +8,11 @@ in {
     package = pkgs.wezterm;
     extraConfig = ''
       return {
-        font = wezterm.font {
-          family = "JetBrainsMono Nerd Font",
-          weight = "Regular",
+        font = wezterm.font_with_fallback {
+          { family = "JetBrainsMono Nerd Font Propo", weight = "Regular" }, 
+          "Noto Color Emoji"
         },
+        dpi = 98.0,
         font_size = ${fontSize},
         line_height = ${lineHeight},
         color_scheme_dirs = { "${config.home.homeDirectory}/.config/wezterm/colors" },
@@ -26,6 +25,7 @@ in {
         default_cursor_style = "BlinkingBlock",
         initial_rows = 40,
         initial_cols = 200,
+        warn_about_missing_glyphs = false,
         window_padding = {
           left = 0,
           right = 0,

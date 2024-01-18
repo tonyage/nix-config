@@ -5,6 +5,8 @@
     zip
     ripgrep
     noto-fonts
+    nil
+    nixpkgs-fmt
     noto-fonts-emoji
     (nerdfonts.override { 
       fonts = [ "JetBrainsMono" ];

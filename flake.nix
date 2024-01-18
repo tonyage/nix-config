@@ -39,9 +39,9 @@
         config.allowUnfree = true;
         overlays = [
           devshell.overlays.default
-          nur.overlay
           rust.overlays.default
           nixgl.overlay
+          nur.overlay
         ];
       };
       common = {

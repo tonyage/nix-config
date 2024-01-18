@@ -3,7 +3,7 @@ with colorscheme;
 let
   main = ./p10k/main.zsh;
   tty = ./p10k/tty.zsh;
-  jb = ./p10k/jb.zsh;
+  pure = ./p10k/pure.zsh;
 in {
 
   programs.fzf = {
@@ -31,7 +31,6 @@ in {
       VISUAL = "nvim";
     };
     initExtraBeforeCompInit = ''
-      [[ "$(tty)" = "/dev/tty1" ]] && exec sway
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${gradients.dark.black90}"
@@ -40,21 +39,20 @@ in {
       ${builtins.readFile ./utils.zsh} 
       eval "$(zoxide init zsh)"
       eval "$(direnv hook zsh)"
-      [ -f ~/.zshrc_local ] && {echo "Sourcing local zshrc"; source ~/.zshrc_local;}
     '';
 
-    initExtra = ''
+    initExtraFirst = ''
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
-        [[ -f ${main} ]] && source ${main}
-      elif [[ "$TERMINAL_EMULATOR" = "JetBrains-JediTerm" ]]; then
-        [[ -f ${jb} ]] && source ${jb}
+        if [ "''${TERM}" = "alacritty" ] || [ "''${TERMINAL_EMULATOR}" = "JetBrains-JediTerm" ]; then
+          source ${pure}
+        else
+          source ${main}
+        fi
       else 
-        [[ -f ${tty} ]] && source ${tty}
+        source ${tty}
       fi
     '';
-    envExtra = ''
-      source $HOME/.zshenv-local
-    '';
+    envExtra = ''source $HOME/.zshenv-local'';
     plugins = [
       { name = "powerlevel10k"; src = pkgs.zsh-powerlevel10k; file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme"; }
       { name = "zsh-autopair"; src = pkgs.zsh-autopair; file = "share/zsh/zsh-autopair/autopair.zsh"; }

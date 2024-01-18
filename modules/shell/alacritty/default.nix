@@ -1,45 +1,66 @@
 { colorscheme, pkgs, ... }: with colorscheme; {
   programs.alacritty = {
     enable = true;
-    settings = ''
-    live_config_reload = true
+    package = pkgs.alacritty;
+    settings = {
+      live_config_reload = true;
 
-    [colors]
-    draw_bold_text_with_bright_colors = true
+      colors.draw_bold_text_with_bright_colors = true;
 
-    [colors.bright]
-    black = "${bright.black}"
-    red = "${bright.red}"
-    green = "${bright.green}"
-    yellow = "${bright.yellow}"
-    blue = "${bright.blue}"
-    magenta = "${bright.magenta}"
-    cyan = "${bright.cyan}"
-    white = "${bright.white}"
+      colors.primary = {
+        background = "${normal.black}";
+        foreground = "${normal.white}";
+      };
 
-    [colors.normal]
-    black = "${normal.black}"
-    red = "${normal.red}"
-    green = "${normal.green}"
-    yellow = "${normal.yellow}"
-    blue = "${normal.blue}"
-    magenta = "${normal.magenta}"
-    cyan = "${normal.cyan}"
-    white = "${normal.white}"
+      colors.bright = {
+        black = "${bright.black}";
+        red = "${bright.red}";
+        green = "${bright.green}";
+        yellow = "${bright.yellow}";
+        blue = "${bright.blue}";
+        magenta = "${bright.magenta}";
+        cyan = "${bright.cyan}";
+        white = "${bright.white}";
+      };
 
-    [cursor]
-    blinking = "Always"
+      colors.normal = {
+        black = "${normal.black}";
+        red = "${normal.red}";
+        green = "${normal.green}";
+        yellow = "${normal.yellow}";
+        blue = "${normal.blue}";
+        magenta = "${normal.magenta}";
+        cyan = "${normal.cyan}";
+        white = "${normal.white}";
+      };
 
-    [font]
-    normal = { family = "JetbrainsMono Nerd Font", style = "Regular" }
-    offset = { x = 0, y = 1 }
-    size = 12
+      cursor.style = {
+        blinking = "On";
+      };
 
-    [selection]
-    save_to_clipboard = true
+      font = {
+        builtin_box_drawing = true;
+        bold = {
+          family = "JetbrainsMono Nerd Font Propo";
+          style = "Bold";
+        };
+        bold_italic = {
+          family = "JetbrainsMono Nerd Font Propo";
+          style = "Bold Italic";
+        };
+        italic = {
+          family = "JetbrainsMono Nerd Font Propo";
+          style = "Italic";
+        };
+        normal = {
+          family = "JetbrainsMono Nerd Font Propo";
+          style = "Regular";
+        };
+        size = 10.0;
+      };
 
-    [window]
-    dynamic_title = true
-    '';
+      selection.save_to_clipboard = true;
+      window.dynamic_title = true;
+    };
   };
 }
