@@ -55,9 +55,22 @@
         ];
         systemd.user.startServices = "sd-switch";
       };
+      disableHomeManagerNews = {
+        config = {
+          news.display = "silent";
+        };
+      };
       tony = {
         home.homeDirectory = "/home/tony";
         home.username = "tony";
+        imports = [
+          ./modules/chat.nix
+          ./modules/editor/jetbrains
+          ./modules/shell/alacritty
+          ./modules/shell/wezterm
+          ./modules/shell/ssh
+          ./modules/entries
+        ];
       };
       colorscheme = {
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
@@ -86,15 +99,7 @@
         "tony@cable" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            common
-            tony
-            ./modules/editor/jetbrains
-            ./modules/shell/wezterm
-            ./modules/chat
-            ./modules/shell/ssh
-            ./modules/entries
-          ];
+          modules = [ common disableHomeManagerNews tony ];
         };
       };
       devShells = flake-utils.lib.eachSystem [

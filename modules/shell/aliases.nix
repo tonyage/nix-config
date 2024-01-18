@@ -1,5 +1,5 @@
 {
-  ls = "exa --icons";
+  ls = "eza --icons";
   ll = "ls -lah --git --group-directories-first";
   tree = "ls -T";
   ".." = "cd ../";

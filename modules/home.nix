@@ -1,4 +1,4 @@
-{ config, lib, inputs, pkgs, ... }: with config; {
+{ config, lib, pkgs, ... }: with config; {
   fonts.fontconfig.enable = true;
   targets.genericLinux.enable = true;
   home.packages = with pkgs; [

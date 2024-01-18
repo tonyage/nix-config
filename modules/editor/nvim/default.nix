@@ -44,10 +44,10 @@
   #  yamlfmt
   #  vimPlugins.nvim-treesitter.withAllGrammars
   #];
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    defaultEditor = true;
-  };
+  #programs.neovim = {
+  #  enable = true;
+  #  viAlias = true;
+  #  vimAlias = true;
+  #  defaultEditor = true;
+  #};
 }
