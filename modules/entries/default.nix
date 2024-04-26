@@ -4,6 +4,7 @@
       name = "WezTerm";
       comment = "Wez's Terminal Emulator";
       icon = "${pkgs.wezterm}/share/icons/hicolor/128x128/apps/org.wezfurlong.wezterm.png";
+      # exec = "${pkgs.wezterm}";
       exec = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel wezterm";
       type = "Application";
       categories = [ "System" "TerminalEmulator" "Utility" ];

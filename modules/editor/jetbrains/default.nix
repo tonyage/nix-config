@@ -19,7 +19,6 @@
     set sneak
     set surround
     set wrapscan
-    set NERDtree
 
     let mapleader = " "
 
@@ -32,7 +31,6 @@
     map <leader>s <Action>(Stop)
     map <leader>ch <Action>(CallHierarchy)
     map <leader>chm <Action>(CallHierarchy.BaseOnThisMethod)
-    map <leader>e :NERDTreeToggle<CR>
 
     sethandler <c-h> Vim
     sethandler <c-l> Vim

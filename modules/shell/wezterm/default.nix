@@ -1,8 +1,9 @@
 { colorscheme, config, pkgs, ... }: with colorscheme;
-let 
+let
   fontSize = if pkgs.system == "x86_64-linux" then "10.0" else "14.0";
   lineHeight = "1.2";
-in {
+in
+{
   programs.wezterm = {
     enable = true;
     package = pkgs.wezterm;
@@ -12,7 +13,6 @@ in {
           { family = "JetBrainsMono Nerd Font Propo", weight = "Regular" }, 
           "Noto Color Emoji"
         },
-        dpi = 98.0,
         font_size = ${fontSize},
         line_height = ${lineHeight},
         color_scheme_dirs = { "${config.home.homeDirectory}/.config/wezterm/colors" },
@@ -21,17 +21,46 @@ in {
         underline_position = -12,
         underline_thickness = 2.0,
         use_fancy_tab_bar = false,
-        tab_bar_at_bottom = true,
+        tab_max_width = 16,
         default_cursor_style = "BlinkingBlock",
         initial_rows = 40,
         initial_cols = 200,
         warn_about_missing_glyphs = false,
+        window_decorations = "RESIZE",
         window_padding = {
           left = 0,
           right = 0,
           top = 0,
           bottom = 0,
         },
+        keys = {
+          { 
+            key = 'Backspace',
+            mods = 'CTRL',
+            action = wezterm.action.SendKey {
+              key = 'Backspace',
+              mods = 'ALT'
+            }
+          },
+          {
+            key = 'Backspace',
+            mods = 'CTRL',
+            action = wezterm.action.SendKey {
+              key = 'w',
+              mods = 'CTRL'
+            }
+          },
+          {
+            key = '-',
+            mods = 'ALT',
+            action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" }
+          },
+          {
+            key = '/',
+            mods = 'ALT',
+            action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" }
+          }
+        }
       }
     '';
     colorSchemes = {
@@ -62,7 +91,7 @@ in {
           normal.white
         ];
         brights = [
-          bright.black
+          gradients.dark.black10
           bright.red
           bright.green
           bright.yellow

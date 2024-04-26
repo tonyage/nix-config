@@ -2,5 +2,25 @@ box * {
   font: 20px;
 }
 * {
-  border-radius: 2;  
+  border-radius: 2;
+}
+
+headerbar:not(.selection-mode),
+.titlebar:not(.selection-mode),
+headerbar > headerbar:not(.selection-mode),
+.titlebar > .titlebar:not(.selection-mode),
+.titlebar > stack > headerbar:not(.selection-mode),
+headerbar:last-child:not(.selection-mode),
+.titlebar:last-child:not(.selection-mode),
+.windowhandle:not(.selection-mode) {
+  padding-right: 0;
+}
+headerbar > box.right,
+.titlebar > box.right {
+  margin: 0 -200px 0 0;
+  opacity: 0;
+}
+.titlebar.default-decoration {
+  margin: -200px 0 0;
+  opacity: 0;
 }

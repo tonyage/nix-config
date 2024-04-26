@@ -1,13 +1,14 @@
-{ colorscheme, config, pkgs,... }:
+{ colorscheme, config, pkgs, ... }:
 
 with config;
 with colorscheme;
 
 let
   username = home.username;
-in {
+in
+{
   home.sessionVariables = {
-    MOZ_ENABLE_WAYLAND=1;
+    MOZ_ENABLE_WAYLAND = 1;
   };
   programs.firefox = {
     enable = true;
@@ -91,7 +92,7 @@ in {
             background: ${normal.black} !important;
           }
           #tabbrowser-tabs .tab-background[selected="true"] {
-            border-top: solid 1px var(--identity-icon-color), ${normal.blue} !important;
+            border-top: solid 1px var(--identity-icon-color, ${normal.blue}) !important;
             background: ${gradients.dark.black05} !important;
           }
           .titlebar-buttonbox-container {

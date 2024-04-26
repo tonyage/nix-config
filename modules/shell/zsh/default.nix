@@ -4,7 +4,8 @@ let
   main = ./p10k/main.zsh;
   tty = ./p10k/tty.zsh;
   pure = ./p10k/pure.zsh;
-in {
+in
+{
 
   programs.fzf = {
     enable = true;
@@ -33,6 +34,7 @@ in {
     initExtraBeforeCompInit = ''
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
+      fpath+=("/usr/share/zsh/site-functions")
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${gradients.dark.black90}"
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       ${builtins.readFile ./docker.zsh} 

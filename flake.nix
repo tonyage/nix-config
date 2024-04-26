@@ -22,15 +22,18 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self,
-    nur,
-    darwin,
-    nixpkgs,
-    home-manager,
-    flake-utils,
-    devshell,
-    nixgl,
-    rust, ... }@inputs:
+  outputs =
+    { self
+    , nur
+    , darwin
+    , nixpkgs
+    , home-manager
+    , flake-utils
+    , devshell
+    , nixgl
+    , rust
+    , ...
+    }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -66,7 +69,6 @@
         imports = [
           ./modules/chat.nix
           ./modules/editor/jetbrains
-          ./modules/shell/alacritty
           ./modules/shell/wezterm
           ./modules/shell/ssh
           ./modules/entries
@@ -75,20 +77,22 @@
       colorscheme = {
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
       };
-    in {
+    in
+    {
       darwinConfigurations = {
         "m1" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [ 
-	          ./nixos/darwin-configuration.nix
-            home-manager.darwinModules.home-manager {
+          modules = [
+            ./nixos/darwin-configuration.nix
+            home-manager.darwinModules.home-manager
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."tony.do" = {
                 imports = [
                   colorscheme
                   ./modules/darwin.nix
-                ]; 
+                ];
               };
             }
           ];
@@ -104,9 +108,10 @@
       };
       devShells = flake-utils.lib.eachSystem [
         flake-utils.lib.system.x86_64-linux
-      ] (_:
-        import ./shell.nix { inherit pkgs; }
-      );
+      ]
+        (_:
+          import ./shell.nix { inherit pkgs; }
+        );
 
       templates.jvm = {
         path = ./templates/jvm;
@@ -117,4 +122,4 @@
         description = "A devshell for c++ projects";
       };
     };
-  }
+}

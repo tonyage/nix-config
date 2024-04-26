@@ -11,7 +11,7 @@
         user = "git";
         identityFile = "~/.ssh/personal";
       };
-      "work" = {
+      "github.com" = {
         hostname = "github.com";
         user = "git";
         identityFile = "~/.ssh/work";

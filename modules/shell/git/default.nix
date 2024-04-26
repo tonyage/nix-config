@@ -2,8 +2,8 @@
   programs.git = {
     enable = true;
     includes = [
-      { path = "~/git/personal/.gitconfig";  condition = "gitdir:~/git/personal";  }
-      { path = "~/git/work/.gitconfig"; condition = "gitdir:~/git/work"; }
+      { path = "~/git/personal/.gitconfig"; condition = "gitdir:~/git/personal/"; }
+      { path = "~/git/work/.gitconfig"; condition = "gitdir:~/git/work/"; }
     ];
 
     aliases = {
@@ -40,7 +40,7 @@
   };
 
   programs.gh = {
-   enable = true;
+    enable = true;
     settings = {
       git_protocol = "ssh";
       editor = "nvim";

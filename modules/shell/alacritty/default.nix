@@ -1,6 +1,6 @@
 { colorscheme, pkgs, ... }: with colorscheme; {
   programs.alacritty = {
-    enable = true;
+    enable = false;
     package = pkgs.alacritty;
     settings = {
       live_config_reload = true;
