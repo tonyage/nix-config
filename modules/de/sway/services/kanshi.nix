@@ -1,9 +1,10 @@
 { pkgs, ... }:
-let 
+let
   lg-1 = "LG Electronics 27GN950 101NTFAC5283";
   dell-1 = "Dell Inc. Dell AW2721D #GTIYMxgwABpO";
   dell-2 = "Dell Inc. Dell AW2721D #GTIYMxgwAAda";
-in {
+in
+{
   services.kanshi = {
     enable = true;
     profiles = {

@@ -6,7 +6,6 @@ let
   pure = ./p10k/pure.zsh;
 in
 {
-
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -53,6 +52,7 @@ in
       else 
         source ${tty}
       fi
+      # eval "$(zellij setup --generate-auto-start zsh)"
     '';
     envExtra = ''source $HOME/.zshenv-local'';
     plugins = [

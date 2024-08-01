@@ -1,8 +1,8 @@
 {
-  imports = [ 
+  imports = [
     ./mako.nix
     ./fuzzel.nix
-    #./kanshi.nix
+    ./kanshi.nix
     ./swayidle.nix
   ];
 }

@@ -1,12 +1,13 @@
 { colorscheme, config, pkgs, ... }:
-let 
+let
   copy = if pkgs.system == "x86_64-linux" then "wl-copy" else "pb-copy";
-in {
+in
+{
   programs.zellij = {
     enable = true;
     settings = {
       theme = "dusk";
-      themes.dusk = { 
+      themes.dusk = {
         bg = colorscheme.normal.black;
         fg = colorscheme.normal.white;
 
@@ -22,13 +23,14 @@ in {
       };
       copy_command = "${copy}";
       copy_on_select = true;
-      default_layout = "simplified";
       default_shell = "zsh";
       layout_dir = "${config.xdg.configHome}/zellij/layouts";
       mouse_mode = true;
       scroll_buffer_size = 100000;
       scrollback_editor = "${pkgs.neovim}/bin/nvim";
-      simplified_ui = true;
+      simplified_ui = false;
+      ui.pane_frames.rounded_corners = true;
+      ui.pane_frames.hide_session_name = true;
     };
   };
   xdg.configFile."zellij/layouts/base.kdl".text = ''
@@ -46,7 +48,7 @@ in {
       }
     }
   '';
-  xdg.configFile."zellij/layouts/config.kdl".text = ''
+  xdg.configFile."zellij/layouts/nix-config.kdl".text = ''
     layout {
       cwd "git/personal/nix-config"
       pane_template name="config_pane" {

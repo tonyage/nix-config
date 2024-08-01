@@ -8,7 +8,7 @@
     nil
     nixpkgs-fmt
     noto-fonts-emoji
-    (nerdfonts.override { 
+    (nerdfonts.override {
       fonts = [ "JetBrainsMono" ];
     })
     xclip
@@ -24,9 +24,9 @@
     templates = "${home.homeDirectory}/";
     videos = "${home.homeDirectory}/";
 
-    documents = "${home.homeDirectory}/git";
+    documents = "${home.homeDirectory}/docs";
     download = "${home.homeDirectory}/dl";
-    publicShare = "${home.homeDirectory}/pub";
+    publicShare = "${home.homeDirectory}/git";
     pictures = "${home.homeDirectory}/pics";
   };
 }

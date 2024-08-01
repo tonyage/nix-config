@@ -11,7 +11,7 @@
       modules-center = [ ];
       modules-right = [
         "idle_inhibitor"
-        #"cpu"
+        "cpu"
         #"memory"
         #"temperature"
         #"battery"
@@ -25,17 +25,17 @@
         all-outputs = true;
         format = "{icon}";
         format-icons = {
-            "1" = "";
-            "2" = "";
-            "3" = "";
-            "4" = "<span color=\"${normal.green}\"></span>";
-            "5" = "";
-            "urgent" = "";
-            "focused" = "";
-            "default" = "";
+          "1" = "";
+          "2" = "";
+          "3" = "";
+          "4" = "<span color=\"${normal.green}\"></span>";
+          "5" = "";
+          "urgent" = "";
+          "focused" = "";
+          "default" = "";
         };
         persistent_workspaces = {
-          "1" = [];
+          "1" = [ ];
           "2" = [ "eDP-1" "DP-1" "DP-3" ];
           "3" = [ "eDP-1" ];
           "4" = [ "eDP-1" ];
@@ -85,7 +85,7 @@
         critical-threshold = 80;
         format-critical = "{icon} {temperatureC}°C";
         format = "{icon}  {temperatureC}°C";
-        format-icons = ["" "" ""];
+        format-icons = [ "" "" "" ];
       };
       battery = {
         states = {

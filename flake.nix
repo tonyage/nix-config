@@ -68,6 +68,7 @@
         home.username = "tony";
         imports = [
           ./modules/chat.nix
+          # ./modules/de/sway
           ./modules/editor/jetbrains
           ./modules/shell/wezterm
           ./modules/shell/ssh
